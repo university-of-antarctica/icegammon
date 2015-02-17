@@ -24,18 +24,19 @@ all:
 	# set the compiler to think about c++ as the c++11 standard so we can do certain cooler things
 	# output the result to 'your_test'
 	g++ -std=c++11 -isystem ${GTEST_DIR}/include -pthread tests/inittest.cc libgtest.a \
-		-o your_test 
+		-o main_unittest
 
 clean:
 	# remove the archive file and object files from the first two steps of making
-	rm *.o
-	rm *.a
+	rm -f *.o
+	rm -f *.a
 
 test:
+
 	make clean
 
 	clear 
 
 	make
 
-	./your_test
+	./main_unittest
