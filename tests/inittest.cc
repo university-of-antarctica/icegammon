@@ -45,3 +45,20 @@ TEST(Initialization,ColorEqualityCount){
 	ASSERT_EQ(count,0) << "should be the same # of white and black stones";
 
 }
+
+/////////////////////////////////////////////////////////////////////////////
+
+TEST(Turns, First4TurnsAlternate){
+	Game *g = new Game();
+	Color first = g->turn;
+	g->passTurn();
+	Color second = g->turn;
+	g->passTurn();
+	Color third = g->turn;
+	g->passTurn();
+	Color fourth= g->turn;
+
+	EXPECT_EQ(first,third) << "first and third turns should be the same color";
+	EXPECT_EQ(second,fourth) << "second and fourth turns should be the same color";
+	EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
+}
