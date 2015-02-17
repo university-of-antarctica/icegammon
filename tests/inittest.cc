@@ -1,5 +1,5 @@
 //#include <stdio.h>
-#include "../main.cc"
+#include "testmain.cc"
 #include "gtest/gtest.h"
 
 TEST(Initialization,Pip24){

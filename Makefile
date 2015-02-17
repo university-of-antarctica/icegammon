@@ -8,3 +8,10 @@ all:
 
 clean:
 	rm *.o
+
+test:
+	clear 
+
+	make
+
+	./your_test
