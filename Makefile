@@ -27,9 +27,10 @@ all:
 		-o main_unittest
 
 clean:
-	# remove the archive file and object files from the first two steps of making
+# remove the archive file and object files from the first two steps of making
 	rm -f *.o
 	rm -f *.a
+	rm -f *_unittest
 
 test:
 
