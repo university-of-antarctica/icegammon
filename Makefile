@@ -33,11 +33,8 @@ clean:
 	rm -f *_unittest
 
 test:
-
+#clears working directory and gives us a fresh terminal to look at test output
 	make clean
-
-	clear 
-
+	clear
 	make
-
 	./main_unittest

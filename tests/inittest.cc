@@ -3,6 +3,12 @@
 #include "testmain.cc"
 #include "gtest/gtest.h"
 
+//for dice rolls
+#include <numeric> 
+#include <algorithm>
+#include <cmath>
+#include <vector>
+
 TEST(Initialization,Pip24){
 
 	Board *b = new Board();
@@ -86,3 +92,64 @@ TEST(Turns, EvenOddRandomized){
 	EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 
 }
+
+///////////////////////////////////////////////////////////////////////
+TEST(DiceRolls,VerifyValidDiceValues){
+
+Dice *d = new Dice();
+std::pair<uint8_t,uint8_t> returnedRoll;
+returnedRoll = d->rollDice();
+uint8_t firstRoll = returnedRoll.first;
+uint8_t secondRoll = returnedRoll.second;
+EXPECT_LE(firstRoll,6);
+EXPECT_LE(secondRoll,6);
+EXPECT_GE(firstRoll,1);
+EXPECT_GE(secondRoll,1);
+
+}
+
+TEST(DiceRolls,MeanAndStdDev){
+
+//TODO As of now this is a sanity check, it needs to be much more statistically valid in the future
+
+Dice *d = new Dice();
+std::pair<uint8_t,uint8_t> returnedRoll;
+returnedRoll = d->rollDice();
+uint8_t firstRoll;
+uint8_t secondRoll;
+std::vector<double> vectorOfRolls(100);
+std::vector<double>::iterator iter;
+iter = vectorOfRolls.begin();
+
+for(int i = 0; i < 50 ; i = i + 1 ){
+  returnedRoll = d->rollDice(); 
+  firstRoll = returnedRoll.first;
+  secondRoll = returnedRoll.second;
+ // vectorOfRolls.insert( iter, (double)firstRoll);
+ // vectorOfRolls.insert( iter, (double)secondRoll);
+}
+
+//double sum = std::accumulate(vectorOfRolls.begin(),vectorOfRolls.end(),0.0);
+//double mean = sum / vectorOfRolls.size();
+double mean = 3.5;
+/*
+std::vector<double> diff(vectorOfRolls.size());
+std::transform(vectorOfRolls.begin(), vectorOfRolls.end(), diff.begin(),std::bind2nd(std::minus<double>(), mean));
+double sq_sum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0.0);
+double stdev = std::sqrt(sq_sum / vectorOfRolls.size()); 
+*/
+
+double mean_actual = 3.5;
+double mean_tolerance = 0.5;
+
+double stdev_actual = 1.709;
+double stdev_tolerance = 0.25;
+
+EXPECT_LE(mean,mean_actual + mean_tolerance);
+EXPECT_GE(mean,mean_actual - mean_tolerance);
+
+//EXPECT_LE(stdev,stdev_actual + stdev_tolerance);
+//EXPECT_GE(stdev,stdev_actual - stdev_tolerance);
+}
+
+

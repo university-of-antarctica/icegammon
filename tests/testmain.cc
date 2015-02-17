@@ -3,6 +3,7 @@
 #include "../src/Board.cc"
 #include "../src/Color.cc"
 #include "../src/Game.cc"
+#include "../src/Dice.cc"
 
 //TODO: include more intelligently, "../src/*" ?
 
