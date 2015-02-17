@@ -23,7 +23,7 @@ class Board{
 			pips[17] = -3; // ...
 			pips[13] =  5;
 			pips[12] = -5;
-			pips[8]  = -3;
+			pips[8]  =  3;
 			pips[6]  =  5;
 			pips[1]  = -2;
 		};

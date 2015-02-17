@@ -4,19 +4,14 @@
 
 TEST(Initialization,Pip24){
 
-	// ASSERT_EQ(preset(),5) << "preset was not 5";
-	// EXPECT_EQ(4,preset()) << "should not work";
-
 	Board *b = new Board();
-
-	EXPECT_EQ(b->pips[24],2) <<  "we want 2 white stones on pip 24";
-
 	b->initialize();
 
-	ASSERT_EQ(b->pips[24],3) <<  "we better have 2 white stones on pip 24";
+	ASSERT_EQ(b->pips[24],2) <<  "we don't have 2 white stones on pip 24";
 
 }
 
+//TODO: count stones in locations other than pips
 TEST(Initialization,WhiteCount){
 	Board *b = new Board();
 	b->initialize();
@@ -33,5 +28,20 @@ TEST(Initialization,WhiteCount){
 	// now count = # white stones on the board
 
 	ASSERT_EQ(count,15) <<  "we want 15 white stones on the board";
+}
+
+TEST(Initialization,ColorEqualityCount){
+	Board *b = new Board();
+	b->initialize();
+
+	// Count up all of the stones
+	int count = 0;
+	int pipval;
+	for(int i = 1; i < 25; ++i){
+		pipval = b->pips[i];
+		count += pipval;
+	}
+
+	ASSERT_EQ(count,0) << "should be the same # of white and black stones";
 
 }
