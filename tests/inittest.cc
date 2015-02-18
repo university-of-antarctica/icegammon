@@ -117,11 +117,10 @@ std::pair<uint8_t,uint8_t> returnedRoll;
 returnedRoll = d->rollDice();
 uint8_t firstRoll;
 uint8_t secondRoll;
-std::vector<double> vectorOfRolls(100);
-//std::vector<double>::iterator iter;
-//iter = vectorOfRolls.begin();
+int numberOfRolls = 10000;
+std::vector<double> vectorOfRolls(numberOfRolls);
 
-for(int i = 0; i < 50 ; i = i + 1 ){
+for(int i = 0; i < (numberOfRolls/2) ; i = i + 1 ){
   returnedRoll = d->rollDice(); 
   firstRoll = returnedRoll.first;
   secondRoll = returnedRoll.second;
@@ -131,7 +130,6 @@ for(int i = 0; i < 50 ; i = i + 1 ){
 
 double sum = std::accumulate(vectorOfRolls.begin(),vectorOfRolls.end(),0.0);
 double mean = sum / vectorOfRolls.size();
-//double mean = 3.5;
 
 std::vector<double> diff(vectorOfRolls.size());
 std::transform(vectorOfRolls.begin(), vectorOfRolls.end(), diff.begin(),std::bind2nd(std::minus<double>(), mean));
@@ -150,6 +148,5 @@ EXPECT_GE(mean,mean_actual - mean_tolerance);
 
 EXPECT_LE(stdev,stdev_actual + stdev_tolerance);
 EXPECT_GE(stdev,stdev_actual - stdev_tolerance);
+
 }
-
-
