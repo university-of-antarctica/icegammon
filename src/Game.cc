@@ -1,9 +1,6 @@
-class Game{
+#include "Game.h"
 
-public:
-	Color turn = WHITE; //TODO: roll for initiative
-
-	void passTurn(){
+	void Game::passTurn(){
 		if(turn==WHITE){
 			turn=BLACK;
 		}
@@ -11,6 +8,3 @@ public:
 			turn=WHITE;
 		}
 	}
-
-
-};

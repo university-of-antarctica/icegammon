@@ -1,8 +1,6 @@
-#include <time.h> /* Needed just for srand seed */
-#include <stdlib.h>
-#include <stdio.h>
 
-class Dice{
+#include "Dice.h"
+
 // Randomization woes explained:
 // After using a specific number as a seed, you'll always get the same sequence of random #s
 // srand(1) is called if you never call srand(something) yourself
@@ -12,35 +10,31 @@ class Dice{
 // and you are basically getting on the same sequence of numbers, just starting over
 // so you just call srand() once, in the constructor of the Dice
 
-public:
-   //Constructor
-  Dice(){
+   // class Dice;
+
+  Dice::Dice(){
       randomize();
       roll();
   }
 
-  void roll(){
+  void Dice::roll(){
    values.first = getRandomDieRoll();
    values.second = getRandomDieRoll();
   }
 
-  uint8_t left(){
+  uint8_t Dice::left(){
       return values.first;
   }
-  uint8_t right(){
+  uint8_t Dice::right(){
       return values.second;
   }
 
-private:
-   std::pair<uint8_t,uint8_t> values;
 
- uint8_t getRandomDieRoll(){
+ uint8_t Dice::getRandomDieRoll(){
    uint8_t dieVal = (uint8_t)( ( rand() % 6 ) + 1 ); 
    return dieVal;
  }
 
- void randomize(){
+ void Dice::randomize(){
    srand((unsigned)time(NULL));
  }
-
-};

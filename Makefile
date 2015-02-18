@@ -14,9 +14,13 @@ CC = g++
 # Flags
 FLAGS = -std=c++11
 # Tests
-TESTS = tests/inittest.cc
+TESTS = tests/*
 # Includes
 INCLUDES = -isystem ${GTEST_DIR}/include -pthread
+# Source files
+SOURCES = src/*
+#Game.cc Dice.cc utils.cc ...
+
 # Out
 OUT = main_unittest
 
@@ -26,7 +30,7 @@ OUT = main_unittest
 # set the compiler to think about c++ as the c++11 standard so we can do certain cooler things
 # output the result to 'your_test'
 all: libgtest.a
-	$(CC) $(FLAGS) $(INCLUDES) $(TESTS) libgtest.a \
+	$(CC) $(FLAGS) $(INCLUDES) $(TESTS) $(SOURCES) libgtest.a \
 		-o $(OUT)
 
 

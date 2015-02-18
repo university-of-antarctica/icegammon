@@ -1,7 +1,5 @@
-#include <numeric> 
-#include <algorithm>
-#include <cmath>
-#include <vector>
+
+#include "utils.h"
 
 //TODO: test these
 

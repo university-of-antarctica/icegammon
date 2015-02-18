@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "gtest/gtest.h"
-#include "../src/Board.cc"
-#include "../src/Color.cc"
-#include "../src/Game.cc"
-#include "../src/Dice.cc"
+// #include "../src/*"
+#include "../src/Board.h"
+#include "../src/Color.h"
+#include "../src/Game.h"
+#include "../src/Dice.h"
+#include "../src/utils.h"
 
 //TODO: include more intelligently, "../src/*" ?
 
