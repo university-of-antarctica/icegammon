@@ -60,6 +60,7 @@ clean:
 # prepended hyphen means that make will not complain if we fail the tests
 test: 
 	clear
+	make clean
 	make all
 	make run
 
