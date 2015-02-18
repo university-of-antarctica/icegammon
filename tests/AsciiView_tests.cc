@@ -16,11 +16,13 @@ TEST(AsciiView, InitialCount){
 
 	// Access members of AsciiView, sanity check them
 	char whiteStone = v->whiteStone();
-	EXPECT_GT(whiteStone,32)<<"white stone should be printable char";
+	EXPECT_GT(whiteStone,32) << "white stone should be printable char";
+  EXPECT_LT(whiteStone,127) << "white stone should be printable char";
 	char blackStone = v->blackStone();
-	EXPECT_GT(blackStone,32)<<"black stone should be printable char";
+	EXPECT_GT(blackStone,32) << "black stone should be printable char";
+  EXPECT_LT(blackStone,127) << "black stone should be printable char";
 	std::string *s = v->toString();
-	EXPECT_GE(s->length(),28)<<"Even the most minimalist design should have a char for each of the 28 locations on the board";
+	EXPECT_GE(s->length(),28)<<"Even the most minimalist design should have a char for: 24 pips + 2 bars + 2 home spaces = 28 spaces";
 
 
 	// Count the occurrence of black and white stones on the board
