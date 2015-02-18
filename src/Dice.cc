@@ -8,24 +8,31 @@ class Dice{
 // srand(1) is called if you never call srand(something) yourself
 // so without calling srand() you will get the same sequence of random #s every time you run the program
 // if you use srand(time(NULL)) then you get some other sequence of #s
-// if you REPEATEDLY call srand(time(NULL)) in the same ... second? milisecond? then the time value is the same
+// if you REPEATEDLY call srand(time(NULL)) in the same ... second? milisecond? then the time value is the SAME!!!
 // and you are basically getting on the same sequence of numbers, just starting over
 // so you just call srand() once, in the constructor of the Dice
 
 public:
+   //Constructor
   Dice(){
       randomize();
+      roll();
   }
 
- std::pair<uint8_t,uint8_t> rollDice(){
-   std::pair<uint8_t,uint8_t> pairOfRolls;
-   pairOfRolls.first = getRandomDieRoll();
-   pairOfRolls.second = getRandomDieRoll();
-   return pairOfRolls;
+  void roll(){
+   values.first = getRandomDieRoll();
+   values.second = getRandomDieRoll();
+  }
 
- }
+  uint8_t left(){
+      return values.first;
+  }
+  uint8_t right(){
+      return values.second;
+  }
 
 private:
+   std::pair<uint8_t,uint8_t> values;
 
  uint8_t getRandomDieRoll(){
    uint8_t dieVal = (uint8_t)( ( rand() % 6 ) + 1 ); 
