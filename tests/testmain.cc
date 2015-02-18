@@ -6,6 +6,7 @@
 #include "../src/Game.h"
 #include "../src/Dice.h"
 #include "../src/utils.h"
+#include "../src/AsciiView.h"
 
 //TODO: include more intelligently, "../src/*" ?
 
