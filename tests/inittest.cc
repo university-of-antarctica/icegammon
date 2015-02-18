@@ -118,26 +118,26 @@ returnedRoll = d->rollDice();
 uint8_t firstRoll;
 uint8_t secondRoll;
 std::vector<double> vectorOfRolls(100);
-std::vector<double>::iterator iter;
-iter = vectorOfRolls.begin();
+//std::vector<double>::iterator iter;
+//iter = vectorOfRolls.begin();
 
 for(int i = 0; i < 50 ; i = i + 1 ){
   returnedRoll = d->rollDice(); 
   firstRoll = returnedRoll.first;
   secondRoll = returnedRoll.second;
- // vectorOfRolls.insert( iter, (double)firstRoll);
- // vectorOfRolls.insert( iter, (double)secondRoll);
+  vectorOfRolls.push_back( (double) firstRoll);
+  vectorOfRolls.push_back( (double) secondRoll);
 }
 
-//double sum = std::accumulate(vectorOfRolls.begin(),vectorOfRolls.end(),0.0);
-//double mean = sum / vectorOfRolls.size();
-double mean = 3.5;
-/*
+double sum = std::accumulate(vectorOfRolls.begin(),vectorOfRolls.end(),0.0);
+double mean = sum / vectorOfRolls.size();
+//double mean = 3.5;
+
 std::vector<double> diff(vectorOfRolls.size());
 std::transform(vectorOfRolls.begin(), vectorOfRolls.end(), diff.begin(),std::bind2nd(std::minus<double>(), mean));
 double sq_sum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0.0);
 double stdev = std::sqrt(sq_sum / vectorOfRolls.size()); 
-*/
+
 
 double mean_actual = 3.5;
 double mean_tolerance = 0.5;
@@ -148,8 +148,8 @@ double stdev_tolerance = 0.25;
 EXPECT_LE(mean,mean_actual + mean_tolerance);
 EXPECT_GE(mean,mean_actual - mean_tolerance);
 
-//EXPECT_LE(stdev,stdev_actual + stdev_tolerance);
-//EXPECT_GE(stdev,stdev_actual - stdev_tolerance);
+EXPECT_LE(stdev,stdev_actual + stdev_tolerance);
+EXPECT_GE(stdev,stdev_actual - stdev_tolerance);
 }
 
 
