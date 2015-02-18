@@ -117,8 +117,8 @@ std::pair<uint8_t,uint8_t> returnedRoll;
 returnedRoll = d->rollDice();
 uint8_t firstRoll;
 uint8_t secondRoll;
-int numberOfRolls = 10000;
-std::vector<double> vectorOfRolls(numberOfRolls);
+int numberOfRolls = 1000;
+std::vector<double> vectorOfRolls; //removed the (numberOfRolls) construction argument.  It was initializing the vector with <numberOfRolls> zeros.
 
 for(int i = 0; i < (numberOfRolls/2) ; i = i + 1 ){
   returnedRoll = d->rollDice(); 
