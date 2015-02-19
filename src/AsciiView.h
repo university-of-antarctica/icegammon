@@ -1,9 +1,7 @@
 #ifndef ICEGAMMON_ASCIIVIEW_H_
 #define ICEGAMMON_ASCIIVIEW_H_
-#include <iostream>
-#include <sstream>
 #include <stdio.h>
-
+#include <cmath>
 	//forward declaration
 	//class Board;
 
@@ -23,8 +21,7 @@
 		char _whiteStone = 'W';
 		char _blackStone = 'B';
     //Board *b;
-    std::vector<std::string> getViewColumnArray();
-    std::string intToString(int);
+    std::vector<int> getViewColumnArray();
 	};
 
 #endif

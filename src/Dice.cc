@@ -1,4 +1,3 @@
-
 #include "Dice.h"
 
 // Randomization woes explained:
