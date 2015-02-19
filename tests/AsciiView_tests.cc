@@ -11,7 +11,7 @@ TEST(AsciiView, InitialCount){
 	//iterate over the string and verify that there are 15 of each
 
 	Board *b = new Board();
-	AsciiView *v = new AsciiView(b);
+  AsciiView *v = new AsciiView(b);
 
 
 	// Access members of AsciiView, sanity check them
