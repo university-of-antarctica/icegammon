@@ -1,1 +1,1 @@
-enum Color { BLACK, WHITE };
+enum Color { BLACK, WHITE };

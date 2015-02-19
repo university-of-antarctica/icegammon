@@ -2,6 +2,8 @@
 #define ICEGAMMON_ASCIIVIEW_H_
 #include <stdio.h>
 #include <cmath>
+#include <sstream>
+#include <string>
 	//forward declaration
 	//class Board;
 
@@ -15,13 +17,19 @@
 		AsciiView(Board* );
 		char whiteStone();
 		char blackStone();
-		std::string* toString();
-	  Board *b;
+		int whiteStoneCount();
+    int blackStoneCount();
+    std::string* toString();
   private:
 		char _whiteStone = 'W';
 		char _blackStone = 'B';
-    //Board *b;
+    int numWhiteStones = 0;
+    int numBlackStones = 0;
+    Board *b; 
     std::vector<int> getViewColumnArray();
+    std::string charToString(char);
+    void incrementBlackStones();
+    void incrementWhiteStones();
 	};
 
 #endif

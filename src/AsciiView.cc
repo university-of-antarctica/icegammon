@@ -5,37 +5,50 @@ AsciiView::AsciiView(Board* b){
 }
 
 char AsciiView::whiteStone(){
-	return _whiteStone;
+  incrementWhiteStones();
+  return _whiteStone;
+}
+
+void AsciiView::incrementWhiteStones(){
+  numWhiteStones = numWhiteStones + 1;
+}
+
+int AsciiView::whiteStoneCount(){
+  return numWhiteStones;
 }
 
 char AsciiView::blackStone(){
+  incrementBlackStones();
 	return _blackStone;
 }
 
-std::string* AsciiView::toString(){
-	std::string* visualization = new std::string("WH```P`P`P`P`P`P``|BB|``P`P`P`P`P`P```P`P`P`P`P`P``|WB|``P`P`P`P`P`P```BH\n");
+void AsciiView::incrementBlackStones(){
+  numBlackStones = numBlackStones + 1;
+}
 
+int AsciiView::blackStoneCount(){
+  return numBlackStones;
+}
+
+std::string* AsciiView::toString(){
+	
+  std::string* visualization = new std::string("WH```P`P`P`P`P`P``|BB|``P`P`P`P`P`P```P`P`P`P`P`P``|WB|``P`P`P`P`P`P```BH\n");
   std::vector<int> viewColumnArray;
   viewColumnArray = getViewColumnArray(); 
   
   for(int i = 0; i < 15; i = i + 1){
-    
     for(int j = 1; j < 73; j = j + 1){
-      
-      if(viewColumnArray[j] == 0 || abs(viewColumnArray[j]) <= i  ){
-        visualization->append(" ");
-      }else{
-        if(viewColumnArray[j] > 0){
-          visualization->append("W");
+        if(viewColumnArray[j] == 0 || abs(viewColumnArray[j]) <= i  ){
+          visualization->append(" ");
         }else{
-          visualization->append("B");
-        }
-
-      }
-    
+           if(viewColumnArray[j] > 0){
+              visualization->append(charToString(whiteStone()));
+           }else{
+               visualization->append(charToString(blackStone()));
+           }
+       }
     }
-  
-  visualization->append("\n");
+    visualization->append("\n");
   }
 
   return visualization;
@@ -75,3 +88,10 @@ std::vector<int> AsciiView::getViewColumnArray(){
   return viewColumnArray;
 }
 
+std::string AsciiView::charToString(char c){
+   std::stringstream ss;
+   std::string s;
+   ss << c;
+   ss >> s;
+  return s;
+}
