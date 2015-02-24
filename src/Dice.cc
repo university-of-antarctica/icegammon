@@ -18,7 +18,6 @@
 
   Dice::Dice(){
       randomize();
- //     roll();
   }
 
   void Dice::roll(){

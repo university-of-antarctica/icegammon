@@ -16,7 +16,7 @@ OBJDIR = build
 SRCDIR = src
 
 # Flags
-CFLAGS = -Wall -pedantic -std=c++11
+CFLAGS = -Wall -pedantic -std=c++11 -lreadline
 
 # Files 
 OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o)
