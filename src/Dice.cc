@@ -54,6 +54,7 @@
 const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
 
 void Dice::prettyPrint(){
+  std::locale::global(std::locale(""));
   //FUN EXPERIMENTAL THING TO TRY TO PRINT UNICODE DICE
   // stdout only likes to be a 'narrow' (8 bit) character stream or a 'wide' character stream (more than 8 bits)
   // got to reopen stdout to allow it to change modes to wide, then back to narrow

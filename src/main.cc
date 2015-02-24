@@ -19,7 +19,9 @@ int main(){
 
 	std::cout << "turn: " << game->turn << std::endl;
 	game->rollForFirstMove();
-  
+
+	game->getDice()->prettyPrint();
+
   return 0;
 
 }

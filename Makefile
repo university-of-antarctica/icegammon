@@ -16,7 +16,7 @@ OBJDIR = build
 SRCDIR = src
 
 # Flags
-CFLAGS = -Wall -pedantic -std=c++11 -lreadline
+CFLAGS = -Wall -pedantic -std=c++11
 
 # Files 
 OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o)
@@ -26,7 +26,7 @@ all: main test
 
 .PHONY: main
 main: $(OBJS)
-	g++ $(CFLAGS) $(OBJS) $(SRCDIR)/main.cc -o $@
+	g++ $(CFLAGS) $(OBJS) $(SRCDIR)/main.cc -lreadline -o $@
 
 # Test
 ############################################################
