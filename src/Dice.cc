@@ -15,7 +15,7 @@
 
   Dice::Dice(){
       randomize();
-      roll();
+ //     roll();
   }
 
   void Dice::roll(){

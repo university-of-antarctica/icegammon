@@ -16,10 +16,10 @@ OBJDIR = build
 SRCDIR = src
 
 # Flags
-CFLAGS = -Wall -pedantic -std=c++11
+CFLAGS = -Wall -pedantic -std=c++11 -lreadline
 
 # Files 
-OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o)
+OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o)
 
 .PHONY: all
 all: main test
@@ -33,7 +33,7 @@ main: $(OBJS)
 .PHONY: test
 test: main_unittest
 
-INCLUDES = -isystem ${GTEST_DIR}/include -pthread
+INCLUDES = -isystem ${GTEST_DIR}/include -lreadline -pthread
 main_unittest: libgtest.a $(OBJS)
 	g++ -std=c++11 $(INCLUDES) tests/* $(OBJS) libgtest.a \
 	-o $@
