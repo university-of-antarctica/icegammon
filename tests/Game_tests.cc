@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Game.h"
+#include "../include/Game.h"
 #include <ctime>
 
 TEST(Turns, First4TurnsAlternate){

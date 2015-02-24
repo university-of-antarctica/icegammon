@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "gtest/gtest.h"
 // #include "../src/*"
-#include "../src/Board.h"
-#include "../src/Color.h"
-#include "../src/Game.h"
-#include "../src/Dice.h"
-#include "../src/utils.h"
-#include "../src/AsciiView.h"
+#include "../include/Board.h"
+#include "../include/Color.h"
+#include "../include/Game.h"
+#include "../include/Dice.h"
+#include "../include/utils.h"
+#include "../include/AsciiView.h"
 
 //TODO: include more intelligently, "../src/*" ?
 

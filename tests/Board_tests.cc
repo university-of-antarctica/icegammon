@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Board.h"
+#include "../include/Board.h"
 // #include "testmain.cc"
 
 TEST(Initialization,Pip24){

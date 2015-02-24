@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <string>
-#include "../src/AsciiView.h"
+#include "../include/AsciiView.h"
 //include asciiview source
 
 TEST(AsciiView, InitialCount){

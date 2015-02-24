@@ -2,8 +2,8 @@
 // #include "testmain.cc"
 // #include "../src/utils.cc"
 
-#include "../src/Dice.h"
-#include "../src/utils.h"
+#include "../include/Dice.h"
+#include "../include/utils.h"
 #include "gtest/gtest.h"
 
 
