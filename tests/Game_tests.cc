@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "../src/Game.h"
+#include <ctime>
 
 TEST(Turns, First4TurnsAlternate){
 	Game *g = new Game();
@@ -18,6 +19,7 @@ TEST(Turns, First4TurnsAlternate){
 
 TEST(Turns, EvenOddRandomized){
 	Game *g = new Game();
+  srand(time(NULL));
 	Color first = g->turn;
 	g->passTurn();
 	Color second = g->turn;
