@@ -1,5 +1,9 @@
 #include "../include/Board.h"
 
+Board::Board(){
+ initialize();
+}
+
 void Board::initialize(){
 	pips[24] =  2; // 2 white stones on pip 24
 	pips[19] = -5; // 5 black stones on pip 19
