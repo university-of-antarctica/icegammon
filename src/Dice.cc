@@ -30,6 +30,11 @@
       return values.second;
   }
 
+  // const char* Dice::left_(){
+  //   return "\xE2\x9A\x80";
+  // }
+
+
 
  uint8_t Dice::getRandomDieRoll(){
    uint8_t dieVal = (uint8_t)( ( rand() % 6 ) + 1 ); 
@@ -39,3 +44,9 @@
  void Dice::randomize(){
    srand((unsigned)time(NULL));
  }
+
+// an array of wide characters (>8 bits each)
+// note the L before each character to denote that it's longer than a normal char
+// the first die can be arrived at with the following keys: [Ctrl Shift U][2][6][8][0]
+// in a terminal.
+const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
