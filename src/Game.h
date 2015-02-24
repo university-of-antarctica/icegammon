@@ -1,7 +1,7 @@
 #ifndef ICEGAMMON_GAME_H_
 #define ICEGAMMON_GAME_H_
 
-	#include "Color.cc"
+	#include "Color.h"
 
 	class Game{
 
