@@ -5,12 +5,9 @@
 #include "../include/Dice.h"
 #include "../include/utils.h"
 #include "gtest/gtest.h"
-
-
 TEST(DiceRolls,VerifyValidDiceValues){
 
 Dice *d = new Dice();
-std::pair<uint8_t,uint8_t> returnedRoll;
 d->roll();
 uint8_t firstRoll = d->left();
 uint8_t secondRoll = d->right();
@@ -31,7 +28,6 @@ double stdev_tolerance = 0.2;
 
 // Declarations
 Dice *d = new Dice();
-std::pair<uint8_t,uint8_t> returnedRoll;
 uint8_t firstRoll, secondRoll;
 std::vector<double> vectorOfRolls; //removed the (numberOfRolls) construction argument.  It was initializing the vector with <numberOfRolls> zeros.
 

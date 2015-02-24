@@ -13,4 +13,4 @@ void Board::initialize(){
 	pips[8]  =  3;
 	pips[6]  =  5;
 	pips[1]  = -2;
-};
+}

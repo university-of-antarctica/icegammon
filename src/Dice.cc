@@ -1,5 +1,8 @@
 
 #include "../include/Dice.h"
+#include <locale> //printing fun symbols
+#include <string>
+#include <iostream> // cout
 
 
 // Randomization woes explained:
@@ -15,7 +18,7 @@
 
   Dice::Dice(){
       randomize();
-      roll();
+ //     roll();
   }
 
   void Dice::roll(){
@@ -50,3 +53,16 @@
 // the first die can be arrived at with the following keys: [Ctrl Shift U][2][6][8][0]
 // in a terminal.
 const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
+
+void Dice::prettyPrint(){
+  //FUN EXPERIMENTAL THING TO TRY TO PRINT UNICODE DICE
+  // stdout only likes to be a 'narrow' (8 bit) character stream or a 'wide' character stream (more than 8 bits)
+  // got to reopen stdout to allow it to change modes to wide, then back to narrow
+  freopen(NULL, "w", stdout); 
+  // wcout for printing wide-character strings
+  // use Classname::property to access static members
+  std::wcout << Dice::symbols[this->left()-1] << " and " << Dice::symbols[this->right()-1] << std::endl;
+  freopen(NULL, "w", stdout); 
+}
+
+  
