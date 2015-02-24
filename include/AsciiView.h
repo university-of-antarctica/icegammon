@@ -14,7 +14,7 @@
 
 	class AsciiView{
 	public:
-		AsciiView(Board* );
+		AsciiView(Board*);
 		char whiteStone();
 		char blackStone();
 		int whiteStoneCount();

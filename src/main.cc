@@ -6,17 +6,17 @@
 #include <iostream>
 
 int main(){
+  
+  Controller *controller = new Controller();
 
 	Game *game = new Game();
-	game->passTurn();
-	std::cout << "turn: " << game->turn << std::endl;
 
   AsciiView *view = new AsciiView(game->getBoard());
 	std::string visualization = *view->toString();
 	std::cout << "view looks like this: \n" << visualization << std::endl;
 
-  Controller *controller = new Controller();
-	controller->getUserInputLine();
+	std::cout << "turn: " << game->turn << std::endl;
+	game->rollForFirstMove();
   
   return 0;
 

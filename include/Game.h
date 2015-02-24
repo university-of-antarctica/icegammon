@@ -4,10 +4,10 @@
 	#include "Color.h"
   #include "Board.h"
   #include "Dice.h"
+  #include "Controller.h"
   #include <typeinfo>
   #include <cinttypes>
   #include <iostream>
-
 	class Game{
 	public:
     Game();
@@ -15,9 +15,9 @@
 		void passTurn();
     Board* getBoard();
     Dice* getDice();
+    void rollForFirstMove();
   private:
     Board* b;
     Dice* dice;
-  
   };
 #endif
