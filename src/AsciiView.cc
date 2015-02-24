@@ -1,4 +1,4 @@
-#include "AsciiView.h"
+#include "../include/AsciiView.h"
 
 AsciiView::AsciiView(Board* b){
 

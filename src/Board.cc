@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "../include/Board.h"
 
 void Board::initialize(){
 	pips[24] =  2; // 2 white stones on pip 24

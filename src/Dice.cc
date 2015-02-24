@@ -1,5 +1,5 @@
 
-#include "Dice.h"
+#include "../include/Dice.h"
 
 // Randomization woes explained:
 // After using a specific number as a seed, you'll always get the same sequence of random #s
