@@ -1,12 +1,12 @@
 #include "../include/Game.h"
 
 
-  Game::Game(){
+  Game::Game(Controller* controller){
 	  Game::b = new Board();
+    Game::view = new AsciiView(Game::b);
 	  Game::dice = new Dice();
+    Game::controller = controller;
     dice->roll();
-    uint8_t firstRoll = dice->left();
-    uint8_t secondRoll = dice->right();
     rollForFirstMove(); 
   }
   void Game::rollForFirstMove(){
@@ -24,6 +24,9 @@
 		}
 	}
  
+ std::string Game::drawBoard(){
+    return Game::view->toString();
+ }
   Board* Game::getBoard(){
     return Game::b;
   }

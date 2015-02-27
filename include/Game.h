@@ -8,16 +8,21 @@
   #include <typeinfo>
   #include <cinttypes>
   #include <iostream>
+  #include "AsciiView.h"
+
 	class Game{
 	public:
-    Game();
+    Game(Controller*);
     Color turn = WHITE; //TODO: roll for initiative
 		void passTurn();
     Board* getBoard();
     Dice* getDice();
     void rollForFirstMove();
+    std::string drawBoard();
   private:
+    AsciiView* view;
     Board* b;
     Dice* dice;
+    Controller* controller;
   };
 #endif

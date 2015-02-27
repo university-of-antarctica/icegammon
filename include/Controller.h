@@ -11,7 +11,7 @@
   class Controller{
 
   public:
-  uint8_t getRoll();
+  void getRoll();
 
   private:
   void getUserInputLine();

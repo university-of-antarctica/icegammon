@@ -19,7 +19,7 @@
 		char blackStone();
 		int whiteStoneCount();
     int blackStoneCount();
-    std::string* toString();
+    std::string toString();
   private:
 		char _whiteStone = 'W';
 		char _blackStone = 'B';
