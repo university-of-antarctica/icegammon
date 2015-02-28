@@ -11,11 +11,12 @@
   class Controller{
 
   public:
-  void getRoll();
+  Controller(Game*);
+  void getFirstTurn();
 
   private:
-  void getUserInputLine();
-
+  Game* game;
+  void getUserInputLine(std::string**);
 
   };
 #endif

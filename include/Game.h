@@ -12,17 +12,14 @@
 
 	class Game{
 	public:
-    Game(Controller*);
-    Color turn = WHITE; //TODO: roll for initiative
+    Game();
 		void passTurn();
+    Color getActiveColor(); // Returns the current value of turn which is whose turn it is, white or black.
     Board* getBoard();
     Dice* getDice();
-    void rollForFirstMove();
-    std::string drawBoard();
   private:
-    AsciiView* view;
     Board* b;
     Dice* dice;
-    Controller* controller;
+    Color turn = WHITE; // White is prompted for first roll
   };
 #endif

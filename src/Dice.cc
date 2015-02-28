@@ -53,6 +53,8 @@
 // in a terminal.
 const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
 
+
+
 void Dice::prettyPrint(){
   std::locale::global(std::locale(""));
   //FUN EXPERIMENTAL THING TO TRY TO PRINT UNICODE DICE
@@ -65,4 +67,16 @@ void Dice::prettyPrint(){
   freopen(NULL, "w", stdout); 
 }
 
-  
+void Dice::prettyPrintOne(){
+  std::locale::global(std::locale(""));
+  //FUN EXPERIMENTAL THING TO TRY TO PRINT UNICODE DICE
+  // stdout only likes to be a 'narrow' (8 bit) character stream or a 'wide' character stream (more than 8 bits)
+  // got to reopen stdout to allow it to change modes to wide, then back to narrow
+  freopen(NULL, "w", stdout); 
+  // wcout for printing wide-character strings
+  // use Classname::property to access static members
+  std::wcout << Dice::symbols[this->left()-1];
+  freopen(NULL, "w", stdout); 
+}
+
+

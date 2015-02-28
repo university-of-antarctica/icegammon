@@ -14,18 +14,18 @@
 
 	class AsciiView{
 	public:
-		AsciiView(Board*);
+		AsciiView(Game*);
 		char whiteStone();
 		char blackStone();
 		int whiteStoneCount();
     int blackStoneCount();
     std::string toString();
   private:
+    Game *game;
 		char _whiteStone = 'W';
 		char _blackStone = 'B';
     int numWhiteStones = 0;
     int numBlackStones = 0;
-    Board *b; 
     std::vector<int> getViewColumnArray();
     std::string charToString(char);
     void incrementBlackStones();

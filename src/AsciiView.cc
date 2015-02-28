@@ -1,7 +1,7 @@
 #include "../include/AsciiView.h"
 
-AsciiView::AsciiView(Board* b){
-     AsciiView::b = b;
+AsciiView::AsciiView(Game* game){
+     AsciiView::game = game;
 }
 
 char AsciiView::whiteStone(){
@@ -31,7 +31,9 @@ int AsciiView::blackStoneCount(){
 }
 
 std::string AsciiView::toString(){
-	
+  //needs to print the turn number? maybe
+  //needs to print whose turn it is white or black
+  //Dice rolls
   std::string visualization = std::string("WH```P`P`P`P`P`P``|BB|``P`P`P`P`P`P```P`P`P`P`P`P``|WB|``P`P`P`P`P`P```BH\n");
   std::vector<int> viewColumnArray;
   viewColumnArray = getViewColumnArray(); 
@@ -55,6 +57,7 @@ std::string AsciiView::toString(){
 }
 
 std::vector<int> AsciiView::getViewColumnArray(){
+  Board* b = game->getBoard();
   std::vector<int> viewColumnArray(73,0);
   viewColumnArray[1] = b->homes[0];
   viewColumnArray[6] = b->pips[1]; 
