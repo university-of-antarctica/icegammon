@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <string>
 #include "../include/AsciiView.h"
+#include "../include/Game.h"
 //include asciiview source
 
 TEST(AsciiView, InitialCount){
@@ -10,10 +11,10 @@ TEST(AsciiView, InitialCount){
 	//decide what a black stone looks like
 	//iterate over the string and verify that there are 15 of each
 
-	Board *b = new Board();
-  AsciiView *v = new AsciiView(b);
+	Game *g = new Game();
+  AsciiView *v = new AsciiView(g);
 
-	std::string *s = v->toString();
+	std::string s = v->toString();
 
 	// Count the occurrence of black and white stones on the board
 	EXPECT_EQ(v->whiteStoneCount(),15)<<"there should be 15 white stone characters";
@@ -28,5 +29,5 @@ TEST(AsciiView, InitialCount){
 	EXPECT_GT(blackStone,32) << "black stone should be printable char";
   EXPECT_LT(blackStone,127) << "black stone should be printable char";
 
-	std::cout << *s;
+	std::cout << s;
 }

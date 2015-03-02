@@ -1,17 +1,19 @@
 #include "gtest/gtest.h"
 #include "../include/Game.h"
+#include "../include/Controller.h"
 #include <ctime>
 
 TEST(Turns, First4TurnsAlternate){
-  Controller *controller = new Controller();
-	Game *g = new Game(controller);
-	Color first = g->turn;
+	Game *g = new Game();
+	Controller *controller = new Controller(g);
+
+	Color first = g->getActiveColor();
 	g->passTurn();
-	Color second = g->turn;
+	Color second = g->getActiveColor();
 	g->passTurn();
-	Color third = g->turn;
+	Color third = g->getActiveColor();
 	g->passTurn();
-	Color fourth= g->turn;
+	Color fourth= g->getActiveColor();
 
 	EXPECT_EQ(first,third) << "first and third turns should be the same color";
 	EXPECT_EQ(second,fourth) << "second and fourth turns should be the same color";
@@ -19,12 +21,13 @@ TEST(Turns, First4TurnsAlternate){
 }
 
 TEST(Turns, EvenOddRandomized){
-  Controller *controller = new Controller();
-	Game *g = new Game(controller);
+	Game *g = new Game();
+	Controller *controller = new Controller(g);
+
   srand(time(NULL));
-	Color first = g->turn;
+	Color first = g->getActiveColor();
 	g->passTurn();
-	Color second = g->turn;
+	Color second = g->getActiveColor();
 
 	int n = rand() % 1000; //in the range between 0 and 999
 	for(int i = 0; i < n; ++i){
@@ -34,10 +37,10 @@ TEST(Turns, EvenOddRandomized){
 	//if n is odd, then the color should be same as the first color
 	//if n is even, then the color should be the same as the second color
 	if(n%2==1){//n is odd
-		EXPECT_EQ(first,g->turn)<< "all odd numbered turns should be the same color";
+		EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
 	}
 	else{//n is even
-		EXPECT_EQ(second,g->turn) << "all even numbered turns should be the same color";
+		EXPECT_EQ(second,g->getActiveColor()) << "all even numbered turns should be the same color";
 	}
 	EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 

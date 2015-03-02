@@ -21,10 +21,11 @@ void Controller::getFirstTurn(){
 
 }
 
-void queryPlayerForFirstRoll(Color activeColor){  
+void Controller::queryPlayerForFirstRoll(Color activeColor){  
   std::cout << "Input R or r to roll for first move" << std::endl;
   std::string* line =  new std::string();
-  do{
+  do{  void queryPlayerForFirstRoll(Color activeColor);
+
     std::cout << "Enter an R or an r" << std::endl;
     getUserInputLine(line);
     std::cout << "you entered: " << *line << std::endl;

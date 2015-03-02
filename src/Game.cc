@@ -14,7 +14,7 @@
 			turn=WHITE;
 		}
 	}
-  Color getActiveColor(){
+  Color Game::getActiveColor(){
     return Game::turn;
   }
 

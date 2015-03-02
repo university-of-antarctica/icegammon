@@ -16,6 +16,7 @@
 		uint8_t right();
 		static const wchar_t symbols[];
 		void prettyPrint();
+		void prettyPrintOne();
 	private:
 		std::pair<uint8_t,uint8_t> values;
 		uint8_t getRandomDieRoll();

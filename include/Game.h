@@ -4,11 +4,10 @@
 	#include "Color.h"
   #include "Board.h"
   #include "Dice.h"
-  #include "Controller.h"
+ 
   #include <typeinfo>
   #include <cinttypes>
   #include <iostream>
-  #include "AsciiView.h"
 
 	class Game{
 	public:

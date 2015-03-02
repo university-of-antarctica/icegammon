@@ -4,8 +4,9 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include "Game.h"
 	//forward declaration
-	//class Board;
+	
 
 	//includes
 	#include <string>

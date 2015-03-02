@@ -6,6 +6,7 @@
 #include <readline/history.h>
 #include "Turn.h"
 #include "Move.h"
+#include "Game.h"
 #include <iostream>
   
   class Controller{
@@ -13,10 +14,11 @@
   public:
   Controller(Game*);
   void getFirstTurn();
+  void queryPlayerForFirstRoll(Color activeColor);
 
   private:
   Game* game;
-  void getUserInputLine(std::string**);
+  void getUserInputLine(std::string*);
 
   };
 #endif

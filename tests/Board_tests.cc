@@ -5,7 +5,6 @@
 TEST(Initialization,Pip24){
 
 	Board *b = new Board();
-	b->initialize();
 
 	ASSERT_EQ(b->pips[24],2) <<  "we don't have 2 white stones on pip 24";
 
@@ -14,7 +13,6 @@ TEST(Initialization,Pip24){
 //TODO: count stones in locations other than pips
 TEST(Initialization,WhiteCount){
 	Board *b = new Board();
-	b->initialize();
 
 	// Count up the white stones
 	int count = 0;
@@ -32,7 +30,6 @@ TEST(Initialization,WhiteCount){
 
 TEST(Initialization,ColorEqualityCount){
 	Board *b = new Board();
-	b->initialize();
 
 	// Count up all of the stones
 	int count = 0;

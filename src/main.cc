@@ -14,12 +14,13 @@ int main(){
   //controller queries each player and prints their die values and the proper prompts
   //a winner of the opening roll is determined (this is the exit condition)
   //
-  controller->getFirstRoll();
-	std::string visualization = game->drawBoard();
+  controller->getFirstTurn();
+	std::string visualization = view->toString();
 	std::cout << "view looks like this: \n" << visualization << std::endl;
   
-	std::cout << "turn: " << game->turn << std::endl;
+	std::cout << "turn: " << game->getActiveColor() << std::endl;
 
+  game->getDice()->roll();
 	game->getDice()->prettyPrint();
 
   return 0;
