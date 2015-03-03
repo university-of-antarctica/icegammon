@@ -25,3 +25,11 @@
   Dice* Game::getDice(){
     return Game::dice;
   }
+
+  bool Game::isLegal(Move potentialMove, Color player){
+    return false;
+  }
+
+  // bool Game::moveStone(Move move, Color stoneColor){
+  //   return false;
+  // }

@@ -45,3 +45,23 @@ TEST(Turns, EvenOddRandomized){
 	EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 
 }
+
+// TEST(Moving, BasicFirstMoves){
+// 	Game* g = new Game();
+// 	bool success;
+// 	Move move;
+
+// 	//Before move
+// 	EXPECT_EQ(result.pips[1],2)<< "there should be 2 black stones on pip 1";
+// 	EXPECT_EQ(result.pips[3],0)<< "there shouldnt be any black stones on pip 3";
+
+// 	move = Move(1,3);
+// 	success = g->moveStone(Move move, BLACK);
+
+// 	//After move
+// 	EXPECT_EQ(success,true)<<"black should be able to move forward 2 pips";
+// 	Board* result = g->getBoard();
+// 	EXPECT_EQ(result.pips[1],1)<< "there should be 1 remaining black stone on pip 1";
+// 	EXPECT_EQ(result.pips[3],1)<< "there should now be 1 black stone on pip 3";
+
+// }

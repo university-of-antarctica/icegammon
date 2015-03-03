@@ -1,9 +1,7 @@
 #include "gtest/gtest.h"
 #include "../include/Game.h"
 
-#define ONE 1
-#define SIX 6
-TEST(Validation, PossibleMoves){
+TEST(Validation, isLegal){
 	Game *g = new Game(); //starting board
 	Dice *d = g->getDice();
 	d->set(ONE,SIX);

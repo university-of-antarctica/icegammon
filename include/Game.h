@@ -4,6 +4,7 @@
 	#include "Color.h"
   #include "Board.h"
   #include "Dice.h"
+  #include "Move.h"
  
   #include <typeinfo>
   #include <cinttypes>
@@ -16,6 +17,8 @@
     Color getActiveColor(); // Returns the current value of turn which is whose turn it is, white or black.
     Board* getBoard();
     Dice* getDice();
+    bool isLegal(Move potentialMove, Color player);
+    // bool moveStone(Move move, Color player);
   private:
     Board* b;
     Dice* dice;

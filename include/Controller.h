@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "Turn.h"
-#include "Move.h"
+//#include "Turn.h"
+//#include "Move.h"
 #include "Game.h"
 #include <iostream>
   
