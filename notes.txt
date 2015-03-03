@@ -1,0 +1,5 @@
+Having trouble getting readline recognized as a method "undefined reference to `readline' "
+
+forward declaration seems to be rarely doable.  A class, including its implementation, must only have a pointer to an instance the other class (the one being forward-declared) as return values, args, or member variables.  That means that you can't use any methods of that foreign class.
+
+found out that readline wasn't being linked to properly because -lreadline needs to come AFTER the target being compiled (http://askubuntu.com/questions/523934/cant-link-libreadline-on-ubuntu-14-04)
