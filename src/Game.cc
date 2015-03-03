@@ -31,5 +31,23 @@
   }
 
   bool Game::moveStone(Move move, Color stoneColor){
-    return false;
+
+    int numSourceStones = b->pips[move.sourcePipNum];
+
+    if(numSourceStones == 0){ // there is no stone on the source pip
+      return false;
+    }
+    else{ // there is at least one stone on the source pip
+      //positive #s represent # of white stones
+      //negative #s represent # of black stones
+      if(numSourceStones > 0){ // white stone(s)
+        b->pips[move.sourcePipNum] -= 1; // 1 fewer stone on source pip
+        b->pips[move.destPipNum]   += 1; // 1 more stone on dest pip
+      }
+      else{ // black stone(s)
+        b->pips[move.sourcePipNum] += 1; // 1 fewer stone on source pip (so we add)
+        b->pips[move.destPipNum]   -= 1; // 1 more stone on dest pip (so we subtract)
+      }
+      return true;
+    }
   }

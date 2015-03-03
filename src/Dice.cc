@@ -14,7 +14,6 @@
 // and you are basically getting on the same sequence of numbers, just starting over
 // so you just call srand() once, in the constructor of the Dice
 
-   // class Dice;
 
   Dice::Dice(){
       randomize();
@@ -32,17 +31,10 @@
       return values.second;
   }
 
-  //TODO: change all uint8_t to DieVal
   void Dice::set(DieFace left, DieFace right){
     values.first = left;
     values.second = right;
   }
-
-  // const char* Dice::left_(){
-  //   return "\xE2\x9A\x80";
-  // }
-
-
 
  DieFace Dice::getRandomDieRoll(){
    DieFace retval;
@@ -53,7 +45,7 @@
    if(dieVal==4)retval=FOUR;
    if(dieVal==5)retval=FIVE;
    if(dieVal==6)retval=SIX;
-   
+
    return retval;
  }
 
@@ -86,8 +78,6 @@ void Dice::prettyPrint(){
   // got to reopen stdout to allow it to change modes to wide, then back to narrow
   freopen(NULL, "w", stdout); 
   // wcout for printing wide-character strings
-  // use Classname::property to access static members
-  // std::wcout << Dice::symbols[this->left()-1] << " and " << Dice::symbols[this->right()-1] << std::endl;
   std::wcout << getSymbol(left()) << " and " << getSymbol(right()) << std::endl;
 
   freopen(NULL, "w", stdout); 
@@ -100,8 +90,7 @@ void Dice::prettyPrintOne(){
   // got to reopen stdout to allow it to change modes to wide, then back to narrow
   freopen(NULL, "w", stdout); 
   // wcout for printing wide-character strings
-  // use Classname::property to access static members
-  std::wcout << getSymbol(left());
+ std::wcout << getSymbol(left());
   freopen(NULL, "w", stdout); 
 }
 
