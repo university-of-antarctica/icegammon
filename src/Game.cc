@@ -30,6 +30,6 @@
     return false;
   }
 
-  // bool Game::moveStone(Move move, Color stoneColor){
-  //   return false;
-  // }
+  bool Game::moveStone(Move move, Color stoneColor){
+    return false;
+  }

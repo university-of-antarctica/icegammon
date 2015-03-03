@@ -17,8 +17,8 @@
     Color getActiveColor(); // Returns the current value of turn which is whose turn it is, white or black.
     Board* getBoard();
     Dice* getDice();
-    bool isLegal(Move potentialMove, Color player);
-    // bool moveStone(Move move, Color player);
+    bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
+    bool moveStone(Move move, Color player);
   private:
     Board* b;
     Dice* dice;
