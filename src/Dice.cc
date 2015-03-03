@@ -14,7 +14,6 @@
 // and you are basically getting on the same sequence of numbers, just starting over
 // so you just call srand() once, in the constructor of the Dice
 
-   // class Dice;
 
   Dice::Dice(){
       randomize();
@@ -25,22 +24,29 @@
    values.second = getRandomDieRoll();
   }
 
-  uint8_t Dice::left(){
+  DieFace Dice::left(){
       return values.first;
   }
-  uint8_t Dice::right(){
+  DieFace Dice::right(){
       return values.second;
   }
 
-  // const char* Dice::left_(){
-  //   return "\xE2\x9A\x80";
-  // }
+  void Dice::set(DieFace left, DieFace right){
+    values.first = left;
+    values.second = right;
+  }
 
+ DieFace Dice::getRandomDieRoll(){
+   DieFace retval;
+   uint dieVal = ( ( rand() % 6 ) + 1 ); 
+   if(dieVal==1)retval=ONE;
+   if(dieVal==2)retval=TWO;
+   if(dieVal==3)retval=THREE;
+   if(dieVal==4)retval=FOUR;
+   if(dieVal==5)retval=FIVE;
+   if(dieVal==6)retval=SIX;
 
-
- uint8_t Dice::getRandomDieRoll(){
-   uint8_t dieVal = (uint8_t)( ( rand() % 6 ) + 1 ); 
-   return dieVal;
+   return retval;
  }
 
  void Dice::randomize(){
@@ -53,7 +59,17 @@
 // in a terminal.
 const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
 
-
+wchar_t Dice::getSymbol(DieFace die){
+  switch(die){
+    case ONE:   return L'⚀';
+    case TWO:   return L'⚁';
+    case THREE: return 0x2682;
+    case FOUR:  return L'⚃';
+    case FIVE:  return L'⚄';
+    case SIX:   return L'⚅';
+    default:    return L'☠'; //0x2620 ( a skull )
+  }
+}
 
 void Dice::prettyPrint(){
   std::locale::global(std::locale(""));
@@ -62,8 +78,8 @@ void Dice::prettyPrint(){
   // got to reopen stdout to allow it to change modes to wide, then back to narrow
   freopen(NULL, "w", stdout); 
   // wcout for printing wide-character strings
-  // use Classname::property to access static members
-  std::wcout << Dice::symbols[this->left()-1] << " and " << Dice::symbols[this->right()-1] << std::endl;
+  std::wcout << getSymbol(left()) << " and " << getSymbol(right()) << std::endl;
+
   freopen(NULL, "w", stdout); 
 }
 
@@ -74,8 +90,7 @@ void Dice::prettyPrintOne(){
   // got to reopen stdout to allow it to change modes to wide, then back to narrow
   freopen(NULL, "w", stdout); 
   // wcout for printing wide-character strings
-  // use Classname::property to access static members
-  std::wcout << Dice::symbols[this->left()-1];
+ std::wcout << getSymbol(left());
   freopen(NULL, "w", stdout); 
 }
 

@@ -33,10 +33,14 @@ main: $(OBJS)
 .PHONY: test
 test: main_unittest
 
-INCLUDES = -isystem ${GTEST_DIR}/include -lreadline -pthread
+INCLUDES = -isystem ${GTEST_DIR}/include -pthread
+LIBRARIES = -lreadline
 main_unittest: libgtest.a $(OBJS)
 	g++ -std=c++11 $(INCLUDES) tests/* $(OBJS) libgtest.a \
-	-o $@
+	-o $@ $(LIBRARIES)
+
+ctest: libgtest.a $(OBJS)
+	g++ -std=c++11 $(INCLUDES) -L/usr/lib/x86_64-linux-gnu/ -I/usr/include/readline/ tests/Controller_tests.cc $(OBJS) libgtest.a -o $@
 
 # Google Test static library file
 libgtest.a: gtest-all.o

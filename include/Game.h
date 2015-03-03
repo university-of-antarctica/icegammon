@@ -4,6 +4,7 @@
 	#include "Color.h"
   #include "Board.h"
   #include "Dice.h"
+  #include "Move.h"
  
   #include <typeinfo>
   #include <cinttypes>
@@ -17,6 +18,8 @@
     Color getActiveColor();
     Board* getBoard();
     Dice* getDice();
+    bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
+    bool moveStone(Move move, Color player);
   private:
     Board* b;
     Dice* dice;

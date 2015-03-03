@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "../include/Game.h"
 #include "../include/Controller.h"
+#include "../include/AsciiView.h"
 #include <ctime>
 
 TEST(Turns, First4TurnsAlternate){
@@ -44,4 +45,27 @@ TEST(Turns, EvenOddRandomized){
 	}
 	EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 
+}
+
+TEST(Moving, BasicFirstMove){
+	Game* g = new Game();
+	bool success;
+	Move move;
+	Board* b = g->getBoard();
+	AsciiView* v = new AsciiView(g);
+
+
+	//Before move
+	EXPECT_EQ(b->pips[1],-2)<< "there should be 2 black stones on pip 1";
+	EXPECT_EQ(b->pips[3],0)<< "there shouldnt be any black stones on pip 3";
+	std::cout << v->toString();
+
+	move = Move(1,3);
+	success = g->moveStone( move, BLACK);
+
+	//After move
+	EXPECT_EQ(success,true)<<"black should be able to move forward 2 pips";
+	EXPECT_EQ(b->pips[1],-1)<< "there should be 1 remaining black stone on pip 1";
+	EXPECT_EQ(b->pips[3],-1)<< "there should now be 1 black stone on pip 3";
+	std::cout << v->toString();
 }
