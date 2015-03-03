@@ -13,12 +13,13 @@
 
   public:
   Controller(Game*);
-  void getFirstTurn();
-  void queryPlayerForFirstRoll(Color activeColor);
-
+  std::pair<uint8_t,uint8_t> getFirstTurn(bool);
+  void queryPlayerForFirstRoll(bool);
+  uint8_t getFirstDieRoll();
+  bool inputValidationForDiceRollPrompt(std::string*);
+  
   private:
   Game* game;
   void getUserInputLine(std::string*);
-
   };
 #endif
