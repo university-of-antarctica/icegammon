@@ -48,19 +48,21 @@ TEST(Controller,verifyInputsForFirstTurn){
   bool testValue;
   //InputValidationForDiceRollPrompt only checks first char,
   //and returns true if first chars aren't 'r' or 'R'.
-  std::string *testLine = new std::string();
   
-  for(char i = 0; i <= LAST_ASCII_CHAR; ++i){
-
-    testLine->at(0) = i; 
-    testValue = controller->inputValidationForDiceRollPrompt(testLine);
+  std::string testLine; 
+ 
+ for(int i = 0; i < LAST_ASCII_CHAR; ++i){
+    testLine.assign(1,i);
+    testValue = controller->inputValidationForDiceRollPrompt(&testLine);
     
-    if( i == UC_R || i == LC_R){
-      EXPECT_EQ(false,testValue)<<"If input is 'r'/'R' return false so we stop looping";
+    if( i == UC_R){
+      EXPECT_EQ(false,testValue)<<"If input is 'R' return false so we stop looping";
     }
-  
+    if(i == LC_R){
+      EXPECT_EQ(false,testValue)<<"If input is 'r' return false so we stop looping";
+    }
+ 
   }
-  delete testLine;
 }
 
 TEST(Controller, verifyPostFirstTurnState){
@@ -75,6 +77,5 @@ TEST(Controller, verifyPostFirstTurnState){
   }else{
     EXPECT_EQ(BLACK_STONE,g->getActiveColor())<<"If black won then it should be their turn";
   }
-
 
 }

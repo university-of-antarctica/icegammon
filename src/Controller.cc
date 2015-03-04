@@ -78,7 +78,7 @@ void Controller::queryPlayerForFirstRoll(bool test){
 
     std::cout << "Enter an R or an r" << std::endl;
     if(test){
-      line->at(0) = 'r';
+      line->assign(1,'r');
     }else{
       getUserInputLine(line);
     }
