@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "../include/Controller.h"
 #include "../include/Game.h"
+#include "../include/Move.h"
 #include <unistd.h>
 #include <string>
 #include <sstream>
@@ -81,12 +82,42 @@ TEST(Controller, verifyPostFirstTurnState){
 
 TEST(Controller, queryPlayerForMoveObjectTest){
   //test queryPlayerForMoveObject
-
+  bool test = true;
+  Game *g = new Game();
+  Controller *c = new Controller(g);
+  Turn *turnObj = c->queryPlayerForMoveObject(test);
+  
+  for(int i = 0; i < 4; ++i){
+    EXPECT_EQ(1,turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
+    EXPECT_EQ(11,turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";
+  }
 }
 
 TEST(Controller, validateInputForMoveObject){
-  //test inputValidationForMoveObject();
+  Game *g = new Game();
+  Controller *c = new Controller(g);
+  // test inputValidationForMoveObject();
+  //This function returns FALSE if the input is VALID
+  //and return TRUE if the input is INVALID
+  //as it is the exit condition for a loop
+  EXPECT_EQ(true,c->inputValidationForMoveObject("t 80 80"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("N 80 80"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("M 80 80"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("m XX ys90"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("m 8X0 90xx09"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("m 450X X80"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("m X80X X80s"))<<"Invalid Input should return true";
+  EXPECT_EQ(true,c->inputValidationForMoveObject("m 80 0009"))<<"Invalid Input should return true";
 
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 8 9"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 0 49"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 1 9"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 12 18"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 4 9"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 19 22"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 12 13"))<<"Valid Input should return false";
+  EXPECT_EQ(false,c->inputValidationForMoveObject("m 1 9"))<<"Valid Input should return false";
+ 
 }
 
 TEST(Controller,verifyGetNumMoves){
@@ -111,5 +142,28 @@ TEST(Controller,verifyGetNumMoves){
 
 TEST(Controller,parseMoveValidation){
   //test parseMove();
+  Game *g = new Game();
+  Controller *c = new Controller(g);
+
+  int testSource = 8;
+  int testDest = 9;
+  Move *moveObj = c->parseMove("m 8 9");
+  
+  EXPECT_EQ(testSource,moveObj->sourcePipNum)<<"Source pip number should match test provided token";
+  EXPECT_EQ(testDest,moveObj->destPipNum)<<"Dest pip number should match test provided token";
+
+  testSource = 6;
+  testDest = 15;
+  moveObj = c->parseMove("m 6 15");
+  
+  EXPECT_EQ(testSource,moveObj->sourcePipNum)<<"Source pip number should match test provided token";
+  EXPECT_EQ(testDest,moveObj->destPipNum)<<"Dest pip number should match test provided token";
+
+  testSource = 18;
+  testDest = 22;
+  moveObj = c->parseMove("m 18 22");
+  
+  EXPECT_EQ(testSource,moveObj->sourcePipNum)<<"Source pip number should match test provided token";
+  EXPECT_EQ(testDest,moveObj->destPipNum)<<"Dest pip number should match test provided token";
 
 }

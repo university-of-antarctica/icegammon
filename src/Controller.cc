@@ -32,14 +32,14 @@ Turn* Controller::queryPlayerForMoveObject(bool test){
        std::cout << "Input move, format 'm int int' " << std::endl;
     
        if(test){
-         // line->assign(1,'r'); //figure out simple valid move syntax
+          line->assign("m 1 11"); //figure out simple valid move syntax
        }else{
           getUserInputLine(line);
        }
       std::cout << "you entered: " << *line << std::endl;
-    }while(inputValidationForMoveObject(line));//not implemented
+    }while(inputValidationForMoveObject(*line));
 
-    Move *moveObj = parseMove(line); //not implemented
+    Move *moveObj = parseMove(*line); 
     turnObj->moves[i] = moveObj;//TODO: is this making a deep copy of the moveObj? if so we need to delete it   
   }
  delete line;
@@ -47,17 +47,82 @@ Turn* Controller::queryPlayerForMoveObject(bool test){
  return turnObj;
 }
 
-Move* Controller::parseMove(std::string* line){
-  Move *moveObj = new Move();
+Move* Controller::parseMove(std::string line){
 //needs to allocate new move on the heap
 //and return that object
+  std::vector<std::string> userInputVector = splitByWhiteSpace(line);
+  std::string elem1 = userInputVector[1];
+  std::string elem2 = userInputVector[2];
+  int elem1Int = atoi(elem1.c_str());
+  int elem2Int = atoi(elem2.c_str());
+  
+  Move *moveObj = new Move(elem1Int,elem2Int);
+  
   return moveObj;
 }
 
-bool Controller::inputValidationForMoveObject(std::string *line){
-  bool validMove = false;
+bool Controller::inputValidationForMoveObject(std::string line){
+  bool inputInvalidKeepLooking = true;
+  std::vector<std::string> userInputVector = splitByWhiteSpace(line);
 
-  return validMove;
+  //move object only has 3 tokens
+  if(userInputVector.size()==3){
+
+    std::string elem0 = userInputVector[0];
+    std::string elem1 = userInputVector[1];
+    std::string elem2 = userInputVector[2];
+    
+    //Get length of elements as they are strings 
+    int elem1StrLength = elem1.length();
+    int elem2StrLength = elem2.length();
+    
+    //convert strings to integers, if there are non digits characters
+    //it will return a digit in the string depending on where the character
+    //in the string was.
+    int elem1Int = atoi(elem1.c_str());
+    int elem2Int = atoi(elem2.c_str());
+    
+    //get the numberOfDigits, this will be used in a check with
+    //the string length, if the string length and num digits match
+    //then we know the whole string was an integer we can use.
+    int elem1IntLength = numDigits(elem1Int);
+    int elem2IntLength = numDigits(elem2Int);
+
+  // std::cout << "1: " << elem1Int << " str: " << elem1StrLength << " int: " << elem1IntLength << " 2: " << elem2Int << " str: " << elem2StrLength << " int: " << elem2IntLength << std::endl;
+    
+    if(elem0=="m" && elem1StrLength == elem1IntLength && elem2StrLength == elem2IntLength ){ 
+        inputInvalidKeepLooking = false;
+    }
+  }
+
+  return inputInvalidKeepLooking;
+}
+
+int Controller::numDigits(int x){  
+    x = abs(x);  
+    return (x < 10 ? 1 :   
+           (x < 100 ? 2 :   
+           (x < 1000 ? 3 :   
+           (x < 10000 ? 4 :   
+           (x < 100000 ? 5 :   
+           (x < 1000000 ? 6 :   
+           (x < 10000000 ? 7 :  
+           (x < 100000000 ? 8 :  
+           (x < 1000000000 ? 9 :  
+           10)))))))));  
+}
+
+std::vector<std::string> Controller::splitByWhiteSpace(std::string line){
+ 
+  std::string buf; // Have a buffer string
+  std::stringstream ss(line); // Insert the string into a stream
+  std::vector<std::string> tokens; // Create vector to hold our words
+
+  while (ss >> buf){
+    tokens.push_back(buf);
+  }
+  
+  return tokens;
 }
 
 void Controller::getFirstTurn(bool test){
@@ -67,10 +132,15 @@ void Controller::getFirstTurn(bool test){
 }
 
 int Controller::getNumMoves(){
-  int numMoves = 0;
-  game->getDice()->left();
-  game->getDice()->right();
-  return numMoves;
+  DieFace leftDie = game->getDice()->left();
+  DieFace rightDie = game->getDice()->right();
+  if(leftDie==rightDie){
+  //in backgammon if you roll doubles you get 4 moves
+    return 4;
+  }else{
+  //normal rolls constitute 2 moves
+    return 2;
+  }
 }
 
 std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){

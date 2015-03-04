@@ -8,9 +8,12 @@
 //#include "Move.h"
 #include "Game.h"
 #include <iostream>
+#include <sstream>
+#include <algorithm>
 #include "Dice.h"
 #include "Move.h"
 #include "Turn.h"
+#include <cstdlib>
 
   class Controller{
 
@@ -24,14 +27,16 @@
   //implement these! (and test)
   void getFirstTurn(bool);
   Turn* queryPlayerForMoveObject(bool);
-  bool inputValidationForMoveObject(std::string*); 
+  bool inputValidationForMoveObject(std::string); 
   int getNumMoves(); 
   bool getTurn(bool);
-  Move* parseMove(std::string*);
+  Move* parseMove(std::string);
 
 
   private:
   Game* game;
   void getUserInputLine(std::string*);
+  std::vector<std::string> splitByWhiteSpace(std::string);
+  int numDigits(int);
   };
 #endif
