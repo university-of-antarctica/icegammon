@@ -20,6 +20,8 @@ CFLAGS = -Wall -pedantic -std=c++11
 
 # Files 
 OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o)
+TESTS = $(addprefix tests/,AsciiView_tests.cc Board_tests.cc Controller_tests.cc Dice_tests.cc Game_tests.cc Validation_tests.cc testmain.cc)
+
 
 .PHONY: all
 all: main test
@@ -35,12 +37,9 @@ test: main_unittest
 
 INCLUDES = -isystem ${GTEST_DIR}/include -pthread
 LIBRARIES = -lreadline
-main_unittest: libgtest.a $(OBJS)
+main_unittest: libgtest.a $(OBJS) $(TESTS)
 	g++ -std=c++11 $(INCLUDES) tests/* $(OBJS) libgtest.a \
 	-o $@ $(LIBRARIES)
-
-ctest: libgtest.a $(OBJS)
-	g++ -std=c++11 $(INCLUDES) -L/usr/lib/x86_64-linux-gnu/ -I/usr/include/readline/ tests/Controller_tests.cc $(OBJS) libgtest.a -o $@
 
 # Google Test static library file
 libgtest.a: gtest-all.o
