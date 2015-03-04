@@ -16,7 +16,8 @@
 	public:
     Game();
 		void passTurn();
-    Color getActiveColor(); // Returns the current value of turn which is whose turn it is, white or black.
+    std::string getActiveColorString(); // Returns the current value of turn which is whose turn it is, white or black.
+    Color getActiveColor();
     Board* getBoard();
     Dice* getDice();
     bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
