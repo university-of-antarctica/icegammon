@@ -41,19 +41,27 @@ for(int i = 0; i < (numberOfRolls/2) ; i = i + 1 ){
 }
 
 // Calculate statistics
-double mean  = utils_mean(vectorOfRolls);
-double stdev = utils_stddev(vectorOfRolls);
+double mean_observed  = utils_mean(vectorOfRolls);
+double stdev_observed = utils_stddev(vectorOfRolls);
 
 // Expected results 
 // from (http://www.futureaccountant.com/theory-of-expectation-random-variable/problems-solutions/throwing-rolling-dice.php#.VOQF0jVTdNA)
-double mean_actual  = 3.5; 
-double stdev_actual = 1.709;
+double mean_desired  = 3.5; 
+double stdev_desired = 1.709;
 
+double mean_lower_bound  = mean_desired  - mean_tolerance;
+double mean_upper_bound  = mean_desired  + mean_tolerance;
+double stdev_lower_bound = stdev_desired - stdev_tolerance;
+double stdev_upper_bound = stdev_desired + stdev_tolerance;
 
-EXPECT_GE(mean,mean_actual - mean_tolerance);
-EXPECT_LE(mean,mean_actual + mean_tolerance);
+EXPECT_LE(mean_lower_bound, mean_observed);
+EXPECT_GE(mean_upper_bound, mean_observed);
+EXPECT_LE(stdev_lower_bound, stdev_observed);
+EXPECT_GE(stdev_upper_bound, stdev_observed);
 
-EXPECT_GE(stdev,stdev_actual - stdev_tolerance);
-EXPECT_LE(stdev,stdev_actual + stdev_tolerance);
+}
 
+TEST(EdgeCaseBehavior, Declaration){
+	Dice* d = new Dice();
+	d->prettyPrint();
 }

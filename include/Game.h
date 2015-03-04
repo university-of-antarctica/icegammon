@@ -28,7 +28,7 @@
   private:
     Board* b;
     Dice* dice;
-    Color turn = WHITE; // White is prompted for first roll
+    Color turn = Color::WHITE; // White is prompted for first roll
     
 
    // FRIEND_TEST(Moving, BasicForceMove);

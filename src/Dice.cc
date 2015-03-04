@@ -17,6 +17,7 @@
 
   Dice::Dice(){
       randomize();
+      roll();
   }
 
   void Dice::roll(){
@@ -53,21 +54,20 @@
    srand((unsigned)time(NULL));
  }
 
-// an array of wide characters (>8 bits each)
+// wide characters (>8 bits each)
 // note the L before each character to denote that it's longer than a normal char
 // the first die can be arrived at with the following keys: [Ctrl Shift U][2][6][8][0]
 // in a terminal.
-const wchar_t Dice::symbols[] = {L'⚀',L'⚁',0x2682,L'⚃',L'⚄',L'⚅'};
-
 wchar_t Dice::getSymbol(DieFace die){
   switch(die){
-    case ONE:   return L'⚀';
-    case TWO:   return L'⚁';
-    case THREE: return 0x2682;
-    case FOUR:  return L'⚃';
-    case FIVE:  return L'⚄';
-    case SIX:   return L'⚅';
-    default:    return L'☠'; //0x2620 ( a skull )
+    case ONE:   return L'⚀'; //0x2680
+    case TWO:   return L'⚁'; //0x2681
+    case THREE: return L'⚂'; //0x2682
+    case FOUR:  return L'⚃'; //0x2683
+    case FIVE:  return L'⚄'; //0x2684
+    case SIX:   return L'⚅'; //0x2685
+    default:    //TODO: throw exception instead of a fun skull
+        return L'☠'; //0x2620 ( a skull )
   }
 }
 

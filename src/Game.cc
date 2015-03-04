@@ -25,7 +25,7 @@
   }
 
   std::string Game::getActiveColorString(){
-   if(Game::turn==1){
+   if(Game::turn==WHITE){
     return "White";
    }else{
     return "Black";
