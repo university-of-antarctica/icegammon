@@ -10,6 +10,8 @@
   #include <cinttypes>
   #include <iostream>
 
+ // #include "gtest/gtest_prod.h" //FRIEND_TEST
+
 	class Game{
 	public:
     Game();
@@ -18,10 +20,14 @@
     Board* getBoard();
     Dice* getDice();
     bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
-    bool moveStone(Move move, Color player);
+    // bool moveStone(Move move, Color player);
+    bool moveStone(Move move); 
   private:
     Board* b;
     Dice* dice;
     Color turn = WHITE; // White is prompted for first roll
+    
+
+   // FRIEND_TEST(Moving, BasicForceMove);
   };
 #endif
