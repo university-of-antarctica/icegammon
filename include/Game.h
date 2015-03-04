@@ -9,6 +9,7 @@
   #include <typeinfo>
   #include <cinttypes>
   #include <iostream>
+  #include "Turn.h"
 
 	class Game{
 	public:
@@ -20,6 +21,8 @@
     Dice* getDice();
     bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
     bool moveStone(Move move, Color player);
+    void submitTurn(Turn*);
+  
   private:
     Board* b;
     Dice* dice;

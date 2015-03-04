@@ -4,19 +4,85 @@
 Controller::Controller(Game* game){
   Controller::game = game;
 }
-//TODO controller will call getNextTurn() and then decide if it is
-//the first turn or the Nth turn.
 
-std::pair<uint8_t,uint8_t> Controller::getFirstTurn(bool test){
+bool Controller::getTurn(bool test){
+ bool activeGame = true; //TODO: decide on logic for game end 
+//ask activePlayer to roll
+  queryPlayerForRoll(test);
+//actuallyRollTheDice
+  game->getDice()->roll();
 
-uint8_t whiteRoll;
-uint8_t blackRoll;
-std::pair<uint8_t,uint8_t> firstTurnDiceValues;
+//ask activePlayer for series of move tokens corresponding to roll
+  Turn *turnObj = queryPlayerForMoveObject(test);
+//parse move tokens into move objects into turn object
+//submit turn object to game
+  game->submitTurn(turnObj);
+  game->passTurn();
+  return activeGame;
+}
+
+Turn* Controller::queryPlayerForMoveObject(bool test){  
+  std::string* line =  new std::string();
+  Turn *turnObj = new Turn();
+
+  int moveObjectsNeeded = getNumMoves();
+  
+  for(int i = 0; i < moveObjectsNeeded; ++i){
+    do{  
+       std::cout << "Input move, format 'm int int' " << std::endl;
+    
+       if(test){
+         // line->assign(1,'r'); //figure out simple valid move syntax
+       }else{
+          getUserInputLine(line);
+       }
+      std::cout << "you entered: " << *line << std::endl;
+    }while(inputValidationForMoveObject(line));//not implemented
+
+    Move *moveObj = parseMove(line); //not implemented
+    turnObj->moves[i] = moveObj;//TODO: is this making a deep copy of the moveObj? if so we need to delete it   
+  }
+ delete line;
+
+ return turnObj;
+}
+
+Move* Controller::parseMove(std::string* line){
+  Move *moveObj = new Move();
+//needs to allocate new move on the heap
+//and return that object
+  return moveObj;
+}
+
+bool Controller::inputValidationForMoveObject(std::string *line){
+  bool validMove = false;
+
+  return validMove;
+}
+
+void Controller::getFirstTurn(bool test){
+  Turn *turnObj = queryPlayerForMoveObject(test); 
+  game->submitTurn(turnObj);
+  game->passTurn();
+}
+
+int Controller::getNumMoves(){
+  int numMoves = 0;
+  game->getDice()->left();
+  game->getDice()->right();
+  return numMoves;
+}
+
+std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){
+
+  DieFace whiteRoll;
+  DieFace blackRoll;
+  std::pair<DieFace,DieFace> firstTurnDiceValues;
  
- do{
+  do{
     //Print  white's turn
     //White player is asked to roll one die
-    queryPlayerForFirstRoll(test);
+    queryPlayerForRoll(test);
     
     //white player rolls one die, call game for die roll then print it to screen
     whiteRoll = getFirstDieRoll();
@@ -26,7 +92,7 @@ std::pair<uint8_t,uint8_t> firstTurnDiceValues;
 
     //print black's turn
     //Black player is asked to roll one die
-    queryPlayerForFirstRoll(test);
+    queryPlayerForRoll(test);
     
     //Black player rolls one die, call game for die roll then print it to screen
     blackRoll = getFirstDieRoll();
@@ -49,30 +115,10 @@ std::pair<uint8_t,uint8_t> firstTurnDiceValues;
   return firstTurnDiceValues;
 }
 
-uint8_t Controller::getFirstDieRoll(){
-    uint8_t dieRoll;
-    game->getDice()->roll();
-    dieRoll = game->getDice()->left();
-    game->getDice()->prettyPrintOne(); 
-    std::cout << std::endl; 
-  return dieRoll;
-}
-
-bool Controller::inputValidationForDiceRollPrompt(std::string* line){
-  bool inputInvalidKeepLooping = false;
-  
-  
-  if (line->at(0)!='r' && line->at(0)!='R'){
-    inputInvalidKeepLooping = true;
-  }
-
-  return inputInvalidKeepLooping;
-}
-
-void Controller::queryPlayerForFirstRoll(bool test){  
- std::string currPlayer =  game->getActiveColorString(); 
+void Controller::queryPlayerForRoll(bool test){  
+  std::string currPlayer =  game->getActiveColorString(); 
   std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
-  std::cout << "Input R or r to roll for first move" << std::endl;
+  std::cout << "Input R or r to roll" << std::endl;
   std::string* line =  new std::string();
   do{  
 
@@ -90,6 +136,24 @@ void Controller::queryPlayerForFirstRoll(bool test){
 
 }
 
+bool Controller::inputValidationForDiceRollPrompt(std::string* line){
+  bool inputInvalidKeepLooping = false;
+  
+  if (line->at(0)!='r' && line->at(0)!='R'){
+    inputInvalidKeepLooping = true;
+  }
+
+  return inputInvalidKeepLooping;
+}
+
+DieFace Controller::getFirstDieRoll(){
+    DieFace dieRoll;
+    game->getDice()->roll();
+    dieRoll = game->getDice()->left();
+    game->getDice()->prettyPrintOne(); 
+    std::cout << std::endl; 
+  return dieRoll;
+}
 
 void Controller::getUserInputLine(std::string* returnString){
     char * line = readline("> ");

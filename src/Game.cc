@@ -5,7 +5,11 @@
 	  Game::b = new Board();
 	  Game::dice = new Dice();
   } 
- 
+
+  void Game::submitTurn(Turn *turnObj){
+    //YOUR CODE GOES HERE
+  }
+
 	void Game::passTurn(){
 		if(turn==WHITE){
 			turn=BLACK;

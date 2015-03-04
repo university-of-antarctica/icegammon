@@ -31,7 +31,7 @@ TEST(Controller, verifyTurnsPassCorrectly){
 TEST(Controller,GetOneDieTest){
   Game *g = new Game();
   Controller *controller = new Controller(g);
-  uint8_t sampleDieRoll;
+  DieFace sampleDieRoll;
   
   for(int i = 0; i < 10; ++i){
     sampleDieRoll = controller->getFirstDieRoll();
@@ -68,7 +68,7 @@ TEST(Controller,verifyInputsForFirstTurn){
 TEST(Controller, verifyPostFirstTurnState){
   Game *g = new Game();
   Controller *controller = new Controller(g);
-  std::pair<uint8_t,uint8_t> diceRolls = controller->getFirstTurn(true); 
+  std::pair<DieFace,DieFace> diceRolls = controller->getFirstTurnRolls(true); 
   
   ASSERT_NE(diceRolls.first, diceRolls.second)<<"Rolls must be different to start game" ;
   

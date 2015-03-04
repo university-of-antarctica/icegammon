@@ -8,16 +8,26 @@
 //#include "Move.h"
 #include "Game.h"
 #include <iostream>
-  
+#include "Dice.h"
+#include "Move.h"
+#include "Turn.h"
+
   class Controller{
 
   public:
   Controller(Game*);
-  std::pair<uint8_t,uint8_t> getFirstTurn(bool);
-  void queryPlayerForFirstRoll(bool);
-  uint8_t getFirstDieRoll();
+  std::pair<DieFace,DieFace> getFirstTurnRolls(bool);
+  void queryPlayerForRoll(bool);
+  DieFace getFirstDieRoll();
   bool inputValidationForDiceRollPrompt(std::string*);
   
+  void getFirstTurn(bool);
+  Turn* queryPlayerForMoveObject(bool);
+  bool inputValidationForMoveObject(std::string*); 
+  int getNumMoves(); 
+  bool getTurn(bool);
+  Move* parseMove(std::string*);
+
   private:
   Game* game;
   void getUserInputLine(std::string*);
