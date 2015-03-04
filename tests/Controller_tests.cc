@@ -79,3 +79,23 @@ TEST(Controller, verifyPostFirstTurnState){
   }
 
 }
+
+TEST(Controller, queryPlayerForMoveObjectTest){
+  //test queryPlayerForMoveObject
+
+}
+
+TEST(Controller, validateInputForMoveObject){
+  //test inputValidationForMoveObject();
+
+}
+
+TEST(Controller,verifyGetNumMoves){
+  //test getNumMoves();
+
+}
+
+TEST(Controller,parseMoveValidation){
+  //test parseMove();
+
+}

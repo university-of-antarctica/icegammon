@@ -48,6 +48,11 @@ TEST(Turns, EvenOddRandomized){
 
 }
 
+TEST(Turns,validationForTurnSubmission){
+  //test submitTurn();
+
+}
+
 TEST(Moving, BasicFirstMove){
 	Game* g = new Game();
 	bool success;
@@ -144,3 +149,4 @@ TEST(Moving, RandomMoves){
 	std::cout << v->toString() << std::endl;
 
 }
+
