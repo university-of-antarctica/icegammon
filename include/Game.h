@@ -5,7 +5,7 @@
   #include "Board.h"
   #include "Dice.h"
   #include "Move.h"
- 
+  #include "Color.h" 
   #include <typeinfo>
   #include <cinttypes>
   #include <iostream>
@@ -28,7 +28,7 @@
   private:
     Board* b;
     Dice* dice;
-    Color turn = WHITE; // White is prompted for first roll
+    Color turn = Color::WHITE; // White is prompted for first roll
     
 
    // FRIEND_TEST(Moving, BasicForceMove);

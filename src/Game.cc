@@ -12,11 +12,11 @@
   }
 
 	void Game::passTurn(){
-		if(turn==WHITE){
-			turn=BLACK;
+		if(turn==Color::WHITE){
+			turn=Color::BLACK;
 		}
 		else{
-			turn=WHITE;
+			turn=Color::WHITE;
 		}
 	}
 
@@ -25,7 +25,7 @@
   }
 
   std::string Game::getActiveColorString(){
-   if(Game::turn==1){
+   if(Game::turn==Color::WHITE){
     return "White";
    }else{
     return "Black";

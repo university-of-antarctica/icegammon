@@ -53,6 +53,7 @@ Move* Controller::parseMove(std::string line){
   std::vector<std::string> userInputVector = splitByWhiteSpace(line);
   std::string elem1 = userInputVector[1];
   std::string elem2 = userInputVector[2];
+
   int elem1Int = atoi(elem1.c_str());
   int elem2Int = atoi(elem2.c_str());
   
@@ -64,7 +65,6 @@ Move* Controller::parseMove(std::string line){
 bool Controller::inputValidationForMoveObject(std::string line){
   bool inputInvalidKeepLooking = true;
   std::vector<std::string> userInputVector = splitByWhiteSpace(line);
-
   //move object only has 3 tokens
   if(userInputVector.size()==3){
 

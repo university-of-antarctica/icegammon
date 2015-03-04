@@ -2,6 +2,7 @@
 #include "../include/Controller.h"
 #include "../include/Game.h"
 #include "../include/Move.h"
+#include "../include/Color.h"
 #include <unistd.h>
 #include <string>
 #include <sstream>
@@ -9,23 +10,19 @@
 #include <thread>
 #include "../include/Dice.h"
 
-#define WHITE_STONE 1
-#define BLACK_STONE 0
 #define LAST_ASCII_CHAR 127
 #define LC_R 114
 #define UC_R 82
 
 TEST(Controller, verifyTurnStateStartsCorrectly){
   Game *g = new Game();
-
-  EXPECT_EQ(1,g->getActiveColor())<<"First call to getActiveColor should be 1, for white";
+  EXPECT_EQ(Color::WHITE,g->getActiveColor())<<"First call to getActiveColor should be white";
 }
 
 TEST(Controller, verifyTurnsPassCorrectly){
   Game *g = new Game();
-  
   g->passTurn();
-  EXPECT_EQ(0,g->getActiveColor())<<"Second call to getActiveColor should be 0, for black";
+  EXPECT_EQ(Color::BLACK,g->getActiveColor())<<"Second call to getActiveColor should be black";
 }
 
 TEST(Controller,GetOneDieTest){
@@ -73,9 +70,9 @@ TEST(Controller, verifyPostFirstTurnState){
   ASSERT_NE(diceRolls.first, diceRolls.second)<<"Rolls must be different to start game" ;
   
   if(diceRolls.first>diceRolls.second){
-    EXPECT_EQ(WHITE_STONE,g->getActiveColor())<<"If white won then it should be their turn";
+    EXPECT_EQ(Color::WHITE,g->getActiveColor())<<"If white won then it should be their turn";
   }else{
-    EXPECT_EQ(BLACK_STONE,g->getActiveColor())<<"If black won then it should be their turn";
+    EXPECT_EQ(Color::BLACK,g->getActiveColor())<<"If black won then it should be their turn";
   }
 
 }
@@ -86,10 +83,13 @@ TEST(Controller, queryPlayerForMoveObjectTest){
   Game *g = new Game();
   Controller *c = new Controller(g);
   Turn *turnObj = c->queryPlayerForMoveObject(test);
-  
-  for(int i = 0; i < 4; ++i){
+  for(int i = 0; i < 2; ++i){
+    std::cout << "growl 1" << ":: i: " << i << std::endl;
     EXPECT_EQ(1,turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
+    std::cout << "growl 2" << std::endl;
     EXPECT_EQ(11,turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";
+    std::cout << "growl 3" << std::endl;
+
   }
 }
 
