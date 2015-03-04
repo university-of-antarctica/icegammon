@@ -21,12 +21,14 @@
   DieFace getFirstDieRoll();
   bool inputValidationForDiceRollPrompt(std::string*);
   
+  //implement these! (and test)
   void getFirstTurn(bool);
   Turn* queryPlayerForMoveObject(bool);
   bool inputValidationForMoveObject(std::string*); 
   int getNumMoves(); 
   bool getTurn(bool);
   Move* parseMove(std::string*);
+
 
   private:
   Game* game;
