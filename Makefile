@@ -61,10 +61,13 @@ gtest-all.o:
 # $@ refers to the target name (build/*.o) as the output file
 # $< refers to the first prerequisite (src/*.o) as the g++ target
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc
-	g++ $(CFLAGS) -c -o $@ $<
+	#Making $@
+	@g++ $(CFLAGS) -c -o $@ $<
 
 $(TESTDIR)/%.o: $(TESTDIR)/%.cc
-	g++ $(CFLAGS) -c -o $@ $< $(INCLUDES)
+	#Making $@
+	@g++ $(CFLAGS) -c -o $@ $< $(INCLUDES)
+
 
 
 
