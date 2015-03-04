@@ -13,6 +13,7 @@
 
 # Directories
 OBJDIR = build
+TESTDIR= tests
 SRCDIR = src
 
 # Flags
@@ -20,8 +21,9 @@ CFLAGS = -Wall -pedantic -std=c++11
 
 # Files 
 OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o)
-TESTS = $(addprefix tests/,AsciiView_tests.cc Board_tests.cc Controller_tests.cc Dice_tests.cc Game_tests.cc Validation_tests.cc testmain.cc)
-
+TESTNAMES = AsciiView_tests Board_tests Controller_tests Dice_tests Game_tests Validation_tests testmain
+TESTS =    $(addprefix $(TESTDIR)/,$(addsuffix .cc,$(TESTNAMES)))
+TESTOBJS = $(addprefix $(TESTDIR)/,$(addsuffix .o,$(TESTNAMES)))
 
 .PHONY: all
 all: main test
@@ -35,10 +37,11 @@ main: $(OBJS)
 .PHONY: test
 test: main_unittest
 
-INCLUDES = -isystem ${GTEST_DIR}/include -pthread
-LIBRARIES = -lreadline
-main_unittest: libgtest.a $(OBJS) $(TESTS)
-	g++ -std=c++11 $(INCLUDES) tests/* $(OBJS) libgtest.a \
+INCLUDES  = -isystem ${GTEST_DIR}/include 
+LIBRARIES = -lreadline -pthread
+
+main_unittest: libgtest.a $(OBJS) $(TESTOBJS)
+	g++ -std=c++11 $(INCLUDES) $(TESTOBJS) $(OBJS) libgtest.a \
 	-o $@ $(LIBRARIES)
 
 # Google Test static library file
@@ -57,8 +60,12 @@ gtest-all.o:
 # relying upon files like src/*.cc
 # $@ refers to the target name (build/*.o) as the output file
 # $< refers to the first prerequisite (src/*.o) as the g++ target
-$(OBJDIR)/%.o : $(SRCDIR)/%.cc
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc
 	g++ $(CFLAGS) -c -o $@ $<
+
+$(TESTDIR)/%.o: $(TESTDIR)/%.cc
+	g++ $(CFLAGS) -c -o $@ $< $(INCLUDES)
+
 
 
 
@@ -71,6 +78,7 @@ clean:
 	rm -f gtest-all.o
 	rm -f main
 	rm -f main_unittest
+	rm -f $(TESTDIR)/*.o
 
 
 # Dependencies (Unused right now, may want in the future)
