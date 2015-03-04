@@ -7,7 +7,6 @@
 
 TEST(Turns, First4TurnsAlternate){
 	Game *g = new Game();
-	Controller *controller = new Controller(g);
 
 	Color first = g->getActiveColor();
 	g->passTurn();
@@ -24,7 +23,6 @@ TEST(Turns, First4TurnsAlternate){
 
 TEST(Turns, EvenOddRandomized){
 	Game *g = new Game();
-	Controller *controller = new Controller(g);
 
   srand(time(NULL));
 	Color first = g->getActiveColor();
@@ -58,8 +56,6 @@ TEST(Moving, BasicFirstMove){
 	bool success;
 	Move move;
 	Board* b = g->getBoard();
-	AsciiView* v = new AsciiView(g);
-
 
 	//Before move
 	EXPECT_EQ(b->pips[1],-2)<< "there should be 2 black stones on pip 1";

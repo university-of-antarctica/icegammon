@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <thread>
+#include "../include/Dice.h"
 
 #define WHITE_STONE 1
 #define BLACK_STONE 0
@@ -15,14 +16,12 @@
 
 TEST(Controller, verifyTurnStateStartsCorrectly){
   Game *g = new Game();
-  Controller *controller = new Controller(g);
 
   EXPECT_EQ(1,g->getActiveColor())<<"First call to getActiveColor should be 1, for white";
 }
 
 TEST(Controller, verifyTurnsPassCorrectly){
   Game *g = new Game();
-  Controller *controller = new Controller(g);
   
   g->passTurn();
   EXPECT_EQ(0,g->getActiveColor())<<"Second call to getActiveColor should be 0, for black";
@@ -91,8 +90,23 @@ TEST(Controller, validateInputForMoveObject){
 }
 
 TEST(Controller,verifyGetNumMoves){
-  //test getNumMoves();
-
+  Game *g = new Game();
+  Controller *c = new Controller(g);
+  int numMoves;
+  
+  
+  for(int i = 1; i < 7; ++i){
+    for(int j =1; j < 7; ++j){
+      //verify DieFace cast works
+      g->getDice()->set((DieFace)i, (DieFace)j);
+      numMoves = c->getNumMoves();
+      if(i==j){ 
+        EXPECT_EQ(numMoves,4);
+      }else{
+        EXPECT_EQ(numMoves,2);
+      }
+    }
+  }
 }
 
 TEST(Controller,parseMoveValidation){
