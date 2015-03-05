@@ -12,6 +12,8 @@
       ++i;
     }
     //TODO FREE turnObj memory
+    //Need to meet about the deconstructor of turnObj
+    //delete turnObj;
   }
 
 	void Game::passTurn(){
