@@ -27,13 +27,12 @@
   bool inputValidationForDiceRollPrompt(std::string*);
   
   //implement these! (and test)
-  void getFirstTurn(bool);
   Turn* queryPlayerForMoveObject(bool);
   bool inputValidationForMoveObject(std::string); //CLEANCODE: doesn't follow javabean standard for predicates (isValid might be better)
   int getNumMoves(); 
   bool getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
   Move* parseMove(std::string);
-
+  void promptAndPerformRoll(bool test);
 
   private:
   Game* game;

@@ -1,7 +1,5 @@
 #include "../include/Game.h"
 
-
-
   Game::Game(){
 	  Game::b = new Board();
 	  Game::dice = new Dice();
@@ -9,6 +7,10 @@
 
   void Game::submitTurn(Turn *turnObj){
     //YOUR CODE GOES HERE
+    int i = 0;
+    while(turnObj->moves[i]!=NULL){
+      moveStone(*turnObj->moves[i]);      
+    }
   }
 
 	void Game::passTurn(){
@@ -25,12 +27,11 @@
   }
 
   std::string Game::getActiveColorString(){
-   if(Game::turn==Color::WHITE){
-    return "White";
-   }else{
-    return "Black";
-  }
-
+    if(Game::turn==Color::WHITE){
+      return "White";
+    }else{
+      return "Black";
+    }
   }
 
   Board* Game::getBoard(){

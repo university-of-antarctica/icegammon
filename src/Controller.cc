@@ -5,15 +5,18 @@ Controller::Controller(Game* game){
   Controller::game = game;
 }
 
-bool Controller::getTurn(bool test){
- bool activeGame = true; //TODO: decide on logic for game end 
+void promptAndPerformRoll(bool test){
 //ask activePlayer to roll
-  queryPlayerForRoll(test);
+//queryPlayerForRoll(test);
 //actuallyRollTheDice
-  game->getDice()->roll();
+//game->getDice()->roll();
+}
 
+bool Controller::getTurn(bool test){
+ 
+ bool activeGame = true; //TODO: decide on logic for game end 
 //ask activePlayer for series of move tokens corresponding to roll
-  Turn *turnObj = queryPlayerForMoveObject(test);
+  Turn *turnObj = queryPlayerForMoveObject(test); 
 //parse move tokens into move objects into turn object
 //submit turn object to game
   game->submitTurn(turnObj);
@@ -125,15 +128,11 @@ std::vector<std::string> Controller::splitByWhiteSpace(std::string line){
   return tokens;
 }
 
-void Controller::getFirstTurn(bool test){
-  Turn *turnObj = queryPlayerForMoveObject(test); 
-  game->submitTurn(turnObj);
-  game->passTurn();
-}
 
 int Controller::getNumMoves(){
-  DieFace leftDie = game->getDice()->left();
-  DieFace rightDie = game->getDice()->right();
+  
+  DieFace leftDie = Controller::game->getDice()->left();
+  DieFace rightDie = Controller::game->getDice()->right();
   if(leftDie==rightDie){
   //in backgammon if you roll doubles you get 4 moves
     return 4;
