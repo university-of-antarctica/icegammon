@@ -27,12 +27,12 @@
   bool inputValidationForDiceRollPrompt(std::string*);
   
   //implement these! (and test)
-  Turn* queryPlayerForMoveObject(bool);
+  Turn* queryPlayerForMoveObject(bool); //CLEANCODE: misnamed, this prompts a player for a turn object, not a move object. good opportunity to make an actual promptPlayerForMoveObject method
   bool inputValidationForMoveObject(std::string); //CLEANCODE: doesn't follow javabean standard for predicates (isValid might be better)
   int getNumMoves(); 
   bool getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
   Move* parseMove(std::string);
-  void promptAndPerformRoll(bool test);
+  void promptAndPerformRoll(bool test); //CLEANCODE: be consistent with our language.  everything should be 'query' or 'prompt' (my preference) for methods that block waiting for user input
 
   private:
   Game* game;

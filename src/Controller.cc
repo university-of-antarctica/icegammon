@@ -53,6 +53,10 @@ Turn* Controller::queryPlayerForMoveObject(bool test){
 Move* Controller::parseMove(std::string line){
 //needs to allocate new move on the heap
 //and return that object
+
+  // http://www.cplusplus.com/reference/istream/istream/operator%3E%3E/
+  // it looks like you may be able to do this more easily with a stream
+  // (look at the example)
   std::vector<std::string> userInputVector = splitByWhiteSpace(line);
   std::string elem1 = userInputVector[1];
   std::string elem2 = userInputVector[2];
@@ -102,7 +106,7 @@ bool Controller::inputValidationForMoveObject(std::string line){
 }
 
 int Controller::numDigits(int x){  
-    x = abs(x);  
+    x = abs(x);  // this is beautiful
     return (x < 10 ? 1 :   
            (x < 100 ? 2 :   
            (x < 1000 ? 3 :   
@@ -112,7 +116,7 @@ int Controller::numDigits(int x){
            (x < 10000000 ? 7 :  
            (x < 100000000 ? 8 :  
            (x < 1000000000 ? 9 :  
-           10)))))))));  
+           10)))))))));  //TODO: throw exception? have a guarantee on the max size?
 }
 
 std::vector<std::string> Controller::splitByWhiteSpace(std::string line){
@@ -127,7 +131,6 @@ std::vector<std::string> Controller::splitByWhiteSpace(std::string line){
   
   return tokens;
 }
-
 
 int Controller::getNumMoves(){
   
@@ -147,8 +150,36 @@ std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){
   DieFace whiteRoll;
   DieFace blackRoll;
   std::pair<DieFace,DieFace> firstTurnDiceValues;
- 
+  
   do{
+    //alternative:
+    /////////////////////////////////////////////
+        //game->getDice()->roll();
+        
+        //whiteRoll = dice->left();
+        //view->displayCurrentTurn(); //UNIMPLEMENTED
+        //queryPlayerForRoll(test) //just make white player type r
+        //print left(white) die
+        //game->passTurn();
+
+
+        //blackRoll = dice->right();
+        //view->displayCurrentTurn(); //UNIMPLEMENTED
+        //queryPlayerForRoll(test) //just make black player type r
+        //print right(black) die
+        //game->passTurn(); //white's turn
+
+
+        //}
+        //while(whiteRoll == blackRoll);
+        // ...
+
+    //could write method to do the 5 lines above
+    /////////////////////////////////////////////////
+
+
+
+
     //Print  white's turn
     //White player is asked to roll one die
     queryPlayerForRoll(test);
@@ -185,6 +216,8 @@ std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){
 }
 
 void Controller::queryPlayerForRoll(bool test){  
+  //this should be it's own method (print current player's turn)
+  //these also shouldn't be coupled; printing the curr player's turn is a side-effect
   std::string currPlayer =  game->getActiveColorString(); 
   std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
   std::cout << "Input R or r to roll" << std::endl;
@@ -206,16 +239,21 @@ void Controller::queryPlayerForRoll(bool test){
 }
 
 bool Controller::inputValidationForDiceRollPrompt(std::string* line){
-  bool inputInvalidKeepLooping = false;
+  bool inputInvalidKeepLooping = false; //CLEANCODE: javabean predicate
   
-  if (line->at(0)!='r' && line->at(0)!='R'){
-    inputInvalidKeepLooping = true;
+//CLEANCODE: repetition of "line->at(0)".  
+  //show intent by naming this. "firstCharOfInput"?
+  //I feel fine about 'r' and 'R' being magic numbers, but I don't think Clean Code does...
+  if (line->at(0)!='r' && line->at(0)!='R'){ 
+      inputInvalidKeepLooping = true;     
   }
 
   return inputInvalidKeepLooping;
 }
 
-DieFace Controller::getFirstDieRoll(){
+//should be as simple as game->getDice()->left();
+//we don't want side effects like printing in a 'get' method
+DieFace Controller::getFirstDieRoll(){ 
     DieFace dieRoll;
     game->getDice()->roll();
     dieRoll = game->getDice()->left();
@@ -226,6 +264,12 @@ DieFace Controller::getFirstDieRoll(){
 
 void Controller::getUserInputLine(std::string* returnString){
     char * line = readline("> ");
+    //!!!!!!
+    // From http://cnswww.cns.cwru.edu/php/chet/readline/readline.html#SEC24 ...
+    //    "If readline encounters an EOF while reading the line, and 
+    //    the line is empty at that point, then (char *)NULL is returned. 
+    //    Otherwise, the line is ended just as if a newline had been typed.""
+    // this causes a segmentation fault as of 9:00 AM on 3/05 if [Ctrl D] is pressed
     *returnString = reinterpret_cast<char*>(line);
     free(line);
 }
