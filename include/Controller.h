@@ -13,6 +13,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Dice.h"
+#include "AsciiView.h"
 #include "Move.h"
 #include "Turn.h"
 #include <cstdlib>
@@ -21,7 +22,7 @@
 
   public:
   Controller(Game*);
-  std::pair<DieFace,DieFace> getFirstTurnRolls(bool);
+  void getFirstTurnRolls(bool);
   void queryPlayerForRoll(bool);
   DieFace getFirstDieRoll();
   bool inputValidationForDiceRollPrompt(std::string*);
@@ -33,6 +34,8 @@
   bool getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
   Move* parseMove(std::string);
   void promptAndPerformRoll(bool test);
+  void announceTurn();
+  void displayBoard(AsciiView*);
 
   private:
   Game* game;

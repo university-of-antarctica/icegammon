@@ -65,11 +65,11 @@ TEST(Controller,verifyInputsForFirstTurn){
 TEST(Controller, verifyPostFirstTurnState){
   Game *g = new Game();
   Controller *controller = new Controller(g);
-  std::pair<DieFace,DieFace> diceRolls = controller->getFirstTurnRolls(true); 
+  controller->getFirstTurnRolls(true); 
   
-  ASSERT_NE(diceRolls.first, diceRolls.second)<<"Rolls must be different to start game" ;
+  ASSERT_NE(g->getDice()->left(), g->getDice()->right())<<"Rolls must be different to start game" ;
   
-  if(diceRolls.first>diceRolls.second){
+  if(g->getDice()->left() > g->getDice()->right()){
     EXPECT_EQ(Color::WHITE,g->getActiveColor())<<"If white won then it should be their turn";
   }else{
     EXPECT_EQ(Color::BLACK,g->getActiveColor())<<"If black won then it should be their turn";
@@ -84,11 +84,8 @@ TEST(Controller, queryPlayerForMoveObjectTest){
   Controller *c = new Controller(g);
   Turn *turnObj = c->queryPlayerForMoveObject(test);
   for(int i = 0; i < 2; ++i){
-    std::cout << "growl 1" << ":: i: " << i << std::endl;
     EXPECT_EQ(1,turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
-    std::cout << "growl 2" << std::endl;
     EXPECT_EQ(11,turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";
-    std::cout << "growl 3" << std::endl;
 
   }
 }
