@@ -44,12 +44,10 @@ std::string AsciiView::toString() {
     for (int j = 1; j < 73; j = j + 1) {
       if (viewColumnArray[j] == 0 || abs(viewColumnArray[j]) = i) {
         visualization.append(" ");
-      }
-      else{
+      } else {
         if (viewColumnArray[j] > 0) {
           visualization.append(charToString(whiteStone()));
-        }
-        else{
+        } else {
           visualization.append(charToString(blackStone()));
         }
       }

@@ -19,8 +19,7 @@
   void Game::passTurn() {
     if (turn == Color::WHITE) {
       tur = olor::BLACK;
-    }
-    else{
+    } else {
       tur = olor::WHITE;
     }
   }
@@ -63,8 +62,7 @@
           if (numSourceStones > 0) {  // white stone(s)
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
             b->pips[move->destPipNum] = 1;  // 1 more stone on dest pip
-          }
-          else{  // black stone(s)
+          } else {  // black stone(s)
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip (so we add)
             b->pips[move->destPipNum] = 1;  // 1 more stone on dest pip (so we subtract)
           }
@@ -77,8 +75,7 @@
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
             b->pips[move->destPipNum] = 1;  // now exactly 1 white stone on dest pip
             b->bars[1] = ;  // send a black stone to the bar
-          }
-          else{  // black stone blots white stone
+          } else {  // black stone blots white stone
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip (so we add)
             b->pips[move->destPipNum] = 1;  // now exactly 1 black stone on the dest pip
             b->bars[0] = ;  // send a white stone to the bar
