@@ -6,14 +6,14 @@ struct Move{
   int destPipNum;
 
   Move(int s, int d){
-	sourcePipNum = s;
-	destPipNum = d;
+  sourcePipNum = s;
+  destPipNum = d;
   }
 
   //TODO: What does this mean? is there a problem with choosing 0?
   Move(){
-  	sourcePipNum=0;
-  	destPipNum=0;
+    sourcePipNum=0;
+    destPipNum=0;
   }
 
 };

@@ -6,7 +6,7 @@
 
 int main(){
 
-	Game *game = new Game();
+  Game *game = new Game();
   Controller *controller = new Controller(game);
   AsciiView *view = new AsciiView(game);
   
@@ -16,7 +16,7 @@ int main(){
   
   bool test = false; 
   controller->getFirstTurnRolls(test);
-	
+  
   controller->displayBoard(view);// this argument is NOT kosher 
   controller->announceTurn();
   controller->getTurn(test);

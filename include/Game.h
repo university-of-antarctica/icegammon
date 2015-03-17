@@ -1,7 +1,7 @@
 #ifndef ICEGAMMON_GAME_H_
 #define ICEGAMMON_GAME_H_
 
-	#include "Color.h"
+  #include "Color.h"
   #include "Board.h"
   #include "Dice.h"
   #include "Move.h"
@@ -13,10 +13,10 @@
 
  // #include "gtest/gtest_prod.h" //FRIEND_TEST
 
-	class Game{
-	public:
+  class Game{
+  public:
     Game();
-		void passTurn();
+    void passTurn();
     std::string getActiveColorString(); // Returns the current value of turn which is whose turn it is, white or black.
     Color getActiveColor();
     Board* getBoard();
