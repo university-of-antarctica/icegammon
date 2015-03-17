@@ -2,14 +2,14 @@
 #include <string>
 #include "../include/AsciiView.h"
 #include "../include/Game.h"
-//include asciiview source
+// include asciiview source
 
-TEST(AsciiView, InitialCount){
-  //initialize a board
-  //get a string from the view
-  //decide what a white stone looks like
-  //decide what a black stone looks like
-  //iterate over the string and verify that there are 15 of each
+TEST(AsciiView, InitialCount) {
+  // initialize a board
+  // get a string from the view
+  // decide what a white stone looks like
+  // decide what a black stone looks like
+  // iterate over the string and verify that there are 15 of each
 
   Game *g = new Game();
   AsciiView *v = new AsciiView(g);

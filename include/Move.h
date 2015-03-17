@@ -5,13 +5,13 @@ struct Move{
   int sourcePipNum;
   int destPipNum;
 
-  Move(int s, int d){
+  Move(int s, int d) {
   sourcePipNum = s;
   destPipNum = d;
   }
 
-  //TODO: What does this mean? is there a problem with choosing 0?
-  Move(){
+  // TODO(lovestevend@gmail.com): What does this mean? is there a problem with choosing 0?
+  Move() {
     sourcePipNum=0;
     destPipNum=0;
   }

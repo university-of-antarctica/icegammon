@@ -2,8 +2,8 @@
 #include "../include/Game.h"
 #include "../include/Color.h"
 
-TEST(Validation, isLegal){
-  Game *g = new Game(); //starting board
+TEST(Validation, isLegal) {
+  Game *g = new Game(); // starting board
   Dice *d = g->getDice();
   d->set(ONE,SIX);
 

@@ -11,7 +11,7 @@
   #include <iostream>
   #include "Turn.h"
 
- // #include "gtest/gtest_prod.h" //FRIEND_TEST
+ // #include "gtest/gtest_prod.h" // FRIEND_TEST
 
   class Game{
   public:
@@ -21,7 +21,7 @@
     Color getActiveColor();
     Board* getBoard();
     Dice* getDice();
-    bool isLegal(Move*); //should a move also have a color inside it?
+    bool isLegal(Move*); // should a move also have a color inside it?
     // bool moveStone(Move move, Color player);
     void submitTurn(Turn*,int);
     bool moveStone(Move*); 

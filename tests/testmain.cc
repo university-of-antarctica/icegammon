@@ -8,7 +8,7 @@
 #include "../include/utils.h"
 #include "../include/AsciiView.h"
 
-//TODO: include more intelligently, "../src/*" ?
+// TODO(lovestevend@gmail.com): include more intelligently, "../src/*" ?
 
 GTEST_API_ int main(int argc, char **argv) {
   printf("Running tests from testmain.cc\n");

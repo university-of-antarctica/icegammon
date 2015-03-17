@@ -5,10 +5,10 @@
 #include <sstream>
 #include <string>
 #include "Game.h"
-  //forward declaration
+  // forward declaration
   
 
-  //includes
+  // includes
   #include <string>
   #include "Board.h"
   #include <algorithm>
