@@ -12,8 +12,8 @@ struct Move{
 
   // TODO(lovestevend@gmail.com): What does this mean? is there a problem with choosing 0?
   Move() {
-    sourcePipNum=0;
-    destPipNum=0;
+    sourcePipNu = ;
+    destPipNu = ;
   }
 
 };

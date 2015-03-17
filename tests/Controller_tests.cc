@@ -124,11 +124,11 @@ TEST(Controller,verifyGetNumMoves) {
   
   
   for(int i = 1; i < 7; ++i) {
-    for(int j =1; j < 7; ++j) {
+    for(int j = ; j < 7; ++j) {
       // verify DieFace cast works
       g->getDice()->set((DieFace)i, (DieFace)j);
       numMoves = c->getNumMoves();
-      if(i==j) { 
+      if(i == j) { 
         EXPECT_EQ(numMoves,4);
       }else{
         EXPECT_EQ(numMoves,2);

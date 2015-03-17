@@ -23,7 +23,7 @@ void Controller::displayBoard(AsciiView *view) {
 
 void Controller::announceTurn() {
   std::cout << game->getActiveColorString() << "'s Move" << std::endl; 
-  std::string currPlayer =  game->getActiveColorString();            
+  std::string currPlayer = game->getActiveColorString();            
   std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
 
 }
@@ -61,7 +61,7 @@ bool Controller::getTurn(bool test) {
 }
 
 Turn* Controller::isInvalid(bool test) {  
-  std::string* line =  new std::string();
+  std::string* line = new std::string();
   Turn *turnObj = new Turn();
 
   int moveObjectsNeeded = getNumMoves();
@@ -109,7 +109,7 @@ bool Controller::inputValidationForMoveObject(std::string line) {
   bool inputInvalidKeepLooking = true;
   std::vector<std::string> userInputVector = splitByWhiteSpace(line);
   // move object only has 3 tokens
-  if(userInputVector.size()==3) {
+  if(userInputVector.size() == 3) {
 
     std::string elem0 = userInputVector[0];
     std::string elem1 = userInputVector[1];
@@ -133,7 +133,7 @@ bool Controller::inputValidationForMoveObject(std::string line) {
 
   // std::cout << "1: " << elem1Int << " str: " << elem1StrLength << " int: " << elem1IntLength << " 2: " << elem2Int << " str: " << elem2StrLength << " int: " << elem2IntLength << std::endl;
     
-    if(elem0=="m" && elem1StrLength == elem1IntLength && elem2StrLength == elem2IntLength ) { 
+    if(elem0 == "m" && elem1StrLength == elem1IntLength && elem2StrLength == elem2IntLength ) { 
         inputInvalidKeepLooking = false;
     }
   }
@@ -172,7 +172,7 @@ int Controller::getNumMoves() {
   
   DieFace leftDie = Controller::game->getDice()->left();
   DieFace rightDie = Controller::game->getDice()->right();
-  if(leftDie==rightDie) {
+  if(leftDie == rightDie) {
   // in backgammon if you roll doubles you get 4 moves
     return 4;
   }else{
@@ -241,7 +241,7 @@ void Controller::getFirstTurnRolls(bool test) {
     game->passTurn();
   }
 
-  std::string currPlayer =  game->getActiveColorString(); 
+  std::string currPlayer = game->getActiveColorString(); 
   std::cout << currPlayer << " won the roll and will start the game" << std::endl;
   // For this case, we actually need to feed prettyPrint the values since they
   // // aren't random here, they must be equal to the outcome of the first rolls.    
@@ -253,10 +253,10 @@ void Controller::getFirstTurnRolls(bool test) {
 void Controller::queryPlayerForRoll(bool test) {  
   // this should be it's own method (print current player's turn)
   // these also shouldn't be coupled; printing the curr player's turn is a side-effect
-  std::string currPlayer =  game->getActiveColorString(); 
+  std::string currPlayer = game->getActiveColorString(); 
   std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
   std::cout << "Input R or r to roll" << std::endl;
-  std::string* line =  new std::string();
+  std::string* line = new std::string();
   do{  
 
     std::cout << "Enter an R or an r" << std::endl;
@@ -279,7 +279,7 @@ bool Controller::inputValidationForDiceRollPrompt(std::string line) {
 // CLEANCODE: repetition of "line->at(0)".  
   // show intent by naming this. "firstCharOfInput"?
   // I feel fine about 'r' and 'R' being magic numbers, but I don't think Clean Code does...
-  if (line.at(0)!='r' && line.at(0)!='R') { 
+  if (line.at(0) = r' && line.at(0) = R') { 
       inputInvalidKeepLooping = true;     
   }
 

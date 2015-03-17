@@ -40,12 +40,12 @@
  DieFace Dice::getRandomDieRoll() {
    DieFace retval;
    uint dieVal = ( ( rand() % 6 ) + 1 ); 
-   if(dieVal==1)retval=ONE;
-   if(dieVal==2)retval=TWO;
-   if(dieVal==3)retval=THREE;
-   if(dieVal==4)retval=FOUR;
-   if(dieVal==5)retval=FIVE;
-   if(dieVal==6)retval=SIX;
+   if(dieVal == 1)retva = NE;
+   if(dieVal == 2)retva = WO;
+   if(dieVal == 3)retva = HREE;
+   if(dieVal == 4)retva = OUR;
+   if(dieVal == 5)retva = IVE;
+   if(dieVal == 6)retva = IX;
 
    return retval;
  }
