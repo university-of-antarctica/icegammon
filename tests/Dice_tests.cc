@@ -5,20 +5,20 @@
 #include "../include/Dice.h"
 #include "../include/utils.h"
 #include "gtest/gtest.h"
-TEST(DiceRolls,VerifyValidDiceValues) {
+TEST(DiceRolls, VerifyValidDiceValues) {
 
 Dice *d = new Dice();
 d->roll();
 uint8_t firstRoll = d->left();
 uint8_t secondRoll = d->right();
-EXPECT_LE(firstRoll,6);
-EXPECT_LE(secondRoll,6);
-EXPECT_GE(firstRoll,1);
-EXPECT_GE(secondRoll,1);
+EXPECT_LE(firstRoll, 6);
+EXPECT_LE(secondRoll, 6);
+EXPECT_GE(firstRoll, 1);
+EXPECT_GE(secondRoll, 1);
 
 }
 
-TEST(DiceRolls,MeanAndStdDev) {
+TEST(DiceRolls, MeanAndStdDev) {
 // TODO(lovestevend@gmail.com): As of now this is a sanity check, it needs to be much more statistically valid in the future
 
 // Parameters

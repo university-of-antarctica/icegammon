@@ -5,7 +5,7 @@
     Game::dice = new Dice();
   } 
 
-  void Game::submitTurn(Turn *turnObj,int numMoves) {
+  void Game::submitTurn(Turn *turnObj, int numMoves) {
     int i = 0;
     while (i< numMoves) {
       moveStone(turnObj->moves[i]);      

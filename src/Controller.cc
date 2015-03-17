@@ -49,7 +49,7 @@ bool Controller::getTurn(bool test) {
         ++i;
       }
       if (validTurn) {
-        game->submitTurn(turnObj,getNumMoves());
+        game->submitTurn(turnObj, getNumMoves());
         activeTurn = false;
       }else{
         std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;
@@ -100,7 +100,7 @@ Move* Controller::parseMove(std::string line) {
   int elem1Int = atoi(elem1.c_str());
   int elem2Int = atoi(elem2.c_str());
   
-  Move *moveObj = new Move(elem1Int,elem2Int);
+  Move *moveObj = new Move(elem1Int, elem2Int);
   
   return moveObj;
 }
@@ -245,7 +245,7 @@ void Controller::getFirstTurnRolls(bool test) {
   std::cout << currPlayer << " won the roll and will start the game" << std::endl;
   // For this case, we actually need to feed prettyPrint the values since they
   // // aren't random here, they must be equal to the outcome of the first rolls.    
-  game->getDice()->set(whiteRoll,blackRoll);
+  game->getDice()->set(whiteRoll, blackRoll);
   game->getDice()->prettyPrint();
   
 }
@@ -261,7 +261,7 @@ void Controller::queryPlayerForRoll(bool test) {
 
     std::cout << "Enter an R or an r" << std::endl;
     if (test) {
-      line->assign(1,'r');
+      line->assign(1, 'r');
     }else{
       getUserInputLine(line);
     }

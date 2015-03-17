@@ -59,7 +59,7 @@ std::string AsciiView::toString() {
 
 std::vector<int> AsciiView::getViewColumnArray() {
   Board* b = game->getBoard();
-  std::vector<int> viewColumnArray(73,0);
+  std::vector<int> viewColumnArray(73, 0);
   viewColumnArray[1] = b->homes[0];
   viewColumnArray[6] = b->pips[1]; 
   viewColumnArray[8] = b->pips[2];
