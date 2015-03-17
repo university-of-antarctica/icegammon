@@ -25,13 +25,12 @@
   void getFirstTurnRolls(bool);
   void queryPlayerForRoll(bool);
   DieFace getFirstDieRoll();
-  bool inputValidationForDiceRollPrompt(std::string*);
-  
-  //implement these! (and test)
+  Turn* isInvalid(bool);
   Turn* queryPlayerForMoveObject(bool); //CLEANCODE: misnamed, this prompts a player for a turn object, not a move object. good opportunity to make an actual promptPlayerForMoveObject method
   bool inputValidationForMoveObject(std::string); //CLEANCODE: doesn't follow javabean standard for predicates (isValid might be better)
+  bool inputValidationForDiceRollPrompt(std::string);
   int getNumMoves(); 
-  bool getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
+  bool  getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
   Move* parseMove(std::string);
   void announceTurn();
   void displayBoard(AsciiView*);

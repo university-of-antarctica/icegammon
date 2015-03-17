@@ -36,7 +36,7 @@ bool Controller::getTurn(bool test){
   //ask activePlayer for series of move tokens corresponding to roll
     
     while(activeTurn){
-      Turn *turnObj = queryPlayerForMoveObject(test); 
+      Turn *turnObj = isInvalid(test); 
       
       //parse move tokens into move objects into turn object
       //submit turn object to game
@@ -60,7 +60,7 @@ bool Controller::getTurn(bool test){
   return activeGame;
 }
 
-Turn* Controller::queryPlayerForMoveObject(bool test){  
+Turn* Controller::isInvalid(bool test){  
   std::string* line =  new std::string();
   Turn *turnObj = new Turn();
 
@@ -266,20 +266,20 @@ void Controller::queryPlayerForRoll(bool test){
       getUserInputLine(line);
     }
     std::cout << "you entered: " << *line << std::endl;
- }while(inputValidationForDiceRollPrompt(line));
+ }while(inputValidationForDiceRollPrompt(*line));
 
  std::cout << "Rolling..." << std::endl;
  delete line;
 
 }
 
-bool Controller::inputValidationForDiceRollPrompt(std::string* line){
+bool Controller::inputValidationForDiceRollPrompt(std::string line){
   bool inputInvalidKeepLooping = false; //CLEANCODE: javabean predicate
   
 //CLEANCODE: repetition of "line->at(0)".  
   //show intent by naming this. "firstCharOfInput"?
   //I feel fine about 'r' and 'R' being magic numbers, but I don't think Clean Code does...
-  if (line->at(0)!='r' && line->at(0)!='R'){ 
+  if (line.at(0)!='r' && line.at(0)!='R'){ 
       inputInvalidKeepLooping = true;     
   }
 
