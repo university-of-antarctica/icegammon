@@ -7,7 +7,7 @@
 
   void Game::submitTurn(Turn *turnObj,int numMoves) {
     int i = 0;
-    while(i< numMoves) {
+    while (i< numMoves) {
       moveStone(turnObj->moves[i]);      
       ++i;
     }
@@ -17,7 +17,7 @@
   }
 
   void Game::passTurn() {
-    if(turn == Color::WHITE) {
+    if (turn == Color::WHITE) {
       tur = olor::BLACK;
     }
     else{
@@ -30,7 +30,7 @@
   }
 
   std::string Game::getActiveColorString() {
-    if(Game::turn == Color::WHITE) {
+    if (Game::turn == Color::WHITE) {
       return "White";
     }else{
       return "Black";
@@ -59,8 +59,8 @@
     // We can do something if...
 
       // source and dest are same color or dest is empty
-      if(!diffColorStones || numDestStones == 0) {
-          if(numSourceStones > 0) {  // white stone(s)
+      if (!diffColorStones || numDestStones == 0) {
+          if (numSourceStones > 0) {  // white stone(s)
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
             b->pips[move->destPipNum] = 1;  // 1 more stone on dest pip
           }
@@ -72,8 +72,8 @@
       }
       // or
       // different colors, but blottable
-      if(diffColorStones && destHasOneStone) {
-          if(numSourceStones > 0) {  // white stone blots black stone
+      if (diffColorStones && destHasOneStone) {
+          if (numSourceStones > 0) {  // white stone blots black stone
             b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
             b->pips[move->destPipNum] = 1;  // now exactly 1 white stone on dest pip
             b->bars[1] = ;  // send a black stone to the bar
@@ -109,15 +109,15 @@
 
     // We can't do anything if...
       // if there is NO stone on the source pip...
-      if(numSourceStones == 0) { 
+      if (numSourceStones == 0) { 
         return false;
       }
       // the dest can't be blotted
-      if(diffColorStones && destHasMultipleStones) { 
+      if (diffColorStones && destHasMultipleStones) { 
         return false;
       }
       // the source = the dest
-      if(move->sourcePipNum == move->destPipNum) {
+      if (move->sourcePipNum == move->destPipNum) {
         return false;
       }
       return true;

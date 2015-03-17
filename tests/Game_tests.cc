@@ -30,13 +30,13 @@ TEST(Turns, EvenOddRandomized) {
   Color second = g->getActiveColor();
 
   int n = rand() % 1000;  // in the range between 0 and 999
-  for(int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; ++i) {
     g->passTurn();
   }
 
   // if n is odd, then the color should be same as the first color
   // if n is even, then the color should be the same as the second color
-  if(n%2 == 1) {  // n is odd
+  if (n%2 == 1) {  // n is odd
     EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
   }
   else{  // n is even
@@ -81,7 +81,7 @@ TEST(Moving, RandomMoves) {
   bool success;
 
   // make random moves
-  for(int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 100; ++i) {
 
     source = rand()%24+1;  // 1 to 24
     dest = rand()%24+1;  // 1 to 24
@@ -100,13 +100,13 @@ TEST(Moving, RandomMoves) {
     bool blotted;
 
 
-    if(success) {
+    if (success) {
       std::cout << "(" << source << " to " << dest << ")" <<std::endl;
 
       EXPECT_EQ( sourceNumBefore-1, sourceNumAfter);
 
       blotted = (totalBarsAfter > totalBarsBefore);
-      if(blotted) {
+      if (blotted) {
         EXPECT_EQ( totalBarsBefore+1, totalBarsAfter);
         EXPECT_EQ( destNumBefore,     destNumAfter);
       }
@@ -125,9 +125,9 @@ TEST(Moving, RandomMoves) {
   int whitecount = 0;
   int blackcount = 0;
   int pipval;
-  for(int i = 1; i < 25; ++i) {
+  for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if(pipval>0) {
+    if (pipval>0) {
       whitecount = pipval;
     }
     else{

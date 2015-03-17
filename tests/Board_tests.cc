@@ -17,9 +17,9 @@ TEST(Initialization,WhiteCount) {
   // Count up the white stones
   int count = 0;
   int pipval;
-  for(int i = 1; i < 25; ++i) {
+  for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if(pipval > 0) {  // white stones are here
+    if (pipval > 0) {  // white stones are here
       count = pipval;
     }
   }
@@ -34,7 +34,7 @@ TEST(Initialization,ColorEqualityCount) {
   // Count up all of the stones
   int count = 0;
   int pipval;
-  for(int i = 1; i < 25; ++i) {
+  for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
     count = pipval;
   }
