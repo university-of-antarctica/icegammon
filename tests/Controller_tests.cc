@@ -50,7 +50,7 @@ TEST(Controller,verifyInputsForFirstTurn){
  
  for(int i = 0; i < LAST_ASCII_CHAR; ++i){
     testLine.assign(1,i);
-    testValue = controller->inputValidationForDiceRollPrompt(&testLine);
+    testValue = controller->inputValidationForDiceRollPrompt(testLine);
     
     if( i == UC_R){
       EXPECT_EQ(false,testValue)<<"If input is 'R' return false so we stop looping";
@@ -77,12 +77,12 @@ TEST(Controller, verifyPostFirstTurnState){
 
 }
 
-TEST(Controller, queryPlayerForMoveObjectTest){
-  //test queryPlayerForMoveObject
+TEST(Controller, isInvalidTest){
+  //test isInvalid
   bool test = true;
   Game *g = new Game();
   Controller *c = new Controller(g);
-  Turn *turnObj = c->queryPlayerForMoveObject(test);
+  Turn *turnObj = c->isInvalid(test);
   for(int i = 0; i < 2; ++i){
     EXPECT_EQ(1,turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
     EXPECT_EQ(11,turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";

@@ -4,10 +4,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <iostream>
-
 #include <readline/readline.h>
 #include <readline/history.h>
-
 #include "Game.h"
 #include <iostream>
 #include <sstream>
@@ -26,13 +24,12 @@
   void getFirstTurnRolls(bool);
   void queryPlayerForRoll(bool);
   DieFace getFirstDieRoll();
-  bool inputValidationForDiceRollPrompt(std::string*);//CLEANCODE: javabean predicate rule
-  
-  //implement these! (and test)
+  Turn* isInvalid(bool);
   Turn* queryPlayerForMoveObject(bool); //CLEANCODE: misnamed, this prompts a player for a turn object, not a move object. good opportunity to make an actual promptPlayerForMoveObject method
   bool inputValidationForMoveObject(std::string); //CLEANCODE: doesn't follow javabean standard for predicates (isValid might be better)
+  bool inputValidationForDiceRollPrompt(std::string);//CLEANCODE:javabean predicate rule
   int getNumMoves(); //will need to be more complicated since we have to enumerate all turns to find the one with the most moves, right?
-  bool getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
+  bool  getTurn(bool); //CLEANCODE: this doesn't follow javabean standard for get methods, it is a pun
   Move* parseMove(std::string); //CLEANCODE: we're parsing a move string into a move object, so, parseMoveString(std::string)?
   void announceTurn();
   void displayBoard(AsciiView*);
