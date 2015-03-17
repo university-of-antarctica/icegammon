@@ -32,7 +32,7 @@ uint8_t firstRoll, secondRoll;
 std::vector<double> vectorOfRolls;  // removed the (numberOfRolls) construction argument.  It was initializing the vector with <numberOfRolls> zeros.
 
 // Roll dice a bunch of times
-for(int i = 0; i < (numberOfRolls/2) ; i = i + 1 ) {
+for (int i = 0; i < (numberOfRolls/2) ; i = i + 1 ) {
   d->roll();
   firstRoll = d->left();
   secondRoll = d->right();

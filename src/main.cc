@@ -22,7 +22,7 @@ int main() {
   controller->getTurn(test);
   
    bool activeGame = true;
-    while(activeGame) { 
+    while (activeGame) { 
      controller->displayBoard(view); 
      controller->promptAndPerformRoll(test);
      controller->displayBoard(view); 

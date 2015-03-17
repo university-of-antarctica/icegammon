@@ -35,7 +35,7 @@ bool Controller::getTurn(bool test) {
   
   // ask activePlayer for series of move tokens corresponding to roll
     
-    while(activeTurn) {
+    while (activeTurn) {
       Turn *turnObj = isInvalid(test); 
       
       // parse move tokens into move objects into turn object
@@ -44,11 +44,11 @@ bool Controller::getTurn(bool test) {
       bool validTurn = true;
       
       int i = 0;
-      while((i < getNumMoves()) &&  validTurn) {  
+      while ((i < getNumMoves()) &&  validTurn) {  
         validTurn = game->isLegal(turnObj->moves[i]); 
         ++i;
       }
-      if(validTurn) {
+      if (validTurn) {
         game->submitTurn(turnObj,getNumMoves());
         activeTurn = false;
       }else{
@@ -66,17 +66,17 @@ Turn* Controller::isInvalid(bool test) {
 
   int moveObjectsNeeded = getNumMoves();
   
-  for(int i = 0; i < moveObjectsNeeded; ++i) {
+  for (int i = 0; i < moveObjectsNeeded; ++i) {
     do{  
        std::cout << "Input move, format 'm int int' " << std::endl;
     
-       if(test) {
+       if (test) {
           line->assign("m 1 11");  // figure out simple valid move syntax
        }else{
           getUserInputLine(line);
        }
       std::cout << "you entered: " << *line << std::endl;
-    }while(inputValidationForMoveObject(*line));
+    }while (inputValidationForMoveObject(*line));
 
     Move *moveObj = parseMove(*line); 
     turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
@@ -109,7 +109,7 @@ bool Controller::inputValidationForMoveObject(std::string line) {
   bool inputInvalidKeepLooking = true;
   std::vector<std::string> userInputVector = splitByWhiteSpace(line);
   // move object only has 3 tokens
-  if(userInputVector.size() == 3) {
+  if (userInputVector.size() == 3) {
 
     std::string elem0 = userInputVector[0];
     std::string elem1 = userInputVector[1];
@@ -133,7 +133,7 @@ bool Controller::inputValidationForMoveObject(std::string line) {
 
   // std::cout << "1: " << elem1Int << " str: " << elem1StrLength << " int: " << elem1IntLength << " 2: " << elem2Int << " str: " << elem2StrLength << " int: " << elem2IntLength << std::endl;
     
-    if(elem0 == "m" && elem1StrLength == elem1IntLength && elem2StrLength == elem2IntLength ) { 
+    if (elem0 == "m" && elem1StrLength == elem1IntLength && elem2StrLength == elem2IntLength ) { 
         inputInvalidKeepLooking = false;
     }
   }
@@ -172,7 +172,7 @@ int Controller::getNumMoves() {
   
   DieFace leftDie = Controller::game->getDice()->left();
   DieFace rightDie = Controller::game->getDice()->right();
-  if(leftDie == rightDie) {
+  if (leftDie == rightDie) {
   // in backgammon if you roll doubles you get 4 moves
     return 4;
   }else{
@@ -205,7 +205,7 @@ void Controller::getFirstTurnRolls(bool test) {
 
 
         // }
-        // while(whiteRoll == blackRoll);
+        // while (whiteRoll == blackRoll);
         // ...
 
     // could write method to do the 5 lines above
@@ -233,11 +233,11 @@ void Controller::getFirstTurnRolls(bool test) {
     game->passTurn();
 
     // keep doing that until white and black dice rolls aren't the same.
-  }while(whiteRoll == blackRoll);
+  }while (whiteRoll == blackRoll);
 
   // if winner of rolls is black, passTurn is called
   // else passTurn is not called, meaning white won and remains in control of the turn.
-  if(whiteRoll<blackRoll) {
+  if (whiteRoll<blackRoll) {
     game->passTurn();
   }
 
@@ -260,13 +260,13 @@ void Controller::queryPlayerForRoll(bool test) {
   do{  
 
     std::cout << "Enter an R or an r" << std::endl;
-    if(test) {
+    if (test) {
       line->assign(1,'r');
     }else{
       getUserInputLine(line);
     }
     std::cout << "you entered: " << *line << std::endl;
- }while(inputValidationForDiceRollPrompt(*line));
+ }while (inputValidationForDiceRollPrompt(*line));
 
  std::cout << "Rolling..." << std::endl;
  delete line;

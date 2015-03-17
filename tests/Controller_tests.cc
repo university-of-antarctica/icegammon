@@ -30,7 +30,7 @@ TEST(Controller,GetOneDieTest) {
   Controller *controller = new Controller(g);
   DieFace sampleDieRoll;
   
-  for(int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10; ++i) {
     sampleDieRoll = controller->getFirstDieRoll();
     EXPECT_GT(sampleDieRoll,0)<<"Die roll must be greater than 0";
     EXPECT_LT(sampleDieRoll,7)<<"Die roll must be smaller than 7";
@@ -48,14 +48,14 @@ TEST(Controller,verifyInputsForFirstTurn) {
   
   std::string testLine; 
  
- for(int i = 0; i < LAST_ASCII_CHAR; ++i) {
+ for (int i = 0; i < LAST_ASCII_CHAR; ++i) {
     testLine.assign(1,i);
     testValue = controller->inputValidationForDiceRollPrompt(testLine);
     
-    if( i == UC_R) {
+    if ( i == UC_R) {
       EXPECT_EQ(false,testValue)<<"If input is 'R' return false so we stop looping";
     }
-    if(i == LC_R) {
+    if (i == LC_R) {
       EXPECT_EQ(false,testValue)<<"If input is 'r' return false so we stop looping";
     }
  
@@ -69,7 +69,7 @@ TEST(Controller, verifyPostFirstTurnState) {
   
   ASSERT_NE(g->getDice()->left(), g->getDice()->right())<<"Rolls must be different to start game" ;
   
-  if(g->getDice()->left() > g->getDice()->right()) {
+  if (g->getDice()->left() > g->getDice()->right()) {
     EXPECT_EQ(Color::WHITE,g->getActiveColor())<<"If white won then it should be their turn";
   }else{
     EXPECT_EQ(Color::BLACK,g->getActiveColor())<<"If black won then it should be their turn";
@@ -83,7 +83,7 @@ TEST(Controller, isInvalidTest) {
   Game *g = new Game();
   Controller *c = new Controller(g);
   Turn *turnObj = c->isInvalid(test);
-  for(int i = 0; i < 2; ++i) {
+  for (int i = 0; i < 2; ++i) {
     EXPECT_EQ(1,turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
     EXPECT_EQ(11,turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";
 
@@ -123,12 +123,12 @@ TEST(Controller,verifyGetNumMoves) {
   int numMoves;
   
   
-  for(int i = 1; i < 7; ++i) {
-    for(int j = ; j < 7; ++j) {
+  for (int i = 1; i < 7; ++i) {
+    for (int j = ; j < 7; ++j) {
       // verify DieFace cast works
       g->getDice()->set((DieFace)i, (DieFace)j);
       numMoves = c->getNumMoves();
-      if(i == j) { 
+      if (i == j) { 
         EXPECT_EQ(numMoves,4);
       }else{
         EXPECT_EQ(numMoves,2);
