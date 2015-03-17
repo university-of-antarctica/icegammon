@@ -21,10 +21,10 @@
     Color getActiveColor();
     Board* getBoard();
     Dice* getDice();
-    bool isLegal(Move potentialMove, Color player); //should a move also have a color inside it?
+    bool isLegal(Move*); //should a move also have a color inside it?
     // bool moveStone(Move move, Color player);
-    bool moveStone(Move); 
-    void submitTurn(Turn*);
+    void submitTurn(Turn*,int);
+    bool moveStone(Move*); 
   private:
     Board* b;
     Dice* dice;

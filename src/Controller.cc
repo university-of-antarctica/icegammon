@@ -5,21 +5,57 @@ Controller::Controller(Game* game){
   Controller::game = game;
 }
 
-void promptAndPerformRoll(bool test){
+void Controller::promptAndPerformRoll(bool test){
 //ask activePlayer to roll
-//queryPlayerForRoll(test);
+  queryPlayerForRoll(test);
 //actuallyRollTheDice
-//game->getDice()->roll();
+ game->getDice()->roll();
+ 
+ std::cout << "Rolling..." << std::endl;
+ game->getDice()->prettyPrint();
+
 }
 
+void Controller::displayBoard(AsciiView *view){
+  std::string visualization = view->toString(); 
+  std::cout << "/\\/\\/\\*I*C*E*G*A*M*M*O*N/\\/\\/\\/\\ \n" << visualization << std::endl;
+}
+
+void Controller::announceTurn(){
+  std::cout << game->getActiveColorString() << "'s Move" << std::endl; 
+  std::string currPlayer =  game->getActiveColorString();            
+  std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
+
+}
+
+
 bool Controller::getTurn(bool test){
- 
- bool activeGame = true; //TODO: decide on logic for game end 
-//ask activePlayer for series of move tokens corresponding to roll
-  Turn *turnObj = queryPlayerForMoveObject(test); 
-//parse move tokens into move objects into turn object
-//submit turn object to game
-  game->submitTurn(turnObj);
+  bool activeGame = true; //TODO: decide on logic for game end 
+  bool activeTurn = true;
+  
+  //ask activePlayer for series of move tokens corresponding to roll
+    
+    while(activeTurn){
+      Turn *turnObj = queryPlayerForMoveObject(test); 
+      
+      //parse move tokens into move objects into turn object
+      //submit turn object to game
+      
+      bool validTurn = true;
+      
+      int i = 0;
+      while((i < getNumMoves()) &&  validTurn){  
+        validTurn = game->isLegal(turnObj->moves[i]); 
+        ++i;
+      }
+      if(validTurn){
+        game->submitTurn(turnObj,getNumMoves());
+        activeTurn = false;
+      }else{
+        std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;
+      }
+  }
+  
   game->passTurn();
   return activeGame;
 }
@@ -145,12 +181,10 @@ int Controller::getNumMoves(){
   }
 }
 
-std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){
+void Controller::getFirstTurnRolls(bool test){
 
   DieFace whiteRoll;
   DieFace blackRoll;
-  std::pair<DieFace,DieFace> firstTurnDiceValues;
-  
   do{
     //alternative:
     /////////////////////////////////////////////
@@ -209,10 +243,11 @@ std::pair<DieFace,DieFace> Controller::getFirstTurnRolls(bool test){
 
   std::string currPlayer =  game->getActiveColorString(); 
   std::cout << currPlayer << " won the roll and will start the game" << std::endl;
-  firstTurnDiceValues.first = whiteRoll;
-  firstTurnDiceValues.second = blackRoll;
-
-  return firstTurnDiceValues;
+  //For this case, we actually need to feed prettyPrint the values since they
+  ////aren't random here, they must be equal to the outcome of the first rolls.    
+  game->getDice()->set(whiteRoll,blackRoll);
+  game->getDice()->prettyPrint();
+  
 }
 
 void Controller::queryPlayerForRoll(bool test){  

@@ -62,7 +62,7 @@ TEST(Moving, BasicFirstMove){
 	EXPECT_EQ(b->pips[3],0)<< "there shouldnt be any stones on pip 3";
 
 	move = Move(1,3);
-	success = g->moveStone( move );
+	success = g->moveStone(&move );
 
 	//After move
 	EXPECT_EQ(success,true)<<"black should be able to move forward 2 pips";
@@ -91,7 +91,7 @@ TEST(Moving, RandomMoves){
 		totalBarsBefore = b->bars[0]+b->bars[1];
 		
 		Move move = Move(source,dest);
-		success = g->moveStone(move);
+		success = g->moveStone(&move);
 
 		sourceNumAfter = std::abs(b->pips[source]);
 		destNumAfter   = std::abs(b->pips[dest]);

@@ -15,25 +15,21 @@ int main(){
   //a winner of the opening roll is determined (this is the exit condition)
   
   bool test = false; 
-  std::pair<DieFace,DieFace> firstTurnDiceRolls = controller->getFirstTurnRolls(test);
+  controller->getFirstTurnRolls(test);
 	
-  std::string visualization = view->toString();
-	std::cout << "view looks like this: \n" << visualization << std::endl;
-  std::cout << game->getActiveColorString() << "'s Move" << std::endl;
-	//For this case, we actually need to feed prettyPrint the values since they
-  //aren't random here, they must be equal to the outcome of the first rolls.
-
-  //RETURN DICE ROLLS FROM getFirstTurn!!!!!
-  game->getDice()->set(firstTurnDiceRolls.first,firstTurnDiceRolls.second);
-  game->getDice()->prettyPrint();
-  //controller->getFirstTurn();
-  /*
+  controller->displayBoard(view);// this argument is NOT kosher 
+  controller->announceTurn();
+  controller->getTurn(test);
+  
    bool activeGame = true;
-    while(activeGame){  
-     std::string visualization = view->toString();
-     activeGame = controller->getTurn();
-  }
-  */
+    while(activeGame){ 
+     controller->displayBoard(view); 
+     controller->promptAndPerformRoll(test);
+     controller->displayBoard(view); 
+     activeGame = controller->getTurn(test);
+     controller->announceTurn();
+    }
+ 
   return 0;
 
 }
