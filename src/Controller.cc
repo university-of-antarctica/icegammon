@@ -30,7 +30,7 @@ void Controller::announceTurn() {
 
 
 bool Controller::getTurn(bool test) {
-  bool activeGame = true; // TODO(lovestevend@gmail.com): decide on logic for game end 
+  bool activeGame = true;  // TODO(lovestevend@gmail.com): decide on logic for game end 
   bool activeTurn = true;
   
   // ask activePlayer for series of move tokens corresponding to roll
@@ -71,7 +71,7 @@ Turn* Controller::isInvalid(bool test) {
        std::cout << "Input move, format 'm int int' " << std::endl;
     
        if(test) {
-          line->assign("m 1 11"); // figure out simple valid move syntax
+          line->assign("m 1 11");  // figure out simple valid move syntax
        }else{
           getUserInputLine(line);
        }
@@ -79,7 +79,7 @@ Turn* Controller::isInvalid(bool test) {
     }while(inputValidationForMoveObject(*line));
 
     Move *moveObj = parseMove(*line); 
-    turnObj->moves[i] = moveObj;// TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
+    turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
   }
  delete line;
 
@@ -157,9 +157,9 @@ int Controller::numDigits(int x) {
 
 std::vector<std::string> Controller::splitByWhiteSpace(std::string line) {
  
-  std::string buf; // Have a buffer string
-  std::stringstream ss(line); // Insert the string into a stream
-  std::vector<std::string> tokens; // Create vector to hold our words
+  std::string buf;  // Have a buffer string
+  std::stringstream ss(line);  // Insert the string into a stream
+  std::vector<std::string> tokens;  // Create vector to hold our words
 
   while (ss >> buf) {
     tokens.push_back(buf);
@@ -191,17 +191,17 @@ void Controller::getFirstTurnRolls(bool test) {
         // game->getDice()->roll();
         
         // whiteRoll = dice->left();
-        // view->displayCurrentTurn(); // UNIMPLEMENTED
+        // view->displayCurrentTurn();  // UNIMPLEMENTED
         // queryPlayerForRoll(test) // just make white player type r
         // print left(white) die
         // game->passTurn();
 
 
         // blackRoll = dice->right();
-        // view->displayCurrentTurn(); // UNIMPLEMENTED
+        // view->displayCurrentTurn();  // UNIMPLEMENTED
         // queryPlayerForRoll(test) // just make black player type r
         // print right(black) die
-        // game->passTurn(); // white's turn
+        // game->passTurn();  // white's turn
 
 
         // }
@@ -274,7 +274,7 @@ void Controller::queryPlayerForRoll(bool test) {
 }
 
 bool Controller::inputValidationForDiceRollPrompt(std::string line) {
-  bool inputInvalidKeepLooping = false; // CLEANCODE: javabean predicate
+  bool inputInvalidKeepLooping = false;  // CLEANCODE: javabean predicate
   
 // CLEANCODE: repetition of "line->at(0)".  
   // show intent by naming this. "firstCharOfInput"?

@@ -29,17 +29,17 @@ TEST(Turns, EvenOddRandomized) {
   g->passTurn();
   Color second = g->getActiveColor();
 
-  int n = rand() % 1000; // in the range between 0 and 999
+  int n = rand() % 1000;  // in the range between 0 and 999
   for(int i = 0; i < n; ++i) {
     g->passTurn();
   }
 
   // if n is odd, then the color should be same as the first color
   // if n is even, then the color should be the same as the second color
-  if(n%2==1) {// n is odd
+  if(n%2==1) {  // n is odd
     EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
   }
-  else{// n is even
+  else{  // n is even
     EXPECT_EQ(second,g->getActiveColor()) << "all even numbered turns should be the same color";
   }
   EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
@@ -83,8 +83,8 @@ TEST(Moving, RandomMoves) {
   // make random moves
   for(int i = 0; i < 100; ++i) {
 
-    source = rand()%24+1; // 1 to 24
-    dest   = rand()%24+1; // 1 to 24
+    source = rand()%24+1;  // 1 to 24
+    dest   = rand()%24+1;  // 1 to 24
 
     sourceNumBefore = std::abs(b->pips[source]);
     destNumBefore   = std::abs(b->pips[dest]);
