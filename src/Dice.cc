@@ -60,14 +60,14 @@
 // in a terminal.
 wchar_t Dice::getSymbol(DieFace die) {
   switch(die) {
-    case ONE:   return L'⚀'; // 0x2680
-    case TWO:   return L'⚁'; // 0x2681
-    case THREE: return L'⚂'; // 0x2682
-    case FOUR:  return L'⚃'; // 0x2683
-    case FIVE:  return L'⚄'; // 0x2684
-    case SIX:   return L'⚅'; // 0x2685
+    case ONE:   return L'⚀';  // 0x2680
+    case TWO:   return L'⚁';  // 0x2681
+    case THREE: return L'⚂';  // 0x2682
+    case FOUR:  return L'⚃';  // 0x2683
+    case FIVE:  return L'⚄';  // 0x2684
+    case SIX:   return L'⚅';  // 0x2685
     default:    // TODO(lovestevend@gmail.com): throw exception instead of a fun skull
-        return L'☠'; // 0x2620 ( a skull )
+        return L'☠';  // 0x2620 ( a skull )
   }
 }
 

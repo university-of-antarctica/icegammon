@@ -29,7 +29,7 @@ double stdev_tolerance = 0.2;
 // Declarations
 Dice *d = new Dice();
 uint8_t firstRoll, secondRoll;
-std::vector<double> vectorOfRolls; // removed the (numberOfRolls) construction argument.  It was initializing the vector with <numberOfRolls> zeros.
+std::vector<double> vectorOfRolls;  // removed the (numberOfRolls) construction argument.  It was initializing the vector with <numberOfRolls> zeros.
 
 // Roll dice a bunch of times
 for(int i = 0; i < (numberOfRolls/2) ; i = i + 1 ) {

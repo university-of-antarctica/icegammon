@@ -60,28 +60,28 @@
 
       // source and dest are same color or dest is empty
       if(!diffColorStones || numDestStones == 0) {
-          if(numSourceStones > 0) { // white stone(s)
-            b->pips[move->sourcePipNum] -= 1; // 1 fewer stone on source pip
-            b->pips[move->destPipNum]   += 1; // 1 more stone on dest pip
+          if(numSourceStones > 0) {  // white stone(s)
+            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            b->pips[move->destPipNum]   += 1;  // 1 more stone on dest pip
           }
-          else{ // black stone(s)
-            b->pips[move->sourcePipNum] += 1; // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum]   -= 1; // 1 more stone on dest pip (so we subtract)
+          else{  // black stone(s)
+            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            b->pips[move->destPipNum]   -= 1;  // 1 more stone on dest pip (so we subtract)
           }
           return true;
       }
       // or
       // different colors, but blottable
       if(diffColorStones && destHasOneStone) {
-          if(numSourceStones > 0) { // white stone blots black stone
-            b->pips[move->sourcePipNum] -= 1; // 1 fewer stone on source pip
-            b->pips[move->destPipNum]    = 1; // now exactly 1 white stone on dest pip
-            b->bars[1]+=1; // send a black stone to the bar
+          if(numSourceStones > 0) {  // white stone blots black stone
+            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            b->pips[move->destPipNum]    = 1;  // now exactly 1 white stone on dest pip
+            b->bars[1]+=1;  // send a black stone to the bar
           }
-          else{ // black stone blots white stone
-            b->pips[move->sourcePipNum] += 1; // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum]    =-1; // now exactly 1 black stone on the dest pip
-            b->bars[0]+=1; // send a white stone to the bar
+          else{  // black stone blots white stone
+            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            b->pips[move->destPipNum]    =-1;  // now exactly 1 black stone on the dest pip
+            b->bars[0]+=1;  // send a white stone to the bar
           }
           return true;
       }

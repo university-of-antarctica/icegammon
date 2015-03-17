@@ -17,7 +17,7 @@ int main() {
   bool test = false; 
   controller->getFirstTurnRolls(test);
   
-  controller->displayBoard(view);// this argument is NOT kosher 
+  controller->displayBoard(view);  // this argument is NOT kosher 
   controller->announceTurn();
   controller->getTurn(test);
   

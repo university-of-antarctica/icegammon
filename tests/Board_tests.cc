@@ -19,7 +19,7 @@ TEST(Initialization,WhiteCount) {
   int pipval;
   for(int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if(pipval > 0) { // white stones are here
+    if(pipval > 0) {  // white stones are here
       count += pipval;
     }
   }
