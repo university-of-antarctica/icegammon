@@ -62,6 +62,6 @@ EXPECT_GE(stdev_upper_bound, stdev_observed);
 }
 
 TEST(EdgeCaseBehavior, Declaration){
-	Dice* d = new Dice();
-	d->prettyPrint();
+  Dice* d = new Dice();
+  d->prettyPrint();
 }

@@ -1,8 +1,8 @@
 #include "../include/Game.h"
 
   Game::Game(){
-	  Game::b = new Board();
-	  Game::dice = new Dice();
+    Game::b = new Board();
+    Game::dice = new Dice();
   } 
 
   void Game::submitTurn(Turn *turnObj,int numMoves){
@@ -16,14 +16,14 @@
     //delete turnObj;
   }
 
-	void Game::passTurn(){
-		if(turn==Color::WHITE){
-			turn=Color::BLACK;
-		}
-		else{
-			turn=Color::WHITE;
-		}
-	}
+  void Game::passTurn(){
+    if(turn==Color::WHITE){
+      turn=Color::BLACK;
+    }
+    else{
+      turn=Color::WHITE;
+    }
+  }
 
   Color Game::getActiveColor(){
     return Game::turn;
