@@ -38,8 +38,7 @@ TEST(Turns, EvenOddRandomized) {
   // if n is even, then the color should be the same as the second color
   if (n%2 == 1) {  // n is odd
     EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
-  }
-  else{  // n is even
+  } else {  // n is even
     EXPECT_EQ(second,g->getActiveColor()) << "all even numbered turns should be the same color";
   }
   EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
@@ -109,13 +108,11 @@ TEST(Moving, RandomMoves) {
       if (blotted) {
         EXPECT_EQ( totalBarsBefore+1, totalBarsAfter);
         EXPECT_EQ( destNumBefore,     destNumAfter);
-      }
-      else{
+      } else {
         EXPECT_EQ( destNumBefore+1, destNumAfter);
         EXPECT_EQ( totalBarsBefore, totalBarsAfter);
       }
-    }
-    else{
+    } else {
       EXPECT_EQ(sourceNumBefore, sourceNumAfter);
       EXPECT_EQ(destNumBefore,   destNumAfter);
     }
@@ -129,8 +126,7 @@ TEST(Moving, RandomMoves) {
     pipval = b->pips[i];
     if (pipval>0) {
       whitecount = pipval;
-    }
-    else{
+    } else {
       blackcount = pipval;
     }
   }
