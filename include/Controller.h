@@ -4,10 +4,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <iostream>
-
 #include <readline/readline.h>
 #include <readline/history.h>
-
 #include "Game.h"
 #include <iostream>
 #include <sstream>
@@ -26,7 +24,6 @@
   void getFirstTurnRolls(bool);
   void queryPlayerForRoll(bool);
   DieFace getFirstDieRoll();
-<<<<<<< HEAD
   Turn* isInvalid(bool);
   Turn* queryPlayerForMoveObject(bool); //CLEANCODE: misnamed, this prompts a player for a turn object, not a move object. good opportunity to make an actual promptPlayerForMoveObject method
   bool inputValidationForMoveObject(std::string); //CLEANCODE: doesn't follow javabean standard for predicates (isValid might be better)
