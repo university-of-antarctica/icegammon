@@ -16,9 +16,9 @@ TEST(Turns, First4TurnsAlternate) {
   g->passTurn();
   Color fourt = g->getActiveColor();
 
-  EXPECT_EQ(first,third) << "first and third turns should be the same color";
-  EXPECT_EQ(second,fourth) << "second and fourth turns should be the same color";
-  EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
+  EXPECT_EQ(first, third) << "first and third turns should be the same color";
+  EXPECT_EQ(second, fourth) << "second and fourth turns should be the same color";
+  EXPECT_NE(first, second) << "first and second turns shouldn't be the same color";
 }
 
 TEST(Turns, EvenOddRandomized) {
@@ -37,15 +37,15 @@ TEST(Turns, EvenOddRandomized) {
   // if n is odd, then the color should be same as the first color
   // if n is even, then the color should be the same as the second color
   if (n%2 == 1) {  // n is odd
-    EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
+    EXPECT_EQ(first, g->getActiveColor())<< "all odd numbered turns should be the same color";
   } else {  // n is even
-    EXPECT_EQ(second,g->getActiveColor()) << "all even numbered turns should be the same color";
+    EXPECT_EQ(second, g->getActiveColor()) << "all even numbered turns should be the same color";
   }
-  EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
+  EXPECT_NE(first, second) << "first and second turns shouldn't be the same color";
 
 }
 
-TEST(Turns,validationForTurnSubmission) {
+TEST(Turns, validationForTurnSubmission) {
   // test submitTurn();
 
 }
@@ -57,16 +57,16 @@ TEST(Moving, BasicFirstMove) {
   Board* b = g->getBoard();
 
   // Before move
-  EXPECT_EQ(b->pips[1],-2)<< "there should be 2 black stones on pip 1";
-  EXPECT_EQ(b->pips[3],0)<< "there shouldnt be any stones on pip 3";
+  EXPECT_EQ(b->pips[1], -2)<< "there should be 2 black stones on pip 1";
+  EXPECT_EQ(b->pips[3], 0)<< "there shouldnt be any stones on pip 3";
 
-  move = Move(1,3);
+  move = Move(1, 3);
   success = g->moveStone(&move );
 
   // After move
-  EXPECT_EQ(success,true)<<"black should be able to move forward 2 pips";
-  EXPECT_EQ(b->pips[1],-1)<< "there should be 1 remaining black stone on pip 1";
-  EXPECT_EQ(b->pips[3],-1)<< "there should now be 1 black stone on pip 3";
+  EXPECT_EQ(success, true)<<"black should be able to move forward 2 pips";
+  EXPECT_EQ(b->pips[1], -1)<< "there should be 1 remaining black stone on pip 1";
+  EXPECT_EQ(b->pips[3], -1)<< "there should now be 1 black stone on pip 3";
 }
 
 TEST(Moving, RandomMoves) {
@@ -89,7 +89,7 @@ TEST(Moving, RandomMoves) {
     destNumBefore = std::abs(b->pips[dest]);
     totalBarsBefore = b->bars[0]+b->bars[1];
     
-    Move move = Move(source,dest);
+    Move move = Move(source, dest);
     success = g->moveStone(&move);
 
     sourceNumAfter = std::abs(b->pips[source]);
@@ -107,14 +107,14 @@ TEST(Moving, RandomMoves) {
       blotted = (totalBarsAfter > totalBarsBefore);
       if (blotted) {
         EXPECT_EQ( totalBarsBefore+1, totalBarsAfter);
-        EXPECT_EQ( destNumBefore,     destNumAfter);
+        EXPECT_EQ( destNumBefore, destNumAfter);
       } else {
         EXPECT_EQ( destNumBefore+1, destNumAfter);
         EXPECT_EQ( totalBarsBefore, totalBarsAfter);
       }
     } else {
       EXPECT_EQ(sourceNumBefore, sourceNumAfter);
-      EXPECT_EQ(destNumBefore,   destNumAfter);
+      EXPECT_EQ(destNumBefore, destNumAfter);
     }
   }
 
@@ -133,9 +133,9 @@ TEST(Moving, RandomMoves) {
   whitecount = b->bars[0];
   blackcount = b->bars[1];
 
-  EXPECT_EQ(whitecount,blackcount) << "there should still be the same # of white and black stones";
-  EXPECT_EQ(whitecount,15) << "there should still be 15 white stones";
-  EXPECT_EQ(blackcount,15) << "there should still be 15 black stones";
+  EXPECT_EQ(whitecount, blackcount) << "there should still be the same # of white and black stones";
+  EXPECT_EQ(whitecount, 15) << "there should still be 15 white stones";
+  EXPECT_EQ(blackcount, 15) << "there should still be 15 black stones";
 
   AsciiView *v = new AsciiView(g);
   std::cout << v->toString() << std::endl;

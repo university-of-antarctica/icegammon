@@ -23,7 +23,7 @@
     Dice* getDice();
     bool isLegal(Move*);  // should a move also have a color inside it?
     // bool moveStone(Move move, Color player);
-    void submitTurn(Turn*,int);
+    void submitTurn(Turn*, int);
     bool moveStone(Move*); 
   private:
     Board* b;
