@@ -26,39 +26,39 @@
   DieFace getFirstDieRoll();
   Turn* isInvalid(bool);
 
-  //CLEANCODE: misnamed, this prompts a player for a turn object, not a move 
-  //object. good opportunity to make an actual promptPlayerForMoveObject method
+  // CLEANCODE: misnamed, this prompts a player for a turn object, not a move 
+  // object. good opportunity to make an actual promptPlayerForMoveObject method
   Turn* queryPlayerForMoveObject(bool); 
 
-  //CLEANCODE: doesn't follow javabean standard for predicates (isValid might 
-  //be better)
+  // CLEANCODE: doesn't follow javabean standard for predicates (isValid might 
+  // be better)
   bool inputValidationForMoveObject(std::string); 
 
-  //CLEANCODE:javabean predicate rule
+  // CLEANCODE:javabean predicate rule
   bool inputValidationForDiceRollPrompt(std::string);
   
-  //will need to be more complicated since we have to enumerate all turns to 
-  //find the one with the most moves, right?
+  // will need to be more complicated since we have to enumerate all turns to 
+  // find the one with the most moves, right?
   int getNumMoves(); 
 
-  //CLEANCODE: this doesn't follow javabean standard for get methods, it is 
-  //a pun
+  // CLEANCODE: this doesn't follow javabean standard for get methods, it is 
+  // a pun
   bool  getTurn(bool); 
 
-  //CLEANCODE: we're parsing a move string into a move object, so, 
-  //parseMoveString(std::string)?
+  // CLEANCODE: we're parsing a move string into a move object, so, 
+  // parseMoveString(std::string)?
   Move* parseMove(std::string); 
   void announceTurn();
   void displayBoard(AsciiView*);
 
-  //CLEANCODE: be consistent with our language.  everything should be 
-  //'query' or 'prompt' (my preference) for methods that block waiting 
-  //for user input
+  // CLEANCODE: be consistent with our language.  everything should be 
+  // 'query' or 'prompt' (my preference) for methods that block waiting 
+  // for user input
   void promptAndPerformRoll(bool test); 
 
   private:
   Game* game;
-  //CLEANCODE: get method returns void?
+  // CLEANCODE: get method returns void?
   void getUserInputLine(std::string*); 
   std::vector<std::string> splitByWhiteSpace(std::string);
   int numDigits(int);

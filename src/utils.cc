@@ -1,9 +1,9 @@
 
 #include "../include/utils.h"
 
-//TODO: test these
+// TODO(lovestevend@gmail.com): test these
 
-double utils_mean(std::vector<double> v){
+double utils_mean(std::vector<double> v) {
   // Calculate mean...
   double sum = std::accumulate(v.begin(),v.end(),0.0);
   double mean = sum / v.size();
@@ -11,7 +11,7 @@ double utils_mean(std::vector<double> v){
 }
 
 
-double utils_stddev(std::vector<double> v){
+double utils_stddev(std::vector<double> v) {
   double mean = utils_mean(v);
   // Standard Deviation magic...
   std::vector<double> diff(v.size());

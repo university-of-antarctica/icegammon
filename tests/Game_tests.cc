@@ -5,7 +5,7 @@
 #include <ctime> 
 #include <cstdlib> // abs
 
-TEST(Turns, First4TurnsAlternate){
+TEST(Turns, First4TurnsAlternate) {
   Game *g = new Game();
 
   Color first = g->getActiveColor();
@@ -21,7 +21,7 @@ TEST(Turns, First4TurnsAlternate){
   EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 }
 
-TEST(Turns, EvenOddRandomized){
+TEST(Turns, EvenOddRandomized) {
   Game *g = new Game();
 
   srand(time(NULL));
@@ -29,48 +29,48 @@ TEST(Turns, EvenOddRandomized){
   g->passTurn();
   Color second = g->getActiveColor();
 
-  int n = rand() % 1000; //in the range between 0 and 999
-  for(int i = 0; i < n; ++i){
+  int n = rand() % 1000; // in the range between 0 and 999
+  for(int i = 0; i < n; ++i) {
     g->passTurn();
   }
 
-  //if n is odd, then the color should be same as the first color
-  //if n is even, then the color should be the same as the second color
-  if(n%2==1){//n is odd
+  // if n is odd, then the color should be same as the first color
+  // if n is even, then the color should be the same as the second color
+  if(n%2==1) {// n is odd
     EXPECT_EQ(first,g->getActiveColor())<< "all odd numbered turns should be the same color";
   }
-  else{//n is even
+  else{// n is even
     EXPECT_EQ(second,g->getActiveColor()) << "all even numbered turns should be the same color";
   }
   EXPECT_NE(first,second) << "first and second turns shouldn't be the same color";
 
 }
 
-TEST(Turns,validationForTurnSubmission){
-  //test submitTurn();
+TEST(Turns,validationForTurnSubmission) {
+  // test submitTurn();
 
 }
 
-TEST(Moving, BasicFirstMove){
+TEST(Moving, BasicFirstMove) {
   Game* g = new Game();
   bool success;
   Move move;
   Board* b = g->getBoard();
 
-  //Before move
+  // Before move
   EXPECT_EQ(b->pips[1],-2)<< "there should be 2 black stones on pip 1";
   EXPECT_EQ(b->pips[3],0)<< "there shouldnt be any stones on pip 3";
 
   move = Move(1,3);
   success = g->moveStone(&move );
 
-  //After move
+  // After move
   EXPECT_EQ(success,true)<<"black should be able to move forward 2 pips";
   EXPECT_EQ(b->pips[1],-1)<< "there should be 1 remaining black stone on pip 1";
   EXPECT_EQ(b->pips[3],-1)<< "there should now be 1 black stone on pip 3";
 }
 
-TEST(Moving, RandomMoves){
+TEST(Moving, RandomMoves) {
   Game *g = new Game();
   Board *b = g->getBoard();
   srand(time(NULL));
@@ -81,10 +81,10 @@ TEST(Moving, RandomMoves){
   bool success;
 
   // make random moves
-  for(int i = 0; i < 100; ++i){
+  for(int i = 0; i < 100; ++i) {
 
-    source = rand()%24+1; //1 to 24
-    dest   = rand()%24+1; //1 to 24
+    source = rand()%24+1; // 1 to 24
+    dest   = rand()%24+1; // 1 to 24
 
     sourceNumBefore = std::abs(b->pips[source]);
     destNumBefore   = std::abs(b->pips[dest]);
@@ -100,13 +100,13 @@ TEST(Moving, RandomMoves){
     bool blotted;
 
 
-    if(success){
+    if(success) {
       std::cout << "(" << source << " to " << dest << ")" <<std::endl;
 
       EXPECT_EQ( sourceNumBefore-1, sourceNumAfter);
 
       blotted = (totalBarsAfter > totalBarsBefore);
-      if(blotted){
+      if(blotted) {
         EXPECT_EQ( totalBarsBefore+1, totalBarsAfter);
         EXPECT_EQ( destNumBefore,     destNumAfter);
       }
@@ -125,9 +125,9 @@ TEST(Moving, RandomMoves){
   int whitecount = 0;
   int blackcount = 0;
   int pipval;
-  for(int i = 1; i < 25; ++i){
+  for(int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if(pipval>0){
+    if(pipval>0) {
       whitecount += pipval;
     }
     else{
