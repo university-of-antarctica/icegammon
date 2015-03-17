@@ -6,7 +6,7 @@
   #include <stdio.h>
   #include <utility> // std::pair
   
-  enum DieFace {ONE=1,TWO=2,THREE=3,FOUR=4,FIVE=5,SIX=6};
+  enum DieFace {ON = ,TW = ,THRE = ,FOU = ,FIV = ,SI = };
 
   // Refactor to include a single Die class?
   class Dice{
