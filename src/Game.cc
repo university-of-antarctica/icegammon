@@ -5,7 +5,7 @@
     Game::dice = new Dice();
   } 
 
-  void Game::submitTurn(Turn *turnObj,int numMoves) {
+  void Game::submitTurn(Turn *turnObj, int numMoves) {
     int i = 0;
     while (i< numMoves) {
       moveStone(turnObj->moves[i]);      
@@ -17,10 +17,12 @@
   }
 
   void Game::passTurn() {
-    if (turn == Color::WHITE) {
-      tur = olor::BLACK;
-    } else {
-      tur = olor::WHITE;
+
+    if(turn == Color::WHITE) {
+      turn = Color::BLACK;
+    }
+    else{
+      turn = Color::WHITE;
     }
   }
 
@@ -45,40 +47,46 @@
   }
 
   bool Game::moveStone(Move *move) {
+    if(!isLegal(move)){
+      return false;
+    }
     
     // TODO(lovestevend@gmail.com) These variables are repeated in isLegal(), should they be put in a struct or class or something?
-    int numSourceStones = b->pips[move->sourcePipNum];
-    int numDestStones = b->pips[move->destPipNum];
+    int numSourceStones         = b->pips[move->sourcePipNum];
+    int numDestStones           = b->pips[move->destPipNum];
 
     // positive #s represent # of white stones
     // negative #s represent # of black stones
-    bool diffColorStones = numDestStones*numSourceStones < 0;
-    bool destHasOneStone = numDestStones*numDestStones == 1;
+    bool diffColorStones        = numDestStones*numSourceStones < 0;
+    bool destHasOneStone        = numDestStones*numDestStones  == 1;
     
     // We can do something if...
 
       // source and dest are same color or dest is empty
-      if (!diffColorStones || numDestStones == 0) {
-          if (numSourceStones > 0) {  // white stone(s)
-            b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
-            b->pips[move->destPipNum] = 1;  // 1 more stone on dest pip
-          } else {  // black stone(s)
-            b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum] = 1;  // 1 more stone on dest pip (so we subtract)
+
+      if(!diffColorStones || numDestStones == 0) {
+          if(numSourceStones > 0) {  // white stone(s)
+            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            b->pips[move->destPipNum]   += 1;  // 1 more stone on dest pip
+          }
+          else{  // black stone(s)
+            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            b->pips[move->destPipNum]   -= 1;  // 1 more stone on dest pip (so we subtract)
           }
           return true;
       }
       // or
       // different colors, but blottable
-      if (diffColorStones && destHasOneStone) {
-          if (numSourceStones > 0) {  // white stone blots black stone
-            b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip
-            b->pips[move->destPipNum] = 1;  // now exactly 1 white stone on dest pip
-            b->bars[1] = ;  // send a black stone to the bar
-          } else {  // black stone blots white stone
-            b->pips[move->sourcePipNum] = 1;  // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum] = 1;  // now exactly 1 black stone on the dest pip
-            b->bars[0] = ;  // send a white stone to the bar
+      if(diffColorStones && destHasOneStone) {
+          if(numSourceStones > 0) {  // white stone blots black stone
+            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            b->pips[move->destPipNum]    = 1;  // now exactly 1 white stone on dest pip
+            b->bars[1]+=1;  // send a black stone to the bar
+          }
+          else{  // black stone blots white stone
+            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            b->pips[move->destPipNum]    =-1;  // now exactly 1 black stone on the dest pip
+            b->bars[0]+=1;  // send a white stone to the bar
           }
           return true;
       }
@@ -90,13 +98,13 @@
   bool Game::isLegal(Move *move) {
 
     // TODO(lovestevend@gmail.com) These variables are repeated in moveStone(), should they be put in a struct or class or something?
-    int numSourceStones = b->pips[move->sourcePipNum];
-    int numDestStones = b->pips[move->destPipNum];
+    int numSourceStones         = b->pips[move->sourcePipNum];
+    int numDestStones           = b->pips[move->destPipNum];
 
     // positive #s represent # of white stones
     // negative #s represent # of black stones
-    bool diffColorStones = numDestStones*numSourceStones < 0;
-    bool destHasMultipleStones = numDestStones*numDestStones   > 1;
+    bool diffColorStones        = numDestStones*numSourceStones < 0;
+    bool destHasMultipleStones  = numDestStones*numDestStones   > 1;
     
     // TODO(lovestevend@gmail.com): verify that the distance traveled is at most 6 pips
     // TODO(lovestevend@gmail.com): verify that we should be moving this color stone

@@ -42,7 +42,7 @@ std::string AsciiView::toString() {
   viewColumnArray = getViewColumnArray();
   for (int i = 0; i < 15; i = i + 1) {
     for (int j = 1; j < 73; j = j + 1) {
-      if (viewColumnArray[j] == 0 || abs(viewColumnArray[j]) = i) {
+      if (viewColumnArray[j] == 0 || abs(viewColumnArray[j]) <= i) {
         visualization.append(" ");
       } else {
         if (viewColumnArray[j] > 0) {
@@ -59,7 +59,7 @@ std::string AsciiView::toString() {
 
 std::vector<int> AsciiView::getViewColumnArray() {
   Board* b = game->getBoard();
-  std::vector<int> viewColumnArray(73,0);
+  std::vector<int> viewColumnArray(73, 0);
   viewColumnArray[1] = b->homes[0];
   viewColumnArray[6] = b->pips[1]; 
   viewColumnArray[8] = b->pips[2];

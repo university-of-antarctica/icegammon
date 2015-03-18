@@ -5,7 +5,7 @@
     // accesses look like Color::BLACK
     // I should be able to make a method to convert these to a string in a simple way
     // read http:// gamesfromwithin.com/stupid-c-tricks-2-better-enums
-    // enum class Color { BLACK, WHITE};
+    enum class Color { BLACK, WHITE};
 
     
 #endif
