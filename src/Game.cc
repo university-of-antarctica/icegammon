@@ -47,6 +47,9 @@
   }
 
   bool Game::moveStone(Move *move) {
+    if(!isLegal(move)){
+      return false;
+    }
     
     // TODO(lovestevend@gmail.com) These variables are repeated in isLegal(), should they be put in a struct or class or something?
     int numSourceStones         = b->pips[move->sourcePipNum];
