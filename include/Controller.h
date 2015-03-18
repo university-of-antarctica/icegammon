@@ -44,8 +44,7 @@
   // a pun, don't use get, don't return a turn, this is more a perform turn.
   bool  getTurn(bool); 
 
-  // CLEANCODE: we're parsing a move string into a move object, so, 
-  // parseMoveString(std::string)?
+  // CLEANCODE: we're parsing a move string into a move object, so, // parseMoveString(std::string)?
   Move* parseMove(std::string); 
   void announceTurn();
   void displayBoard(AsciiView*);
