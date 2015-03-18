@@ -15,19 +15,19 @@ int main() {
   // a winner of the opening roll is determined (this is the exit condition)
   
   bool test = false; 
-  controller->getFirstTurnRolls(test);
+  controller->PerformFirstTurnRolls(test);
   
-  controller->displayBoard(view);  // this argument is NOT kosher 
-  controller->announceTurn();
-  controller->getTurn(test);
+  controller->DisplayBoard(view);  // this argument is NOT kosher 
+  controller->AnnounceTurn();
+  controller->PerformTurn(test);
   
    bool activeGame = true;
     while (activeGame) { 
-     controller->displayBoard(view); 
-     controller->promptAndPerformRoll(test);
-     controller->displayBoard(view); 
-     activeGame = controller->getTurn(test);
-     controller->announceTurn();
+     controller->DisplayBoard(view); 
+     controller->PerformRoll(test);
+     controller->DisplayBoard(view); 
+     activeGame = controller->PerformTurn(test);
+     controller->AnnounceTurn();
     }
  
   return 0;

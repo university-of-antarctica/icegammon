@@ -140,7 +140,7 @@ TEST(Moving, RandomMoves) {
   EXPECT_EQ(blackcount, 15) << "there should still be 15 black stones";
 
   AsciiView *v = new AsciiView(g);
-  std::cout << v->toString() << std::endl;
+  std::cout << v->ToString() << std::endl;
 
 }
 

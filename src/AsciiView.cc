@@ -33,7 +33,7 @@ int AsciiView::blackStoneCount() {
   return numBlackStones;
 }
 
-std::string AsciiView::toString() {
+std::string AsciiView::ToString() {
   // needs to print the turn number? maybe
   // needs to print whose turn it is white or black
   // Dice rolls
