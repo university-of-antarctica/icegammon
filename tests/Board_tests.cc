@@ -19,8 +19,8 @@ TEST(Initialization, WhiteCount) {
   int pipval;
   for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if (pipval > 0) {  // white stones are here
-      count = pipval;
+    if(pipval > 0) {  // white stones are here
+      count += pipval;
     }
   }
   // now count = # white stones on the board
@@ -36,7 +36,7 @@ TEST(Initialization, ColorEqualityCount) {
   int pipval;
   for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    count = pipval;
+    count += pipval;
   }
 
   ASSERT_EQ(count, 0) << "should be the same # of white and black stones";

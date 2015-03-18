@@ -14,7 +14,7 @@ TEST(Turns, First4TurnsAlternate) {
   g->passTurn();
   Color third = g->getActiveColor();
   g->passTurn();
-  Color fourt = g->getActiveColor();
+  Color fourth= g->getActiveColor();
 
   EXPECT_EQ(first, third) << "first and third turns should be the same color";
   EXPECT_EQ(second, fourth) << "second and fourth turns should be the same color";
@@ -36,8 +36,9 @@ TEST(Turns, EvenOddRandomized) {
 
   // if n is odd, then the color should be same as the first color
   // if n is even, then the color should be the same as the second color
+
   if (n%2 == 1) {  // n is odd
-    EXPECT_EQ(first, g->getActiveColor())<< "all odd numbered turns should be the same color";
+    EXPECT_EQ(first, g->getActiveColor()) << "all odd numbered turns should be the same color";
   } else {  // n is even
     EXPECT_EQ(second, g->getActiveColor()) << "all even numbered turns should be the same color";
   }
@@ -83,17 +84,17 @@ TEST(Moving, RandomMoves) {
   for (int i = 0; i < 100; ++i) {
 
     source = rand()%24+1;  // 1 to 24
-    dest = rand()%24+1;  // 1 to 24
+    dest   = rand()%24+1;  // 1 to 24
 
     sourceNumBefore = std::abs(b->pips[source]);
-    destNumBefore = std::abs(b->pips[dest]);
+    destNumBefore   = std::abs(b->pips[dest]);
     totalBarsBefore = b->bars[0]+b->bars[1];
     
     Move move = Move(source, dest);
     success = g->moveStone(&move);
 
     sourceNumAfter = std::abs(b->pips[source]);
-    destNumAfter = std::abs(b->pips[dest]);
+    destNumAfter   = std::abs(b->pips[dest]);
     totalBarsAfter = b->bars[0]+b->bars[1];
 
     bool blotted;
@@ -124,14 +125,15 @@ TEST(Moving, RandomMoves) {
   int pipval;
   for (int i = 1; i < 25; ++i) {
     pipval = b->pips[i];
-    if (pipval>0) {
-      whitecount = pipval;
-    } else {
-      blackcount = pipval;
+    if(pipval > 0) {
+      whitecount += pipval;
+    }
+    else{
+      blackcount -= pipval;
     }
   }
-  whitecount = b->bars[0];
-  blackcount = b->bars[1];
+  whitecount += b->bars[0];
+  blackcount += b->bars[1];
 
   EXPECT_EQ(whitecount, blackcount) << "there should still be the same # of white and black stones";
   EXPECT_EQ(whitecount, 15) << "there should still be 15 white stones";
