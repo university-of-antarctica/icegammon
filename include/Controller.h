@@ -17,7 +17,7 @@
 #include <cstdlib>
 
   class Controller{
-
+// add parameter name in signature
   public:
   Controller(Game*);
 
@@ -31,18 +31,17 @@
   Turn* queryPlayerForMoveObject(bool); 
 
   // CLEANCODE: doesn't follow javabean standard for predicates (isValid might 
-  // be better)
+  // be better) NAME SHOULD START WITH is IF IT RETURNS bool.
   bool inputValidationForMoveObject(std::string); 
 
-  // CLEANCODE:javabean predicate rule
+  // CLEANCODE:javabean predicate rule //SAME THING AS ABOVE
   bool inputValidationForDiceRollPrompt(std::string);
-  
-  // will need to be more complicated since we have to enumerate all turns to 
-  // find the one with the most moves, right?
+
+  //This function is dubiously named and is technically the property of gameplay logic 
   int getNumMoves(); 
 
   // CLEANCODE: this doesn't follow javabean standard for get methods, it is 
-  // a pun
+  // a pun, don't use get, don't return a turn, this is more a perform turn.
   bool  getTurn(bool); 
 
   // CLEANCODE: we're parsing a move string into a move object, so, 
@@ -58,7 +57,8 @@
 
   private:
   Game* game;
-  // CLEANCODE: get method returns void?
+  // CLEANCODE: get method returns void? Revisit whether or not the line could be returned,
+  // we would prefer to not have output arguments.
   void getUserInputLine(std::string*); 
   std::vector<std::string> splitByWhiteSpace(std::string);
   int numDigits(int);
