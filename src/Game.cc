@@ -44,16 +44,16 @@
      state_ = state;
   }
 
-  void GameLogic::submitTurn(Turn *turnObj, int numMoves) {
-    int i = 0;
-    while (i< numMoves) {
-      moveStone(turnObj->moves[i]);      
-      ++i;
-    }
+//  void GameLogic::submitTurn(Turn *turnObj, int numMoves) {
+//    int i = 0;
+//    while (i< numMoves) {
+//      moveStone(turnObj->moves[i]);      
+//      ++i;
+//    }
     // TODO(lovestevend@gmail.com) FREE turnObj memory
     // Need to meet about the deconstructor of turnObj
     // delete turnObj;
-  }
+//  }
 
   bool GameLogic::moveStone(Move *move) {
     if(!isLegal(move)){
@@ -61,7 +61,8 @@
     }
     Board* board = state_->getBoard();
     
-    // TODO(lovestevend@gmail.com) These variables are repeated in isLegal(), should they be put in a struct or class or something?
+    // TODO(lovestevend@gmail.com) These variables are repeated in isLegal(),
+    // should they be put in a struct or class or something?
     int numSourceStones         = board->pips[move->sourcePipNum];
     int numDestStones           = board->pips[move->destPipNum];
 
@@ -80,8 +81,10 @@
             board->pips[move->destPipNum]   += 1;  // 1 more stone on dest pip
           }
           else{  // black stone(s)
-            board->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
-            board->pips[move->destPipNum]   -= 1;  // 1 more stone on dest pip (so we subtract)
+            // 1 fewer stone on source pip (so we add)
+            board->pips[move->sourcePipNum] += 1;  
+            // 1 more stone on dest pip (so we subtract)
+            board->pips[move->destPipNum]   -= 1;  
           }
           return true;
       }
@@ -89,13 +92,17 @@
       // different colors, but blottable
       if(diffColorStones && destHasOneStone) {
           if(numSourceStones > 0) {  // white stone blots black stone
-            board->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
-            board->pips[move->destPipNum]    = 1;  // now exactly 1 white stone on dest pip
+            // 1 fewer stone on source pip
+            board->pips[move->sourcePipNum] -= 1;  
+            // now exactly 1 white stone on dest pip
+            board->pips[move->destPipNum]    = 1;  
             board->bars[1]+=1;  // send a black stone to the bar
           }
           else{  // black stone blots white stone
-            board->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
-            board->pips[move->destPipNum]    =-1;  // now exactly 1 black stone on the dest pip
+            // 1 fewer stone on source pip (so we add)
+            board->pips[move->sourcePipNum] += 1;  
+            // now exactly 1 black stone on the dest pip
+            board->pips[move->destPipNum]    =-1;  
             board->bars[0]+=1;  // send a white stone to the bar
           }
           return true;
@@ -107,7 +114,8 @@
 
   bool GameLogic::isLegal(Move *move) {
     Board* board = state_->getBoard();
-    // TODO(lovestevend@gmail.com) These variables are repeated in moveStone(), should they be put in a struct or class or something?
+    // TODO(lovestevend@gmail.com) These variables are repeated in moveStone(),
+    // should they be put in a struct or class or something?
     int numSourceStones         = board->pips[move->sourcePipNum];
     int numDestStones           = board->pips[move->destPipNum];
 
@@ -116,10 +124,13 @@
     bool diffColorStones        = numDestStones*numSourceStones < 0;
     bool destHasMultipleStones  = numDestStones*numDestStones   > 1;
     
-    // TODO(lovestevend@gmail.com): verify that the distance traveled is at most 6 pips
-    // TODO(lovestevend@gmail.com): verify that we should be moving this color stone
+    // TODO(lovestevend@gmail.com): verify that the distance traveled is at most
+    // 6 pips
+    // TODO(lovestevend@gmail.com): verify that we should be moving this color
+    // stone
     // TODO(lovestevend@gmail.com): verify that we rolled this on the dice
-    // TODO(lovestevend@gmail.com): verify that we don't need to get a stone off the bar
+    // TODO(lovestevend@gmail.com): verify that we don't need to get a stone 
+    // off the bar
     // TODO(lovestevend@gmail.com): consider bearing off at all
 
     // We can't do anything if...

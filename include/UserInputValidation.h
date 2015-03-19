@@ -7,6 +7,7 @@
 
 class UserInputValidation{
   
+  //TODO(gpwclark@gmail.com): inheritance for InputValidationFor* ?
   public:
 
   // CLEANCODE: doesn't follow javabean standard for predicates (isValid 

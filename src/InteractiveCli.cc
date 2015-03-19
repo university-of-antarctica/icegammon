@@ -1,6 +1,5 @@
 #include "../include/InteractiveCli.h"
 
-
 InteractiveCli::InteractiveCli(GameState* game) {
   InteractiveCli::game_ = game;
   InteractiveCli::input_validator_ = new UserInputValidation();
@@ -17,7 +16,7 @@ void InteractiveCli::AnnounceTurn(){
 
 void InteractiveCli::PromptAndPerformRoll(bool test) {
 // ask activePlayer to roll
-  QueryPlayerForRoll(test);
+  PromptPlayerForRoll(test);
 // actuallyRollTheDice
  game_->getDice()->roll();
  
@@ -26,7 +25,7 @@ void InteractiveCli::PromptAndPerformRoll(bool test) {
 }
 
 
-void InteractiveCli::QueryPlayerForRoll(bool test) {  
+void InteractiveCli::PromptPlayerForRoll(bool test) {  
   // this should be it's own method (print current player's turn)
   // these also shouldn't be coupled; printing the curr player's turn is a side-effect
   std::string currPlayer =  game_->getActiveColorString(); 
@@ -51,13 +50,30 @@ void InteractiveCli::AnnounceWinnerOfRollForInitiative(){
 }
 
 
-Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded) {  
-  std::string* line =  new std::string();
-  Turn *turnObj = new Turn();
+void InteractiveCli::PromptAndPerformTurn(bool test,int moveObjectsNeeded) {  
+  // This moveObjectsNeed int definitely will come from the GameState class 
+  // when we get to that point
   GameLogic logic = GameLogic(game_); 
+  bool is_valid_move;
+  for (int i = 0; i < moveObjectsNeeded; ++i){
+    do {
+      std::string* line =  new std::string();
+      PromptPlayerForMoveString(test, line); 
+      Move *moveObj = ParseMoveString(*line); 
+      is_valid_move = logic.moveStone(moveObj); 
+      if (!is_valid_move){
+        std::cout << "*ERROR* :: *INVALID* :: *MOVE* ... try again...." << std::endl;
+      }
+      delete line;
+      delete moveObj;
+    } while (!is_valid_move);
+  }
+}
+
+void InteractiveCli::PromptPlayerForMoveString(bool test, std::string *line){
+  //TODO(gpwclark@gmail.com): Need support for 'm 2 h' and 'm b 3' moves.
   bool is_invalid_input; 
-  for (int i = 0; i < moveObjectsNeeded; ++i) {
-    do{  
+    do {  
        std::cout << "Input move, format 'm int int' " << std::endl;
     
        if (test) {
@@ -67,35 +83,27 @@ Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded)
        }
       std::cout << "you entered: " << *line << std::endl;
       
-      //InputValidationForMoveObjectPrompt's bool is configured for loop
-      //logic. This means it returns true if the input is false and the 
-      //loop needs to run again to get valid input from user. It returns
-      //false when input is valid and the loop doesn't need to execute.
+      // InputValidationForMoveObjectPrompt's bool is configured for loop
+      // logic. This means it returns true if the input is false and the 
+      // loop needs to run again to get valid input from user. It returns
+      // false when input is valid and the loop doesn't need to execute.
       is_invalid_input = input_validator_->InputValidationForMoveObjectPrompt(*line);
       if (is_invalid_input){
-        std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;
+        std::cout << "*ERROR* :: *INVALID* :: *MOVE* :: *STRING* ... try again...." << std::endl;
       }
-    }while (is_invalid_input);
-
-    Move *moveObj = ParseMove(*line); 
-    logic.isLegal(moveObj); 
-    turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
-  }
- delete line;
-
- return turnObj;
+    } while (is_invalid_input);
 }
-Move* InteractiveCli::ParseMove(std::string line) {
-// needs to allocate new move on the heap
-// and return that object
 
-  // http:// www.cplusplus.com/reference/istream/istream/operator%3E%3E/
-  // it looks like you may be able to do this more easily with a stream
-  // (look at the example)
+Move* InteractiveCli::ParseMoveString(std::string line) {
+
   std::vector<std::string> userInputVector = input_validator_->SplitByWhiteSpace(line);
   std::string elem1 = userInputVector[1];
   std::string elem2 = userInputVector[2];
 
+  // Converting a string (that may or may not be an int) to an int is tricky
+  // business and the behavior of the atoi() function, specifically the way
+  // that it handles mixed int/char strings e.g. "h8k" is the most logical
+  // choice 
   int elem1Int = atoi(elem1.c_str());
   int elem2Int = atoi(elem2.c_str());
   
@@ -104,7 +112,7 @@ Move* InteractiveCli::ParseMove(std::string line) {
 }
 
 void InteractiveCli::GetUserInputLine(std::string* returnString) {
-    char * line = readline("> ");
+    char *line = readline("> ");
     // !!!!!!
     // From http:// cnswww.cns.cwru.edu/php/chet/readline/readline.html#SEC24 ...
     // "If readline encounters an EOF while reading the line, and 

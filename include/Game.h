@@ -38,7 +38,7 @@
     public:
       GameLogic(GameState* state);
       bool isLegal(Move*);
-      void submitTurn(Turn*, int);
+      //void submitTurn(Turn*, int); TODO(gpwclark@gmail.com): talk deprecation
       bool moveStone(Move*);
       GameState getGameState();
     private:
