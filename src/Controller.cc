@@ -1,112 +1,103 @@
 #include "../include/Controller.h"
 
-// TODO(lovestevend@gmail.com) This class generates turn specific messages, need a method to do that
 Controller::Controller(GameState* game) {
-  Controller::game = game;
-  Controller::cli = new InteractiveCli(game);
+  game_ = game;
+  cli_ = new InteractiveCli(game_);
 }
 
-
 void Controller::DisplayBoard(AsciiView *view) {
-  std::string visualization = view->ToString(); 
-  std::cout << "/\\/\\/\\*I*C*E*G*A*M*M*O*N/\\/\\/\\/\\ \n" << visualization << std::endl;
+  cli_->DisplayBoard(view);
 }
 
 void Controller::AnnounceTurn() {
-  std::cout << game->getActiveColorString() << "'s Move" << std::endl; 
-  std::string curr_player =  game->getActiveColorString();            
-  std::cout << "It is:  "  << curr_player << "'s Turn " << std::endl;
+  cli_->AnnounceTurn();
 }
 
-void Controller::PerformRoll(bool test){
-  cli->PromptAndPerformRoll(test);
-}
+void Controller::RollForInitiative(bool test) {
+  std::pair<DieFace, DieFace> initiative_dice_rolls;
 
-void Controller::PerformFirstTurnRolls(bool test) {
-  DieFace white_roll;
-  DieFace black_roll;
-  do{
-    // Print white's turn. White player is asked to roll one die
-    cli->QueryPlayerForRoll(test);
-    
-    // white player rolls one die, call game for die roll then print it to screen
-    white_roll = PerformFirstDieRoll();
-
-    // pass turn
-    game->passTurn();
-
-    //Same series is done for black player, to get black's die roll.
-    cli->QueryPlayerForRoll(test);
-    black_roll = PerformFirstDieRoll();
-    game->passTurn();
-
-    // keep doing that until white and black dice rolls aren't the same.
-  }while (white_roll == black_roll);
+  do {
+    initiative_dice_rolls = GetRollsForInitiative(test);
+    // keep looping until white and black dice rolls aren't the same.
+  } while (initiative_dice_rolls.first == initiative_dice_rolls.second);
   
-  //set game's dice value so it is ready for the first turn
-  
-  game->getDice()->set(white_roll, black_roll);
-  // if winner of rolls is black, passTurn is called
+  // set game_'s dice value so it is ready for the second turn
+  game_->getDice()->set(initiative_dice_rolls.first, initiative_dice_rolls.second);
+
+  // if winner of rolls is black, passTurn is called because black won
   // else passTurn is not called, meaning white won and remains in control of the turn.
-  if (white_roll < black_roll) {
-    game->passTurn();
+  if (initiative_dice_rolls.first < initiative_dice_rolls.second) {
+    game_->passTurn();
   }
-
-  std::string curr_player =  game->getActiveColorString(); 
-  cli->AnnounceWinnerOfFirstTurnRolls(curr_player);
-  // For this case, we actually need to feed prettyPrint the values since they
-  // // aren't random here, they must be equal to the outcome of the first rolls.    
-  game->getDice()->prettyPrint();
-  
+  // Game's state now set so let's announce the winner who will take the second turn 
+  cli_->AnnounceWinnerOfRollForInitiative();
 }
 
-DieFace Controller::PerformFirstDieRoll() { 
-    DieFace dieRoll;
-    game->getDice()->roll();
-    dieRoll = game->getDice()->left();
-    game->getDice()->prettyPrintOne(); 
-    std::cout << std::endl; 
-  return dieRoll;
-}
+std::pair<DieFace,DieFace> Controller::GetRollsForInitiative(bool test){
 
-bool Controller::PerformTurn(bool test) {
-  bool activeGame = true;  // TODO(lovestevend@gmail.com): decide on logic for game end 
-  bool activeTurn = true;
-
-
-
-  GameLogic logic = GameLogic(game);
-  
-  // ask activePlayer for series of move tokens corresponding to roll
+    std::pair<DieFace,DieFace> player_rolls;
     
-    while (activeTurn) {
-      Turn *turnObj = cli->PromptPlayerForMoveObjects(test,GetNumMoves()); 
-      
-      // parse move tokens into move objects into turn object
-      // submit turn object to game
-      
-      bool validTurn = true;
-      
-      int i = 0;
-      while ((i < GetNumMoves()) &&  validTurn) {  
-        validTurn = logic.isLegal(turnObj->moves[i]); 
-        ++i;
+    // This for loop repeats twice so each player gets to roll a die.
+    for (int i = 0; i < 2; ++i){
+      // Print current player's turn. current player is asked to roll one die
+      cli_->QueryPlayerForRoll(test);
+    
+      // current player rolls one die, call game_ for die roll then print it to screen
+      if (i == 0) {
+        std::get<0>(player_rolls) = GetDieRoll();
+      } else {
+        std::get<1>(player_rolls) = GetDieRoll();
       }
-      if (validTurn) {
-        logic.submitTurn(turnObj, GetNumMoves());
-        activeTurn = false;
-      }else{
-        std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;
-      }
-  }
-  game->passTurn();
-  return activeGame;
+      game_->passTurn();
+    }
+
+    return player_rolls;
+}
+
+DieFace Controller::GetDieRoll() { 
+    DieFace die_roll;
+    game_->getDice()->roll();
+    die_roll = game_->getDice()->left();
+    game_->getDice()->prettyPrintOne(); 
+    std::cout << std::endl; 
+  return die_roll;
+}
+void Controller::PerformFirstTurn(bool test){
+  //On the first turn we don't roll the dice, they are set properly because
+  //of RollForInitiative
+  // ask activePlayer for turn object until they submit a valid one 
+  ExecuteMoves(test); 
+  game_->passTurn();
+}
+bool Controller::PerformTurn(bool test) {
+
+  // A turn is just a dice roll, move execution, and then a call to game to pass the turn
+  PerformDiceRoll(test);
+  bool is_active_game;  // TODO(lovestevend@gmail.com): decide on logic for game_ end 
+  
+  // ask activePlayer for turn object until they submit a valid one 
+  is_active_game = ExecuteMoves(test); 
+  game_->passTurn();
+  return is_active_game;
+}
+
+void Controller::PerformDiceRoll(bool test){
+  cli_->PromptAndPerformRoll(test);
+}
+
+bool Controller::ExecuteMoves(bool test){
+  GameLogic logic = GameLogic(game_);
+  bool is_active_game = true; // TODO(gpwclark@gmail.com): need to figure out when this actually is.
+  // parse move tokens into move objects into turn object
+  Turn *turnObj = cli_->PromptPlayerForTurnObject(test,GetNumMoves()); 
+  logic.submitTurn(turnObj, GetNumMoves());
+  return is_active_game;
 }
 
 int Controller::GetNumMoves() {
   
-  DieFace leftDie = Controller::game->getDice()->left();
-  DieFace rightDie = Controller::game->getDice()->right();
+  DieFace leftDie = Controller::game_->getDice()->left();
+  DieFace rightDie = Controller::game_->getDice()->right();
   if (leftDie == rightDie) {
   // in backgammon if you roll doubles you get 4 moves
     return 4;
