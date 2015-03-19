@@ -42,7 +42,7 @@ TEST(InteractiveCli, PromptPlayerForMoveObjects) {
   bool test = true;
   Game *g = new Game();
   InteractiveCli *cli= new InteractiveCli(g);
-  Turn *turnObj = cli->PromptPlayerForMoveObjects(test,2);
+  Turn *turnObj = cli->PromptPlayerForTurnObject(test,2);
   for (int i = 0; i < 2; ++i) {
     EXPECT_EQ(1, turnObj->moves[i]->sourcePipNum)<<"Source pip should be 1";   
     EXPECT_EQ(11, turnObj->moves[i]->destPipNum)<<"Dest pip should be 11";

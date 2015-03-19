@@ -9,6 +9,7 @@
 #include "Turn.h"
 #include "InteractiveCli.h"
 #include <cstdlib>
+#include <utility>
 
   class Controller{
 // add parameter name in signature
@@ -21,18 +22,23 @@
   void AnnounceTurn();
   void DisplayBoard(AsciiView *view);
   
-  void PerformRoll(bool test);
-  void PerformFirstTurnRolls(bool test);
-  DieFace PerformFirstDieRoll();
-  bool  PerformTurn(bool test); 
+  void RollForInitiative(bool test);
+  bool PerformTurn(bool test); 
 
-  //This function is dubiously named and is technically the property of 
-  //gameplay logic, or w/e system we end up using to determine the Complete move
-  //of the user given their roll.
+  // This function is dubiously named and is technically the property of 
+  // gameplay logic, or w/e system we end up using to determine the Complete move
+  // of the user given their roll.
+  // is public for testing
   int GetNumMoves(); 
-
+  
+  //public for google test
+  DieFace GetDieRoll();
   private:
-  Game* game;
-  InteractiveCli* cli;
+
+  Game* game_;
+  InteractiveCli* cli_;
+  std::pair<DieFace,DieFace> GetRollsForInitiative(bool test);
+  void PerformDiceRoll(bool test);
+  bool ExecuteMoves(bool test);
   };
 #endif

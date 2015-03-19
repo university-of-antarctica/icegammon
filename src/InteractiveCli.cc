@@ -2,26 +2,35 @@
 
 
 InteractiveCli::InteractiveCli(Game* game) {
-  InteractiveCli::game = game;
+  InteractiveCli::game_ = game;
 
+}
+
+void InteractiveCli::DisplayBoard(AsciiView *view){
+  std::string visualization = view->ToString(); 
+  std::cout << "/\\/\\/\\*I*C*E*G*A*M*M*O*N/\\/\\/\\/\\ \n" << visualization << std::endl;
+}
+
+void InteractiveCli::AnnounceTurn(){
+  std::cout << "It is: " << game_->getActiveColorString() << "'s Turn" << std::endl; 
 }
 
 void InteractiveCli::PromptAndPerformRoll(bool test) {
 // ask activePlayer to roll
   QueryPlayerForRoll(test);
 // actuallyRollTheDice
- game->getDice()->roll();
+ game_->getDice()->roll();
  
  std::cout << "Rolling..." << std::endl;
- game->getDice()->prettyPrint();
+ game_->getDice()->prettyPrint();
 }
 
 
 void InteractiveCli::QueryPlayerForRoll(bool test) {  
   // this should be it's own method (print current player's turn)
   // these also shouldn't be coupled; printing the curr player's turn is a side-effect
-  std::string currPlayer =  game->getActiveColorString(); 
-  std::cout << "It is:  "  << currPlayer << "'s Turn " << std::endl;
+  std::string currPlayer =  game_->getActiveColorString(); 
+  AnnounceTurn();
   std::cout << "Input R or r to roll" << std::endl;
   std::string* line =  new std::string();
   do{  
@@ -33,12 +42,12 @@ void InteractiveCli::QueryPlayerForRoll(bool test) {
     }
     std::cout << "you entered: " << *line << std::endl;
  }while (InputValidationForDiceRollPrompt(*line));
- std::cout << "Rolling..." << std::endl;
  delete line;
 }
 
-void InteractiveCli::AnnounceWinnerOfFirstTurnRolls(std::string curr_player){
-  std::cout << curr_player << " won the roll and will start the game." << std::endl;
+void InteractiveCli::AnnounceWinnerOfRollForInitiative(){
+  std::cout << game_->getActiveColorString() << " won the roll and will start the game." << std::endl;
+  game_->getDice()->prettyPrint();
 }
 
 bool InteractiveCli::InputValidationForDiceRollPrompt(std::string line) {
@@ -52,9 +61,10 @@ bool InteractiveCli::InputValidationForDiceRollPrompt(std::string line) {
   return inputInvalidKeepLooping;
 }
 
-Turn* InteractiveCli::PromptPlayerForMoveObjects(bool test,int moveObjectsNeeded) {  
+Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded) {  
   std::string* line =  new std::string();
   Turn *turnObj = new Turn();
+  bool is_not_valid_input; 
   for (int i = 0; i < moveObjectsNeeded; ++i) {
     do{  
        std::cout << "Input move, format 'm int int' " << std::endl;
@@ -65,9 +75,14 @@ Turn* InteractiveCli::PromptPlayerForMoveObjects(bool test,int moveObjectsNeeded
           GetUserInputLine(line);
        }
       std::cout << "you entered: " << *line << std::endl;
-    }while (InputValidationForMoveObjectPrompt(*line));
+      is_not_valid_input = InputValidationForMoveObjectPrompt(*line);
+      if(is_not_valid_input){
+        std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;
+      }
+    }while (is_not_valid_input);
 
     Move *moveObj = ParseMove(*line); 
+    game_->isLegal(moveObj); 
     turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
   }
  delete line;
