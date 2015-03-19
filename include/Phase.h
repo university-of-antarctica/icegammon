@@ -8,36 +8,76 @@
 #include <iostream>
 #include <cinttypes>
 
-enum class PhaseType{ 
-    // Start
-    BeginGame,
-    OpeningRollOne,
-    OpeningRollTwo,
-    FirstMove,
-    // Normal turns
-    BeginningOfTurn,
-    Roll,
-    Move,
-    // Finish
-    EndGame,
-  };
 
-const Color kFirstColorOnTurn = Color::WHITE;
-const uint kFirstTurnNumber = 1;
-const PhaseType kFirstPhaseType = PhaseType::BeginGame;
+
+
+class PhaseType{ 
+  public:
+    PhaseType(){}
+    virtual std::string ToString() = 0;//{return "none";}// = 0; 
+};
+
+class BeginGamePhase: public PhaseType{
+  public:
+    BeginGamePhase(){}
+    std::string ToString() { return "beginning of game"; }
+};
+
+class FirstRollPhase: public PhaseType{
+  public:
+    FirstRollPhase(){}
+    std::string ToString() { return "first roll"; }
+};
+
+class FirstMovePhase: public PhaseType{
+  public:
+    FirstMovePhase(){}
+    std::string ToString(){return "first move";}
+};
+
+class BeginTurnPhase: public PhaseType{
+  public:
+    BeginTurnPhase(){}
+    std::string ToString(){return "beginning of turn";}
+};
+
+class RollPhase : public PhaseType{
+  public:
+    RollPhase(){}
+    std::string ToString(){return "roll";}
+};
+
+class MovePhase : public PhaseType{
+  public:
+    MovePhase(){}
+    std::string ToString(){return "move";}
+};
+
+class EndGamePhase: public PhaseType{
+  public:
+    EndGamePhase(){}
+    std::string ToString(){return "end of game";}
+};
+
+
+
+
+// const Color kFirstColorOnTurn = Color::WHITE;
+// const uint kFirstTurnNumber = 1;
+// RollPhase roll = RollPhase();
+// const PhaseType& kFirstPhaseType = roll;
 
   class Phase{
      public:
       Phase();
       std::string toString();
-      //virtual Phase fromPrevPhase(Phase prevPhase) = 0;
-      // virtual Phase to(Phase& nextPhase);
-
 
       Player player_on_turn() const { return player_on_turn_; }
       void set_player_on_turn(Player player) { player_on_turn_ = player; }
-      PhaseType part_of_turn() const { return part_of_turn_; }
-      void set_part_of_turn(PhaseType phase) { part_of_turn_ = phase; }
+
+      PhaseType* part_of_turn() const { return part_of_turn_; }
+      void set_part_of_turn(PhaseType* phase) {part_of_turn_ = phase; }
+
       uint turn_number() const { return turn_number_; }
       void set_turn_number(uint turnNumber) {turn_number_ = turnNumber; }
 
@@ -49,10 +89,10 @@ const PhaseType kFirstPhaseType = PhaseType::BeginGame;
 
 
    
-    protected:
-      PhaseType part_of_turn_;
-      Player    player_on_turn_;
-      uint      turn_number_;
+    private:
+      PhaseType* part_of_turn_; // Can I make this a reference instead of a pointer?
+      Player     player_on_turn_;
+      uint       turn_number_;
 
   };/*
 

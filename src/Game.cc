@@ -5,19 +5,19 @@
     board_ = new Board();
     dice_ = new Dice();
     // turn_ = Color::WHITE;
-    phase_ = Phase();
+    phase_ = new Phase();
   } 
 
   void GameState::passTurn() {
-    phase_.SwitchPlayer();
+    phase_->SwitchPlayer();
   }
 
   Color GameState::getActiveColor() {
-    return phase_.player_on_turn().color();
+    return phase_->player_on_turn().color();
   }
 
   std::string GameState::getActiveColorString() {
-    return phase_.player_on_turn().toString();
+    return phase_->player_on_turn().toString();
   }
 
   Board* GameState::getBoard() {
