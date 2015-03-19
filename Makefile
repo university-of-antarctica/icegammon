@@ -20,8 +20,8 @@ SRCDIR = src
 CFLAGS = -Wall -pedantic -std=c++11
 
 # Files 
-OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o InteractiveCli.o)
-TESTNAMES = AsciiView_tests Board_tests Controller_tests Dice_tests Game_tests Validation_tests InteractiveCli_tests testmain
+OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o InteractiveCli.o UserInputValidation.o)
+TESTNAMES = AsciiView_tests Board_tests Controller_tests Dice_tests Game_tests Validation_tests InteractiveCli_tests UserInputValidation_tests testmain
 TESTS =    $(addprefix $(TESTDIR)/,$(addsuffix .cc,$(TESTNAMES)))
 TESTOBJS = $(addprefix $(TESTDIR)/,$(addsuffix .o,$(TESTNAMES)))
 

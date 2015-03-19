@@ -11,8 +11,8 @@
 #include <cstdlib>
 #include <utility>
 
-  class Controller{
-// add parameter name in signature
+class Controller{
+
   public:
   Controller(GameState* game);
 
