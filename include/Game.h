@@ -25,7 +25,7 @@
       void passTurn();
       std::string getActiveColorString();  // Returns the current value of turn which is whose turn it is, white or black.
       Color getActiveColor();
-      Phase phase_;
+      Phase* phase_;
 
     private:
       Color turn_;

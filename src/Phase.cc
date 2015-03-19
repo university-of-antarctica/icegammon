@@ -1,15 +1,22 @@
 #include "../include/Phase.h"
  #include <string>
 #include <sstream>
+
+// const Color kFirstColorOnTurn = Color::WHITE;
+// const uint kFirstTurnNumber = 1;
+// RollPhase roll = RollPhase();
+// const PhaseType& kFirstPhaseType = roll;
+
   Phase::Phase(){
-    turn_number_ = kFirstTurnNumber;
-    player_on_turn_ = Player(kFirstColorOnTurn);
-    part_of_turn_ = PhaseType::BeginGame;
+    turn_number_ = 1;//kFirstTurnNumber;
+    player_on_turn_ = Player(Color::WHITE);
+    RollPhase* roll = new RollPhase();
+    part_of_turn_ = roll;
   }
 
   std::string Phase::toString(){
     std::ostringstream oss;
-    oss << player_on_turn_.toString() << " is in phase " << "implement phasetype to string" << " on turn " << turn_number_ << std::endl ;
+    oss << player_on_turn_.toString() << " is in phase " << part_of_turn_->ToString() << " on turn " << turn_number_ << std::endl ;
     return oss.str();
     //return "Nonsense phase";
   }
@@ -80,7 +87,7 @@
   // }
 
 
- // /*
+ 
 
 
   OpeningRollOnePhase::OpeningRollOnePhase(Player firstToRoll){
