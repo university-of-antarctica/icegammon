@@ -25,13 +25,13 @@
       void passTurn();
       std::string getActiveColorString();  // Returns the current value of turn which is whose turn it is, white or black.
       Color getActiveColor();
-
+      Phase* phase_;
 
     private:
       Color turn_;
       Board* board_;
       Dice* dice_;
-      Phase* phase;
+      
   };
 
   class GameLogic{
