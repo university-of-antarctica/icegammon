@@ -47,7 +47,7 @@ TEST(Turns, EvenOddRandomized) {
 }
 
 TEST(Turns, validationForTurnSubmission) {
-  // test submitTurn();
+  // test submitTurn() unless we deprecate it
 
 }
 

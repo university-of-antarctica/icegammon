@@ -40,7 +40,7 @@ std::pair<DieFace,DieFace> Controller::GetRollsForInitiative(bool test){
     // This for loop repeats twice so each player gets to roll a die.
     for (int i = 0; i < 2; ++i){
       // Print current player's turn. current player is asked to roll one die
-      cli_->QueryPlayerForRoll(test);
+      cli_->PromptPlayerForRoll(test);
     
       // current player rolls one die, call game_ for die roll then print it to screen
       if (i == 0) {
@@ -86,11 +86,10 @@ void Controller::PerformDiceRoll(bool test){
 }
 
 bool Controller::ExecuteMoves(bool test){
-  GameLogic logic = GameLogic(game_);
-  bool is_active_game = true; // TODO(gpwclark@gmail.com): need to figure out when this actually is.
-  // parse move tokens into move objects into turn object
-  Turn *turnObj = cli_->PromptPlayerForTurnObject(test,GetNumMoves()); 
-  logic.submitTurn(turnObj, GetNumMoves());
+  // TODO(gpwclark@gmail.com): need to figure out game end logic.
+  bool is_active_game = true; 
+  // ask player for move string and perform turn
+  cli_->PromptAndPerformTurn(test,GetNumMoves()); 
   return is_active_game;
 }
 
