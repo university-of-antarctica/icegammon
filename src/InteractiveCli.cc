@@ -1,7 +1,7 @@
 #include "../include/InteractiveCli.h"
 
 
-InteractiveCli::InteractiveCli(Game* game) {
+InteractiveCli::InteractiveCli(GameState* game) {
   InteractiveCli::game_ = game;
 }
 
@@ -82,7 +82,7 @@ Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded)
     }while (is_not_valid_input);
 
     Move *moveObj = ParseMove(*line); 
-    logic->isLegal(moveObj); 
+    logic.isLegal(moveObj); 
     turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
   }
  delete line;
