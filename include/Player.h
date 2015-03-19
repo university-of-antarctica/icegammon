@@ -9,7 +9,7 @@
       Player(){color_=Color::WHITE;}
       Player(Color colorOfPlayer);
       std::string toString();
-      Color getColor();
+      Color color();
     private:
       Color color_;
   };

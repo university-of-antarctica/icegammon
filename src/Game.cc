@@ -4,30 +4,20 @@
   GameState::GameState() {
     board_ = new Board();
     dice_ = new Dice();
-    turn_ = Color::WHITE;
+    // turn_ = Color::WHITE;
     phase_ = BeginGamePhase();
   } 
 
   void GameState::passTurn() {
-
-    if(turn_ == Color::WHITE) {
-      turn_ = Color::BLACK;
-    }
-    else{
-      turn_ = Color::WHITE;
-    }
+    phase_.PassTurn();
   }
 
   Color GameState::getActiveColor() {
-    return turn_;
+    return phase_.player_on_turn().color();
   }
 
   std::string GameState::getActiveColorString() {
-    if (turn_ == Color::WHITE) {
-      return "White";
-    }else{
-      return "Black";
-    }
+    return phase_.player_on_turn().toString();
   }
 
   Board* GameState::getBoard() {
