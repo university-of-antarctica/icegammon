@@ -28,7 +28,7 @@ TEST(Controller, GetOneDieTest) {
   DieFace sampleDieRoll;
   
   for (int i = 0; i < 10; ++i) {
-    sampleDieRoll = controller->PerformFirstDieRoll();
+    sampleDieRoll = controller->GetDieRoll();
     EXPECT_GT(sampleDieRoll, 0)<<"Die roll must be greater than 0";
     EXPECT_LT(sampleDieRoll, 7)<<"Die roll must be smaller than 7";
   }
@@ -39,7 +39,7 @@ TEST(Controller, GetOneDieTest) {
 TEST(Controller, verifyPostFirstTurnState) {
   GameState *g = new GameState();
   Controller *controller = new Controller(g);
-  controller->PerformFirstTurnRolls(true); 
+  controller->RollForInitiative(true); 
   
   ASSERT_NE(g->getDice()->left(), g->getDice()->right())<<"Rolls must be different to start game" ;
   
