@@ -39,6 +39,18 @@
     return "Nonsense phase";
   }
 
+  void Phase::PassTurn(){
+    if(player_on_turn_.color() == Color::WHITE){
+      player_on_turn_ = Player(Color::BLACK);
+    } else {
+      player_on_turn_ = Player(Color::WHITE);
+    }
+  }
+
+
+
+
+
 
   BeginGamePhase::BeginGamePhase(){
     this->turn_number_ = kFirstTurnNumber;
@@ -105,7 +117,7 @@
       FirstMovePhase();
       Phase to(PhaseType nextPhaseType);
   };
-  /*
+  
   
   class BeginTurnPhase : public Phase {
     public:

@@ -48,6 +48,7 @@ const PhaseType kFirstPhaseType = PhaseType::BeginGame;
       PhaseType part_of_turn() const { return part_of_turn_; }
       void setPhaseType(PhaseType phase) { part_of_turn_ = phase; }
       uint turn_number() const { return turn_number_; }
+      void PassTurn();
    
     protected:
       PhaseType part_of_turn_;

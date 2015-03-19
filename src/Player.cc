@@ -13,6 +13,6 @@ std::string Player::toString(){
   }
 }
 
-Color Player::getColor(){
+Color Player::color(){
   return color_;
 }
