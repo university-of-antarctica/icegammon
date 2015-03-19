@@ -1,7 +1,7 @@
 #include "../include/Controller.h"
 
 // TODO(lovestevend@gmail.com) This class generates turn specific messages, need a method to do that
-Controller::Controller(Game* game) {
+Controller::Controller(GameState* game) {
   Controller::game = game;
   Controller::cli = new InteractiveCli(game);
 }
@@ -72,6 +72,10 @@ DieFace Controller::PerformFirstDieRoll() {
 bool Controller::PerformTurn(bool test) {
   bool activeGame = true;  // TODO(lovestevend@gmail.com): decide on logic for game end 
   bool activeTurn = true;
+
+
+
+  GameLogic logic = GameLogic(game);
   
   // ask activePlayer for series of move tokens corresponding to roll
     
@@ -85,11 +89,11 @@ bool Controller::PerformTurn(bool test) {
       
       int i = 0;
       while ((i < GetNumMoves()) &&  validTurn) {  
-        validTurn = game->isLegal(turnObj->moves[i]); 
+        validTurn = logic.isLegal(turnObj->moves[i]); 
         ++i;
       }
       if (validTurn) {
-        game->submitTurn(turnObj, GetNumMoves());
+        logic.submitTurn(turnObj, GetNumMoves());
         activeTurn = false;
       }else{
         std::cout << "*ERROR* :::: *INVALID* :::: *MOVE* ... try again...." << std::endl;

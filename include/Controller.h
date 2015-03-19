@@ -13,7 +13,7 @@
   class Controller{
 // add parameter name in signature
   public:
-  Controller(Game* game);
+  Controller(GameState* game);
 
   //TODO(gpwclark@gmail.com) figure out where these two methods go,
   //as of now they may or not be acceptable, especially DisplayBoard
@@ -32,7 +32,7 @@
   int GetNumMoves(); 
 
   private:
-  Game* game;
+  GameState* game;
   InteractiveCli* cli;
   };
 #endif
