@@ -31,7 +31,7 @@
       Color turn_;
       Board* board_;
       Dice* dice_;
-      Phase* phase;
+      Phase phase_;
   };
 
   class GameLogic{

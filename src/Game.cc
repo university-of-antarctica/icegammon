@@ -5,7 +5,7 @@
     board_ = new Board();
     dice_ = new Dice();
     turn_ = Color::WHITE;
-    //phase = new Phase();
+    phase_ = BeginGamePhase();
   } 
 
   void GameState::passTurn() {
