@@ -5,6 +5,7 @@
 #include "Color.h"
 #include <exception>
 #include <string>
+#include <iostream>
 #include <cinttypes>
 
 enum class PhaseType{ 
@@ -21,56 +22,60 @@ enum class PhaseType{
     EndGame,
   };
 
-
-enum class PhaseType;
 const Color kFirstColorOnTurn = Color::WHITE;
 const uint kFirstTurnNumber = 1;
 const PhaseType kFirstPhaseType = PhaseType::BeginGame;
 
-
-
-  
-
-  // class PhaseException : public std::exception{
-  //   virtual const std::string toString() const throw(){
-  //     return "Incorrect Phase Transition";
-  //   }
-  // };
-
   class Phase{
      public:
       Phase();
-      virtual std::string toString();
+      std::string toString();
       //virtual Phase fromPrevPhase(Phase prevPhase) = 0;
+      // virtual Phase to(Phase& nextPhase);
+
 
       Player player_on_turn() const { return player_on_turn_; }
       void set_player_on_turn(Player player) { player_on_turn_ = player; }
       PhaseType part_of_turn() const { return part_of_turn_; }
-      void setPhaseType(PhaseType phase) { part_of_turn_ = phase; }
+      void set_part_of_turn(PhaseType phase) { part_of_turn_ = phase; }
       uint turn_number() const { return turn_number_; }
-      void PassTurn();
+      void set_turn_number(uint turnNumber) {turn_number_ = turnNumber; }
+
+      void IncrementTurn(){ ++turn_number_; }
+      void SwitchPlayer();
+      // void Proceed();
+      // void Reroll();
+      // void End();
+
+
    
     protected:
       PhaseType part_of_turn_;
       Player    player_on_turn_;
       uint      turn_number_;
 
-  };
+  };/*
+
+  class BeginGamePhase;
+  class OpeningRollOnePhase;
 
   class BeginGamePhase : public Phase {
     public:
       BeginGamePhase();
       std::string toString() override;
+      Phase to(OpeningRollOnePhase &nextPhase);
       //Phase to(PhaseType nextPhaseType);
   };
 
   class OpeningRollOnePhase : public Phase {
     public:
-      OpeningRollOnePhase(BeginGamePhase prevPhase);
+      OpeningRollOnePhase();
+      Phase to(BeginGamePhase &nextPhase);
+      Phase to(OpeningRollOnePhase &nextPhase);
       std::string toString() override;
      // Phase to(PhaseType nextPhaseType);
   };
-  /*
+  
 
   class OpeningRollTwoPhase : public Phase {
     public:

@@ -1,34 +1,6 @@
 #include "../include/Phase.h"
-  // enum class PhaseType{ 
-  //   // Start
-  //   BeginGame,
-  //   OpeningRollOne,
-  //   OpeningRollTwo,
-  //   FirstMove,
-  //   // Normal turns
-  //   BeginningOfTurn,
-  //   Roll,
-  //   Move,
-  //   // Finish
-  //   EndGame,
-  // };
-  // class Phase{
-  //   public:
-  //     Phase(Phase other) = 0;
-  //     std::string toString() = 0;
-  //   private:
-  //     PhaseType part_of_turn_;
-  //     Player    player_on_turn_;
-  //     uint      turn_number_;
-
-  // };
-
-  // class BeginGamePhase : public Phase {
-  //   public:
-  //     BeginGamePhase();
-  //     BeginGamePhase(Phase prevPhase);
-  //     std::string toString();
-  // };
+ #include <string>
+#include <sstream>
   Phase::Phase(){
     turn_number_ = kFirstTurnNumber;
     player_on_turn_ = Player(kFirstColorOnTurn);
@@ -36,10 +8,13 @@
   }
 
   std::string Phase::toString(){
-    return "Nonsense phase";
+    std::ostringstream oss;
+    oss << player_on_turn_.toString() << " is in phase " << "implement phasetype to string" << " on turn " << turn_number_ << std::endl ;
+    return oss.str();
+    //return "Nonsense phase";
   }
 
-  void Phase::PassTurn(){
+  void Phase::SwitchPlayer(){
     if(player_on_turn_.color() == Color::WHITE){
       player_on_turn_ = Player(Color::BLACK);
     } else {
@@ -51,7 +26,7 @@
 
 
 
-
+/*
   BeginGamePhase::BeginGamePhase(){
     this->turn_number_ = kFirstTurnNumber;
     this->player_on_turn_ = Player(kFirstColorOnTurn);
@@ -62,19 +37,41 @@
     // set_part_of_turn_(PhaseType::BeginGame)
   }
 
+  Phase BeginGamePhase::to(OpeningRollOnePhase &nextPhase){
+    nextPhase.set_turn_number(1);
+    nextPhase.set_player_on_turn(player_on_turn_);
+    return nextPhase;
+  }
+
   std::string BeginGamePhase::toString(){
-    return player_on_turn_.toString() + " is beginning the game";
+    // return player_on_turn_.toString() + " is beginning the game on turn " + std::string(turn_number_) + ".";
+    std::cout << player_on_turn_.toString() << " is beginning the game on turn " << turn_number_ << "." << std::endl;
+    return "phase string";
   }
 
 
-  OpeningRollOnePhase::OpeningRollOnePhase(BeginGamePhase prevPhase){
-    turn_number_ = prevPhase.turn_number();
-    player_on_turn_ = prevPhase.player_on_turn();
+  OpeningRollOnePhase::OpeningRollOnePhase(){
     part_of_turn_ = PhaseType::OpeningRollOne;
   }
 
+  Phase OpeningRollOnePhase::to(BeginGamePhase &nextPhase){
+    // start over
+    nextPhase.IncrementTurn();
+    return nextPhase;
+  }
+  Phase OpeningRollOnePhase::to(OpeningRollOnePhase &nextPhase){
+    nextPhase.set_player_on_turn(player_on_turn_);
+    nextPhase.PassTurn();
+    nextPhase.set_turn_number(turn_number_);
+    nextPhase.IncrementTurn();
+    return nextPhase;
+    // redo openingrollone
+  }
+
   std::string OpeningRollOnePhase::toString(){
-    return player_on_turn_.toString() + " is rolling for initiative";
+    // return player_on_turn_.toString() + " is rolling for initiative on turn " + std::string(turn_number_) + ".";
+    std::cout << player_on_turn_.toString() << " is rolling for initiative on turn " << turn_number_ << "." << std::endl;
+    return "phase string";
   }
 
 
@@ -83,7 +80,7 @@
   // }
 
 
-/*
+ // /*
 
 
   OpeningRollOnePhase::OpeningRollOnePhase(Player firstToRoll){
