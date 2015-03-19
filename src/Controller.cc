@@ -2,7 +2,7 @@
 
 Controller::Controller(Game* game) {
   game_ = game;
-  Controller::cli_ = new InteractiveCli(game_);
+  cli_ = new InteractiveCli(game_);
 }
 
 void Controller::DisplayBoard(AsciiView *view) {
@@ -80,10 +80,11 @@ void Controller::PerformDiceRoll(bool test){
 }
 
 bool Controller::ExecuteMoves(bool test){
+  GameLogic logic = GameLogic(game_);
   bool is_active_game = true; // TODO(gpwclark@gmail.com): need to figure out when this actually is.
   // parse move tokens into move objects into turn object
   Turn *turnObj = cli_->PromptPlayerForTurnObject(test,GetNumMoves()); 
-  game_->submitTurn(turnObj, GetNumMoves());
+  logic->submitTurn(turnObj, GetNumMoves());
   return is_active_game;
 }
 

@@ -11,7 +11,7 @@ TEST(AsciiView, InitialCount) {
   // decide what a black stone looks like
   // iterate over the string and verify that there are 15 of each
 
-  Game *g = new Game();
+  GameState *g = new GameState();
   AsciiView *v = new AsciiView(g);
 
   std::string s = v->ToString();

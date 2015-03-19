@@ -14,8 +14,7 @@
 
 class InteractiveCli{
   public:
-  InteractiveCli(Game* game);
-  
+  InteractiveCli(GameState* game);
   void DisplayBoard(AsciiView *view);
   void AnnounceTurn();
 
@@ -46,7 +45,7 @@ class InteractiveCli{
   //are done. 
 
   private:
-  Game* game_;
+  GameState* game_;
   void GetUserInputLine(std::string* returnString);
   std::vector<std::string> SplitByWhiteSpace(std::string);
   int NumDigits(int);

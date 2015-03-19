@@ -14,7 +14,7 @@
   class Controller{
 // add parameter name in signature
   public:
-  Controller(Game* game);
+  Controller(GameState* game);
 
   //TODO(gpwclark@gmail.com) figure out where these two methods go,
   //as of now they may or not be acceptable, especially DisplayBoard
@@ -35,7 +35,7 @@
   DieFace GetDieRoll();
   private:
 
-  Game* game_;
+  GameState* game_;
   InteractiveCli* cli_;
   std::pair<DieFace,DieFace> GetRollsForInitiative(bool test);
   void PerformDiceRoll(bool test);

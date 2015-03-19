@@ -12,18 +12,18 @@
 
 
 TEST(Controller, verifyTurnStateStartsCorrectly) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   EXPECT_EQ(Color::WHITE, g->getActiveColor())<<"First call to getActiveColor should be white";
 }
 
 TEST(Controller, verifyTurnsPassCorrectly) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   g->passTurn();
   EXPECT_EQ(Color::BLACK, g->getActiveColor())<<"Second call to getActiveColor should be black";
 }
 
 TEST(Controller, GetOneDieTest) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   Controller *controller = new Controller(g);
   DieFace sampleDieRoll;
   
@@ -37,7 +37,7 @@ TEST(Controller, GetOneDieTest) {
 
 
 TEST(Controller, verifyPostFirstTurnState) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   Controller *controller = new Controller(g);
   controller->RollForInitiative(true); 
   
@@ -52,7 +52,7 @@ TEST(Controller, verifyPostFirstTurnState) {
 }
 
 TEST(Controller, verifyGetNumMoves) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   Controller *c = new Controller(g);
   int numMoves;
   

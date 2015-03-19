@@ -6,7 +6,7 @@
 #include <cstdlib> // abs
 
 TEST(Turns, First4TurnsAlternate) {
-  Game *g = new Game();
+  GameState *g = new GameState();
 
   Color first = g->getActiveColor();
   g->passTurn();
@@ -22,7 +22,7 @@ TEST(Turns, First4TurnsAlternate) {
 }
 
 TEST(Turns, EvenOddRandomized) {
-  Game *g = new Game();
+  GameState *g = new GameState();
 
   srand(time(NULL));
   Color first = g->getActiveColor();
@@ -52,7 +52,8 @@ TEST(Turns, validationForTurnSubmission) {
 }
 
 TEST(Moving, BasicFirstMove) {
-  Game* g = new Game();
+  GameState* g = new GameState();
+  GameLogic logic = GameLogic(g);
   bool success;
   Move move;
   Board* b = g->getBoard();
@@ -62,7 +63,7 @@ TEST(Moving, BasicFirstMove) {
   EXPECT_EQ(b->pips[3], 0)<< "there shouldnt be any stones on pip 3";
 
   move = Move(1, 3);
-  success = g->moveStone(&move );
+  success = logic.moveStone(&move );
 
   // After move
   EXPECT_EQ(success, true)<<"black should be able to move forward 2 pips";
@@ -71,8 +72,11 @@ TEST(Moving, BasicFirstMove) {
 }
 
 TEST(Moving, RandomMoves) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   Board *b = g->getBoard();
+  GameLogic logic = GameLogic(g);
+
+
   srand(time(NULL));
   int source, dest;
   int sourceNumBefore, destNumBefore;
@@ -91,7 +95,7 @@ TEST(Moving, RandomMoves) {
     totalBarsBefore = b->bars[0]+b->bars[1];
     
     Move move = Move(source, dest);
-    success = g->moveStone(&move);
+    success = logic.moveStone(&move);
 
     sourceNumAfter = std::abs(b->pips[source]);
     destNumAfter   = std::abs(b->pips[dest]);
