@@ -23,6 +23,7 @@
   void DisplayBoard(AsciiView *view);
   
   void RollForInitiative(bool test);
+  void PerformFirstTurn(bool test);
   bool PerformTurn(bool test); 
 
   // This function is dubiously named and is technically the property of 

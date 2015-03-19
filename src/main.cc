@@ -16,10 +16,9 @@ int main() {
   
   bool test = false; 
   controller->RollForInitiative(test);
-  
   controller->DisplayBoard(view);  // this argument is NOT kosher 
   controller->AnnounceTurn();
-  controller->PerformTurn(test);
+  controller->PerformFirstTurn(test);
   
    bool activeGame = true;
     while (activeGame) { 

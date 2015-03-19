@@ -1,6 +1,6 @@
 #include "../include/Controller.h"
 
-Controller::Controller(Game* game) {
+Controller::Controller(GameState* game) {
   game_ = game;
   cli_ = new InteractiveCli(game_);
 }
@@ -62,7 +62,13 @@ DieFace Controller::GetDieRoll() {
     std::cout << std::endl; 
   return die_roll;
 }
-
+void Controller::PerformFirstTurn(bool test){
+  //On the first turn we don't roll the dice, they are set properly because
+  //of RollForInitiative
+  // ask activePlayer for turn object until they submit a valid one 
+  ExecuteMoves(test); 
+  game_->passTurn();
+}
 bool Controller::PerformTurn(bool test) {
 
   // A turn is just a dice roll, move execution, and then a call to game to pass the turn
@@ -84,7 +90,7 @@ bool Controller::ExecuteMoves(bool test){
   bool is_active_game = true; // TODO(gpwclark@gmail.com): need to figure out when this actually is.
   // parse move tokens into move objects into turn object
   Turn *turnObj = cli_->PromptPlayerForTurnObject(test,GetNumMoves()); 
-  logic->submitTurn(turnObj, GetNumMoves());
+  logic.submitTurn(turnObj, GetNumMoves());
   return is_active_game;
 }
 
