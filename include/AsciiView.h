@@ -15,14 +15,14 @@
 
   class AsciiView{
   public:
-    AsciiView(Game*);
+    AsciiView(GameState*);
     char whiteStone();
     char blackStone();
     int whiteStoneCount();
     int blackStoneCount();
     std::string ToString();
   private:
-    Game *game;
+    GameState *game;
     char _whiteStone = 'W';
     char _blackStone = 'B';
     int numWhiteStones = 0;

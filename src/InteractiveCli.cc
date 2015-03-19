@@ -3,7 +3,6 @@
 
 InteractiveCli::InteractiveCli(Game* game) {
   InteractiveCli::game_ = game;
-
 }
 
 void InteractiveCli::DisplayBoard(AsciiView *view){
@@ -64,6 +63,7 @@ bool InteractiveCli::InputValidationForDiceRollPrompt(std::string line) {
 Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded) {  
   std::string* line =  new std::string();
   Turn *turnObj = new Turn();
+  GameLogic logic = GameLogic(game_); 
   bool is_not_valid_input; 
   for (int i = 0; i < moveObjectsNeeded; ++i) {
     do{  
@@ -82,7 +82,7 @@ Turn* InteractiveCli::PromptPlayerForTurnObject(bool test,int moveObjectsNeeded)
     }while (is_not_valid_input);
 
     Move *moveObj = ParseMove(*line); 
-    game_->isLegal(moveObj); 
+    logic->isLegal(moveObj); 
     turnObj->moves[i] = moveObj;  // TODO(lovestevend@gmail.com): is this making a deep copy of the moveObj? if so we need to delete it   
   }
  delete line;

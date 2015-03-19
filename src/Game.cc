@@ -1,11 +1,50 @@
 #include "../include/Game.h"
 
-  Game::Game() {
-    Game::b = new Board();
-    Game::dice = new Dice();
+// GAMESTATE /////////////////////////////////////
+  GameState::GameState() {
+    board_ = new Board();
+    dice_ = new Dice();
+    turn_ = Color::WHITE;
+    //phase = new Phase();
   } 
 
-  void Game::submitTurn(Turn *turnObj, int numMoves) {
+  void GameState::passTurn() {
+
+    if(turn_ == Color::WHITE) {
+      turn_ = Color::BLACK;
+    }
+    else{
+      turn_ = Color::WHITE;
+    }
+  }
+
+  Color GameState::getActiveColor() {
+    return turn_;
+  }
+
+  std::string GameState::getActiveColorString() {
+    if (turn_ == Color::WHITE) {
+      return "White";
+    }else{
+      return "Black";
+    }
+  }
+
+  Board* GameState::getBoard() {
+    return board_;
+  }
+
+  Dice* GameState::getDice() {
+    return dice_;
+  }
+
+// GAMELOGIC ////////////////////////////////////
+
+  GameLogic::GameLogic(GameState* state){
+     state_ = state;
+  }
+
+  void GameLogic::submitTurn(Turn *turnObj, int numMoves) {
     int i = 0;
     while (i< numMoves) {
       moveStone(turnObj->moves[i]);      
@@ -16,44 +55,15 @@
     // delete turnObj;
   }
 
-  void Game::passTurn() {
-
-    if(turn == Color::WHITE) {
-      turn = Color::BLACK;
-    }
-    else{
-      turn = Color::WHITE;
-    }
-  }
-
-  Color Game::getActiveColor() {
-    return Game::turn;
-  }
-
-  std::string Game::getActiveColorString() {
-    if (Game::turn == Color::WHITE) {
-      return "White";
-    }else{
-      return "Black";
-    }
-  }
-
-  Board* Game::getBoard() {
-    return Game::b;
-  }
-
-  Dice* Game::getDice() {
-    return Game::dice;
-  }
-
-  bool Game::moveStone(Move *move) {
+  bool GameLogic::moveStone(Move *move) {
     if(!isLegal(move)){
       return false;
     }
+    Board* board = state_->getBoard();
     
     // TODO(lovestevend@gmail.com) These variables are repeated in isLegal(), should they be put in a struct or class or something?
-    int numSourceStones         = b->pips[move->sourcePipNum];
-    int numDestStones           = b->pips[move->destPipNum];
+    int numSourceStones         = board->pips[move->sourcePipNum];
+    int numDestStones           = board->pips[move->destPipNum];
 
     // positive #s represent # of white stones
     // negative #s represent # of black stones
@@ -66,12 +76,12 @@
 
       if(!diffColorStones || numDestStones == 0) {
           if(numSourceStones > 0) {  // white stone(s)
-            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
-            b->pips[move->destPipNum]   += 1;  // 1 more stone on dest pip
+            board->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            board->pips[move->destPipNum]   += 1;  // 1 more stone on dest pip
           }
           else{  // black stone(s)
-            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum]   -= 1;  // 1 more stone on dest pip (so we subtract)
+            board->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            board->pips[move->destPipNum]   -= 1;  // 1 more stone on dest pip (so we subtract)
           }
           return true;
       }
@@ -79,14 +89,14 @@
       // different colors, but blottable
       if(diffColorStones && destHasOneStone) {
           if(numSourceStones > 0) {  // white stone blots black stone
-            b->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
-            b->pips[move->destPipNum]    = 1;  // now exactly 1 white stone on dest pip
-            b->bars[1]+=1;  // send a black stone to the bar
+            board->pips[move->sourcePipNum] -= 1;  // 1 fewer stone on source pip
+            board->pips[move->destPipNum]    = 1;  // now exactly 1 white stone on dest pip
+            board->bars[1]+=1;  // send a black stone to the bar
           }
           else{  // black stone blots white stone
-            b->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
-            b->pips[move->destPipNum]    =-1;  // now exactly 1 black stone on the dest pip
-            b->bars[0]+=1;  // send a white stone to the bar
+            board->pips[move->sourcePipNum] += 1;  // 1 fewer stone on source pip (so we add)
+            board->pips[move->destPipNum]    =-1;  // now exactly 1 black stone on the dest pip
+            board->bars[0]+=1;  // send a white stone to the bar
           }
           return true;
       }
@@ -95,11 +105,11 @@
     return false;
   }
 
-  bool Game::isLegal(Move *move) {
-
+  bool GameLogic::isLegal(Move *move) {
+    Board* board = state_->getBoard();
     // TODO(lovestevend@gmail.com) These variables are repeated in moveStone(), should they be put in a struct or class or something?
-    int numSourceStones         = b->pips[move->sourcePipNum];
-    int numDestStones           = b->pips[move->destPipNum];
+    int numSourceStones         = board->pips[move->sourcePipNum];
+    int numDestStones           = board->pips[move->destPipNum];
 
     // positive #s represent # of white stones
     // negative #s represent # of black stones

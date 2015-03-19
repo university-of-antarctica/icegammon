@@ -11,7 +11,7 @@
 
 TEST(InteractiveCli, verifyInputsForFirstTurn) {
   
-  Game *g = new Game();
+  GameState *g = new GameState();
   InteractiveCli *cli= new InteractiveCli(g);
   bool testValue;
   // InputValidationForDiceRollPrompt only checks first char, // and returns true if first chars aren't 'r' or 'R'.
@@ -40,7 +40,7 @@ TEST(InteractiveCli, PromptPlayerForMoveObjects) {
   // on the roll.
   
   bool test = true;
-  Game *g = new Game();
+  GameState *g = new GameState();
   InteractiveCli *cli= new InteractiveCli(g);
   Turn *turnObj = cli->PromptPlayerForTurnObject(test,2);
   for (int i = 0; i < 2; ++i) {
@@ -51,7 +51,7 @@ TEST(InteractiveCli, PromptPlayerForMoveObjects) {
 }
 
 TEST(Controller, validateInputForMoveObject) {
-  Game *g = new Game();
+  GameState *g = new GameState();
   InteractiveCli *cli= new InteractiveCli(g);
   // test inputValidationForMoveObject();
   // This function returns FALSE if the input is VALID
@@ -78,7 +78,7 @@ TEST(Controller, validateInputForMoveObject) {
 
 TEST(Controller, parseMoveValidation) {
   // test parseMove();
-  Game *g = new Game();
+  GameState *g = new GameState();
   InteractiveCli *cli= new InteractiveCli(g);
 
   int testSource = 8;
