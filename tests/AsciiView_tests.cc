@@ -14,7 +14,7 @@ TEST(AsciiView, InitialCount) {
   Game *g = new Game();
   AsciiView *v = new AsciiView(g);
 
-  std::string s = v->toString();
+  std::string s = v->ToString();
 
   // Count the occurrence of black and white stones on the board
   EXPECT_EQ(v->whiteStoneCount(), 15)<<"there should be 15 white stone characters";

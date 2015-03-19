@@ -94,5 +94,3 @@ void Dice::prettyPrintOne() {
  std::wcout << getSymbol(left());
   freopen(NULL, "w", stdout); 
 }
-
-
