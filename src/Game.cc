@@ -5,11 +5,11 @@
     board_ = new Board();
     dice_ = new Dice();
     // turn_ = Color::WHITE;
-    phase_ = BeginGamePhase();
+    phase_ = Phase();
   } 
 
   void GameState::passTurn() {
-    phase_.PassTurn();
+    phase_.SwitchPlayer();
   }
 
   Color GameState::getActiveColor() {

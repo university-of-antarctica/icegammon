@@ -22,7 +22,7 @@ CFLAGS = -Wall -pedantic -std=c++11
 # Files 
 OBJS = $(addprefix $(OBJDIR)/,AsciiView.o Board.o Dice.o Game.o utils.o Controller.o InteractiveCli.o Phase.o Player.o)
 
-TESTNAMES = AsciiView_tests Board_tests Controller_tests Dice_tests Game_tests Validation_tests InteractiveCli_tests testmain
+TESTNAMES = AsciiView_tests Board_tests Controller_tests Dice_tests Game_tests Validation_tests InteractiveCli_tests Phase_tests testmain
 
 TESTS =    $(addprefix $(TESTDIR)/,$(addsuffix .cc,$(TESTNAMES)))
 TESTOBJS = $(addprefix $(TESTDIR)/,$(addsuffix .o,$(TESTNAMES)))
