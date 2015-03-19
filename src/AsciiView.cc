@@ -3,7 +3,7 @@
 std::string visualization_header = std::string(
   "WH```P`P`P`P`P`P``|BB|``P`P`P`P`P`P```P`P`P`P`P`P``|WB|``P`P`P`P`P`P```BH\n");
 
-AsciiView::AsciiView(Game* game) {
+AsciiView::AsciiView(GameState* game) {
   AsciiView::game = game;
 }
 

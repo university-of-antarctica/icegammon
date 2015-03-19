@@ -6,7 +6,7 @@
 
   enum class PhaseType{ 
     // Start
-    BeginGame
+    BeginGame,
     OpeningRollOne,
     OpeningRollTwo,
     FirstMove,
@@ -35,9 +35,9 @@
   class Phase{
     public:
       Phase();
-      Phase(Phase previousPhase) = 0;
+      //Phase(Phase previousPhase) = 0;
       // Construct a phase from a previous phase
-      Phase to(PhaseType nextPhase) = 0;  // Alternative: argument is a Phase
+     // Phase to(PhaseType nextPhase) = 0;  // Alternative: argument is a Phase
       std::string toString();
     private:
       PhaseType part_of_turn;
@@ -49,26 +49,25 @@
   class BeginGamePhase : public Phase {
     public:
       BeginGamePhase();
-      to(PhaseType::OpeningRollOne nextPhaseType);
+      Phase to(PhaseType nextPhaseType);
   };
 
   class OpeningRollOnePhase : public Phase {
     public:
       OpeningRollOnePhase();
-      to(PhaseType::OpeningRollTwo nextPhaseType);
+      Phase to(PhaseType nextPhaseType);
   };
 
   class OpeningRollTwoPhase : public Phase {
     public:
       OpeningRollTwoPhase();
-      to(PhaseType::FirstMove      nextPhaseType);
-      to(PhaseType::OpeningRollOne nextPhaseType);
+      Phase to(PhaseType nextPhaseType);
   };
 
   class FirstMovePhase : public Phase {
     public:
       FirstMovePhase();
-      to(PhaseType::BeginGame nextPhaseType);
+      Phase to(PhaseType nextPhaseType);
   };
   /*
   

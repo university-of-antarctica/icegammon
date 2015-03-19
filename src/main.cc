@@ -6,7 +6,7 @@
 
 int main() {
 
-  Game *game = new Game();
+  GameState *game = new GameState();
   Controller *controller = new Controller(game);
   AsciiView *view = new AsciiView(game);
   

@@ -1,7 +1,7 @@
 #include "../include/InteractiveCli.h"
 
 
-InteractiveCli::InteractiveCli(Game* game) {
+InteractiveCli::InteractiveCli(GameState* game) {
   InteractiveCli::game = game;
 
 }
