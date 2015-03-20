@@ -28,7 +28,6 @@ void InteractiveCli::PromptAndPerformRoll(bool test) {
 void InteractiveCli::PromptPlayerForRoll(bool test) {  
   // this should be it's own method (print current player's turn)
   // these also shouldn't be coupled; printing the curr player's turn is a side-effect
-  std::string currPlayer =  game_->getActiveColorString(); 
   AnnounceTurn();
   std::cout << "Input R or r to roll" << std::endl;
   std::string* line =  new std::string();
@@ -56,6 +55,7 @@ void InteractiveCli::PromptAndPerformTurn(bool test,int moveObjectsNeeded) {
   GameLogic logic = GameLogic(game_); 
   bool is_valid_move;
   for (int i = 0; i < moveObjectsNeeded; ++i){
+  //TODO(gpwclark@gmail.com) do I need to create new line every time or no?
     do {
       std::string* line =  new std::string();
       PromptPlayerForMoveString(test, line); 
