@@ -4,7 +4,7 @@
 #include "../include/InteractiveCli.h"
 #include "../include/Turn.h"
 
-TEST(Controller, parseMoveValidation) {
+TEST(GameplayController, parseMoveValidation) {
   // test ParseMoveString();
   GameState *g = new GameState();
   InteractiveCli *cli= new InteractiveCli(g);

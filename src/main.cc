@@ -1,5 +1,5 @@
 #include "../include/Game.h"
-#include "../include/Controller.h" 
+#include "../include/GameplayController.h" 
 #include "../include/AsciiView.h"
 #include <iostream>
 
@@ -7,7 +7,7 @@
 int main() {
 
   GameState *game = new GameState();
-  Controller *controller = new Controller(game);
+  GameplayController *controller = new GameplayController(game);
   AsciiView *view = new AsciiView(game);
   
   // first turn logic

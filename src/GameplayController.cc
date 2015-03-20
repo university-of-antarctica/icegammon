@@ -1,19 +1,19 @@
-#include "../include/Controller.h"
+#include "../include/GameplayController.h"
 
-Controller::Controller(GameState* game) {
+GameplayController::GameplayController(GameState* game) {
   game_ = game;
   cli_ = new InteractiveCli(game_);
 }
 
-void Controller::DisplayBoard(AsciiView *view) {
+void GameplayController::DisplayBoard(AsciiView *view) {
   cli_->DisplayBoard(view);
 }
 
-void Controller::AnnounceTurn() {
+void GameplayController::AnnounceTurn() {
   cli_->AnnounceTurn();
 }
 
-void Controller::RollForInitiative(bool test) {
+void GameplayController::RollForInitiative(bool test) {
   std::pair<DieFace, DieFace> initiative_dice_rolls;
 
   do {
@@ -33,7 +33,7 @@ void Controller::RollForInitiative(bool test) {
   cli_->AnnounceWinnerOfRollForInitiative();
 }
 
-std::pair<DieFace,DieFace> Controller::GetRollsForInitiative(bool test){
+std::pair<DieFace,DieFace> GameplayController::GetRollsForInitiative(bool test){
 
     std::pair<DieFace,DieFace> player_rolls;
     
@@ -54,7 +54,7 @@ std::pair<DieFace,DieFace> Controller::GetRollsForInitiative(bool test){
     return player_rolls;
 }
 
-DieFace Controller::GetDieRoll() { 
+DieFace GameplayController::GetDieRoll() { 
     DieFace die_roll;
     game_->getDice()->roll();
     die_roll = game_->getDice()->left();
@@ -62,14 +62,14 @@ DieFace Controller::GetDieRoll() {
     std::cout << std::endl; 
   return die_roll;
 }
-void Controller::PerformFirstTurn(bool test){
+void GameplayController::PerformFirstTurn(bool test){
   //On the first turn we don't roll the dice, they are set properly because
   //of RollForInitiative
   // ask activePlayer for turn object until they submit a valid one 
   ExecuteMoves(test); 
   game_->passTurn();
 }
-bool Controller::PerformTurn(bool test) {
+bool GameplayController::PerformTurn(bool test) {
 
   // A turn is just a dice roll, move execution, and then a call to game to pass the turn
   PerformDiceRoll(test);
@@ -81,11 +81,11 @@ bool Controller::PerformTurn(bool test) {
   return is_active_game;
 }
 
-void Controller::PerformDiceRoll(bool test){
+void GameplayController::PerformDiceRoll(bool test){
   cli_->PromptAndPerformRoll(test);
 }
 
-bool Controller::ExecuteMoves(bool test){
+bool GameplayController::ExecuteMoves(bool test){
   // TODO(gpwclark@gmail.com): need to figure out game end logic.
   bool is_active_game = true; 
   // ask player for move string and perform turn
@@ -93,10 +93,10 @@ bool Controller::ExecuteMoves(bool test){
   return is_active_game;
 }
 
-int Controller::GetNumMoves() {
+int GameplayController::GetNumMoves() {
   
-  DieFace leftDie = Controller::game_->getDice()->left();
-  DieFace rightDie = Controller::game_->getDice()->right();
+  DieFace leftDie = GameplayController::game_->getDice()->left();
+  DieFace rightDie = GameplayController::game_->getDice()->right();
   if (leftDie == rightDie) {
   // in backgammon if you roll doubles you get 4 moves
     return 4;

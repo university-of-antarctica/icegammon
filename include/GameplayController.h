@@ -1,5 +1,5 @@
-#ifndef ICEGAMMON_CONTROLLER_H_
-#define ICEGAMMON_CONTROLLER_H_
+#ifndef ICEGAMMON_GameplayController_H_
+#define ICEGAMMON_GameplayController_H_
 
 #include <stdint.h>
 #include "Game.h"
@@ -11,10 +11,10 @@
 #include <cstdlib>
 #include <utility>
 
-class Controller{
+class GameplayController{
 
   public:
-  Controller(GameState* game);
+  GameplayController(GameState* game);
 
   //TODO(gpwclark@gmail.com) figure out where these two methods go,
   //as of now they may or not be acceptable, especially DisplayBoard
