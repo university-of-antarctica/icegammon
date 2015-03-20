@@ -26,7 +26,7 @@ OBJS = $(addprefix $(OBJDIR)/, \
 	Dice.o \
 	Game.o \
 	utils.o \
-	Controller.o \
+  GameplayController.o \
 	InteractiveCli.o \
 	UserInputValidation.o \
 	Phase.o \
@@ -37,7 +37,7 @@ OBJS = $(addprefix $(OBJDIR)/, \
 TESTNAMES = \
 	AsciiView_tests \
 	Board_tests \
-	Controller_tests \
+	GameplayController_tests \
 	Dice_tests \
 	Game_tests \
 	Validation_tests \
