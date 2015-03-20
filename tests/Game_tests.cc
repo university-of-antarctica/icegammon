@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "../include/Game.h"
-#include "../include/Controller.h"
+#include "../include/GameplayController.h"
 #include "../include/AsciiView.h"
 #include <ctime> 
 #include <cstdlib> // abs

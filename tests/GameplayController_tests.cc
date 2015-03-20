@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../include/Controller.h"
+#include "../include/GameplayController.h"
 #include "../include/Game.h"
 #include "../include/Move.h"
 #include "../include/Color.h"
@@ -11,20 +11,20 @@
 #include "../include/Dice.h"
 
 
-TEST(Controller, verifyTurnStateStartsCorrectly) {
+TEST(GameplayController, verifyTurnStateStartsCorrectly) {
   GameState *g = new GameState();
   EXPECT_EQ(Color::WHITE, g->getActiveColor())<<"First call to getActiveColor should be white";
 }
 
-TEST(Controller, verifyTurnsPassCorrectly) {
+TEST(GameplayController, verifyTurnsPassCorrectly) {
   GameState *g = new GameState();
   g->passTurn();
   EXPECT_EQ(Color::BLACK, g->getActiveColor())<<"Second call to getActiveColor should be black";
 }
 
-TEST(Controller, GetOneDieTest) {
+TEST(GameplayController, GetOneDieTest) {
   GameState *g = new GameState();
-  Controller *controller = new Controller(g);
+  GameplayController *controller = new GameplayController(g);
   DieFace sampleDieRoll;
   
   for (int i = 0; i < 10; ++i) {
@@ -36,9 +36,9 @@ TEST(Controller, GetOneDieTest) {
 }
 
 
-TEST(Controller, verifyPostFirstTurnState) {
+TEST(GameplayController, verifyPostFirstTurnState) {
   GameState *g = new GameState();
-  Controller *controller = new Controller(g);
+  GameplayController *controller = new GameplayController(g);
   controller->RollForInitiative(true); 
   
   ASSERT_NE(g->getDice()->left(), g->getDice()->right())<<"Rolls must be different to start game" ;
@@ -51,9 +51,9 @@ TEST(Controller, verifyPostFirstTurnState) {
 
 }
 
-TEST(Controller, verifyGetNumMoves) {
+TEST(GameplayController, verifyGetNumMoves) {
   GameState *g = new GameState();
-  Controller *c = new Controller(g);
+  GameplayController *c = new GameplayController(g);
   int numMoves;
   
   for(int i = 1; i < 7; ++i) {
