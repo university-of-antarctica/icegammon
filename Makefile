@@ -19,7 +19,7 @@ SRCDIR = src
 # Flags
 CFLAGS = -Wall -pedantic -std=c++11
 
-# Source Files 
+# Source Files
 OBJS = $(addprefix $(OBJDIR)/, \
 	AsciiView.o \
 	Board.o \
@@ -56,14 +56,14 @@ all: main test
 
 .PHONY: main
 main: $(OBJS)
-	g++ $(CFLAGS) $(OBJS) $(SRCDIR)/main.cc -lreadline -o $@
+	g++ $(CFLAGS) $(OBJS) $(SRCDIR)/main.cc -lgtest -lreadline -o $@
 
 # Test
 ############################################################
 .PHONY: test
 test: main_unittest
 
-INCLUDES  = -isystem ${GTEST_DIR}/include 
+INCLUDES  = -isystem ${GTEST_DIR}/include
 LIBRARIES = -lreadline -pthread
 
 main_unittest: libgtest.a $(OBJS) $(TESTOBJS)
@@ -72,10 +72,10 @@ main_unittest: libgtest.a $(OBJS) $(TESTOBJS)
 
 # Google Test static library file
 libgtest.a: gtest-all.o
-	ar -rv libgtest.a gtest-all.o 
+	ar -rv libgtest.a gtest-all.o
 
 # Google Test object file
-gtest-all.o: 
+gtest-all.o:
 	g++ -isystem ${GTEST_DIR}/include -pthread -I${GTEST_DIR} -c ${GTEST_DIR}/src/gtest-all.cc
 
 
@@ -101,7 +101,7 @@ $(TESTDIR)/%.o: $(TESTDIR)/%.cc
 
 # Clean
 ##########################################################
-clean:	
+clean:
 	rm -rf $(OBJDIR)/*
 	rm -f libgtest.a
 	rm -f gtest-all.o
